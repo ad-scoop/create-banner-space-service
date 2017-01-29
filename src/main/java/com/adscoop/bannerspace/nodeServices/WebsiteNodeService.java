@@ -1,10 +1,8 @@
 package com.adscoop.bannerspace.nodeServices;
 
-import com.adscoop.services.neo4j.connection.ConnectionSource;
-import com.adscoop.services.neo4j.connection.ServiceCommonConfig;
+
 import com.google.inject.Inject;
-import com.kleistit.entiites.user.Company;
-import com.kleistit.entiites.user.WebSiteNode;
+
 import org.neo4j.ogm.model.Result;
 import org.neo4j.ogm.session.Session;
 
@@ -18,22 +16,22 @@ import java.util.List;
  */
 public class WebsiteNodeService {
 
-    private ConnectionSource session;
+    private Session session;
 
     @Inject
-    public WebsiteNodeService(ConnectionSource session) {
+    public WebsiteNodeService(Session session) {
         this.session = session;
     }
 
 
     public void save(WebSiteNode webSiteNode){
-        session.session().save(webSiteNode);
+        session.save(webSiteNode);
 
 
     }
 
     public WebSiteNode findByPath(String path){
-       return  session.session().queryForObject(WebSiteNode.class,"match (w:WebSiteNode) where w.path="+ path+" return w", Collections.EMPTY_MAP);
+       return  session.queryForObject(WebSiteNode.class,"match (w:WebSiteNode) where w.path="+ path+" return w", Collections.EMPTY_MAP);
     }
 
     public List<WebSiteNode> findByCompanyName(String companyname){

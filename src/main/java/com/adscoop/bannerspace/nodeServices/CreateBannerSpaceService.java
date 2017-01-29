@@ -1,9 +1,8 @@
 package com.adscoop.bannerspace.nodeServices;
 
-import com.adscoop.entiites.BannerSpace;
-import com.adscoop.services.neo4j.connection.ConnectionSource;
-import com.adscoop.services.neo4j.connection.ServiceCommonConfig;
+
 import com.google.inject.Inject;
+import org.neo4j.ogm.session.Session;
 
 
 import java.io.IOException;
@@ -13,17 +12,17 @@ import java.io.IOException;
  */
 public class CreateBannerSpaceService {
 
-        ConnectionSource connectionSource;
+        Session connectionSource;
 
 
     @Inject
-    public CreateBannerSpaceService(ConnectionSource connectionSource) {
+    public CreateBannerSpaceService(Session connectionSource) {
         this.connectionSource = connectionSource;
     }
 
 
     public void createBannerSpace(BannerSpace bannerSpace) throws IOException {
-            connectionSource.session().save(bannerSpace);
+            connectionSource.save(bannerSpace);
     }
 
 

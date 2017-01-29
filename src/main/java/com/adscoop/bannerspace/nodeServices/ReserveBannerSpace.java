@@ -1,8 +1,8 @@
 package com.adscoop.bannerspace.nodeServices;
 
-import com.adscoop.entiites.BannerSpace;
-import com.adscoop.services.neo4j.connection.ConnectionSource;
+
 import com.google.inject.Inject;
+import org.neo4j.ogm.session.Session;
 
 import java.util.Collection;
 
@@ -12,10 +12,10 @@ import java.util.Collection;
 public class ReserveBannerSpace {
 
 
-    private ConnectionSource connectionSource;
+    private Session connectionSource;
 
     @Inject
-    public ReserveBannerSpace(ConnectionSource connectionSource) {
+    public ReserveBannerSpace(Session connectionSource) {
         this.connectionSource = connectionSource;
     }
 
@@ -24,4 +24,3 @@ public class ReserveBannerSpace {
 
 
 }
-u

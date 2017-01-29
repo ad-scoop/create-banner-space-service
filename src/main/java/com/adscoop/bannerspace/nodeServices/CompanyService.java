@@ -1,8 +1,9 @@
 package com.adscoop.bannerspace.nodeServices;
 
 import com.adscoop.entiites.Company;
-import com.adscoop.services.neo4j.connection.ConnectionSource;
+
 import com.google.inject.Inject;
+import org.neo4j.ogm.session.Session;
 
 
 import java.util.Collections;
@@ -12,26 +13,26 @@ import java.util.Collections;
  */
 public class CompanyService  {
 
-    ConnectionSource connectionSource;
+    Session connectionSource;
 
     @Inject
-    public CompanyService(ConnectionSource connectionSource) {
+    public CompanyService(Session connectionSource) {
         this.connectionSource = connectionSource;
     }
 
 
     public Company findByUserToken(String token, String companyname){
-        return  connectionSource.session().queryForObject(Company.class,"match (u:UserNode)-[:USER_HAS_COMPANY]->(c:Company ) where c.companyname='"+ companyname  +"' and u.token='" + token +"' return c" , Collections.EMPTY_MAP);
+        return  connectionSource.queryForObject(Company.class,"match (u:UserNode)-[:USER_HAS_COMPANY]->(c:Company ) where c.companyname='"+ companyname  +"' and u.token='" + token +"' return c" , Collections.EMPTY_MAP);
 
     }
 
 
     public long save(Company company ){
-        connectionSource.session().save(company);
+        connectionSource.save(company);
         return  findById(company.getId()).getId();
     }
 
     public Company findById(long id) {
-        return connectionSource.session().load(Company.class,id);
+        return connectionSource.load(Company.class,id);
     }
 }
