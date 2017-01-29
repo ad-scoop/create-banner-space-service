@@ -9,15 +9,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="create-banner-space_main" />
-    <orderEntry type="library" name="Gradle: io.ratpack:ratpack-core:1.4.1" level="project" />
-    <orderEntry type="library" name="Gradle: io.ratpack:ratpack-guice:1.4.1" level="project" />
-    <orderEntry type="library" name="Gradle: io.ratpack:ratpack-rx:1.4.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.neo4j:neo4j-ogm-bolt-driver:2.0.4" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.6.2" level="project" />
-    <orderEntry type="library" name="Gradle: org.neo4j:neo4j-ogm-core:2.0.4" level="project" />
-    <orderEntry type="library" name="Gradle: com.kleistit.adbanner:adbanner-entites:1.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Gradle: com.addscoope:service-common:1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Gradle: io.ratpack:ratpack-test:1.4.1" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.11" level="project" />
     <orderEntry type="library" name="Gradle: io.netty:netty-codec-http:4.1.4.Final" level="project" />
@@ -83,6 +74,12 @@
     <orderEntry type="library" name="Gradle: org.neo4j:neo4j-unsafe:2.3.6" level="project" />
     <orderEntry type="library" name="Gradle: org.neo4j:neo4j-function:2.3.6" level="project" />
     <orderEntry type="library" name="Gradle: org.ow2.asm:asm:5.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: io.ratpack:ratpack-core:1.4.1" level="project" />
+    <orderEntry type="library" name="Gradle: io.ratpack:ratpack-guice:1.4.1" level="project" />
+    <orderEntry type="library" name="Gradle: io.ratpack:ratpack-rx:1.4.1" level="project" />
+    <orderEntry type="library" name="Gradle: org.neo4j:neo4j-ogm-bolt-driver:2.0.4" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.6.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.neo4j:neo4j-ogm-core:2.0.4" level="project" />
     <orderEntry type="library" name="Gradle: org.neo4j:neo4j-cypher-frontend-2.3:2.3.6" level="project" />
     <orderEntry type="library" name="Gradle: org.parboiled:parboiled-core:1.1.7" level="project" />
   </component>

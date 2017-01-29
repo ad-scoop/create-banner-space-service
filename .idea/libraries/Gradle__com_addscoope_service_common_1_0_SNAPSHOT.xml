@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: com.addscoope:service-common:1.0-SNAPSHOT">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/addscoope/service-common/1.0-SNAPSHOT/service-common-1.0-SNAPSHOT.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
