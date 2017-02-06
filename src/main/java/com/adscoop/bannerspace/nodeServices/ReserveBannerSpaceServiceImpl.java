@@ -9,13 +9,13 @@ import java.util.Collection;
 /**
  * Created by thokle on 25/11/2016.
  */
-public class ReserveBannerSpace {
+public class ReserveBannerSpaceServiceImpl {
 
 
     private Session connectionSource;
 
     @Inject
-    public ReserveBannerSpace(Session connectionSource) {
+    public ReserveBannerSpaceServiceImpl(Session connectionSource) {
         this.connectionSource = connectionSource;
     }
 

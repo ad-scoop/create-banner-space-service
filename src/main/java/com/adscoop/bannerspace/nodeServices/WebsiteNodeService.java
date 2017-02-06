@@ -1,6 +1,7 @@
 package com.adscoop.bannerspace.nodeServices;
 
 
+import com.adscoop.bannerspace.entites.WebSiteNode;
 import com.google.inject.Inject;
 
 import org.neo4j.ogm.model.Result;
@@ -37,7 +38,7 @@ public class WebsiteNodeService {
     public List<WebSiteNode> findByCompanyName(String companyname){
         List<WebSiteNode> webSiteNodes = new ArrayList<>();
         try {
-            Result result = session.session().query("", Collections.EMPTY_MAP);
+            Result result = session.query("", Collections.EMPTY_MAP);
 
             Iterator iterator = result.iterator();
             while (iterator.hasNext()) {

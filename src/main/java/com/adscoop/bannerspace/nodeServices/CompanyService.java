@@ -1,7 +1,9 @@
 package com.adscoop.bannerspace.nodeServices;
 
-import com.adscoop.entiites.Company;
 
+
+
+import com.adscoop.bannerspace.entites.Company;
 import com.google.inject.Inject;
 import org.neo4j.ogm.session.Session;
 

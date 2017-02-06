@@ -1,9 +1,10 @@
 package com.adscoop.bannerspace.handlers.banner;
 
+import com.adscoop.bannerspace.entites.BannerSpace;
+import com.adscoop.bannerspace.entites.WebSiteNode;
 import com.adscoop.bannerspace.nodeServices.WebsiteNodeService;
 import com.google.inject.Inject;
-import com.kleistit.entiites.user.BannerSpace;
-import com.kleistit.entiites.user.WebSiteNode;
+
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
 
