@@ -3,6 +3,7 @@ package com.adscoop.bannerspace.config;
 import com.adscoop.bannerspace.exceptions.BannerServiceClientException;
 import com.adscoop.bannerspace.exceptions.BannerServiceServerException;
 import com.adscoop.bannerspace.handlers.banner.CreateBannerHandler;
+import com.adscoop.bannerspace.handlers.banner.ReserveBannerSpaceHandler;
 import com.adscoop.bannerspace.handlers.website.CreateWebSiteHandler;
 import com.adscoop.bannerspace.handlers.website.GetWebsiteHandler;
 import com.google.inject.AbstractModule;
@@ -24,7 +25,7 @@ public class ConfigBinder extends AbstractModule {
 
         bind(BannerServiceClientException.class).asEagerSingleton();
         bind(BannerServiceServerException.class).asEagerSingleton();
-        
+        bind(ReserveBannerSpaceHandler.class).asEagerSingleton();
 
     }
 }
