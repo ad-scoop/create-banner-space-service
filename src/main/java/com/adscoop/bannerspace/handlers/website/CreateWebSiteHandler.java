@@ -2,7 +2,7 @@ package com.adscoop.bannerspace.handlers.website;
 
 import com.adscoop.bannerspace.entites.Company;
 import com.adscoop.bannerspace.entites.WebSiteNode;
-import com.adscoop.bannerspace.nodeServices.CompanyService;
+import com.adscoop.bannerspace.services.CompanyService;
 import com.google.inject.Inject;
 
 import ratpack.handling.Context;

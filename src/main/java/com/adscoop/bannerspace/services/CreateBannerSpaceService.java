@@ -1,4 +1,4 @@
-package com.adscoop.bannerspace.nodeServices;
+package com.adscoop.bannerspace.services;
 
 
 import com.adscoop.bannerspace.entites.BannerSpace;

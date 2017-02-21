@@ -7,10 +7,10 @@ import ratpack.handling.Context;
 /**
  * Created by thokle on 05/02/2017.
  */
-public class BannerServiceClientException implements Action<Throwable> {
+public class BannerServiceClientException implements ClientErrorHandler {
 
     @Override
-    public void execute(Throwable throwable) throws Exception {
-
+    public void error(Context context, int statusCode) throws Exception {
+        context.render(statusCode);
     }
 }

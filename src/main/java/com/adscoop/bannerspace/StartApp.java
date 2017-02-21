@@ -20,10 +20,10 @@ public class StartApp {
 public  static void main(String ... args ) throws Exception {
     RxRatpack.initialize();
     RatpackServer.start(ratpackServerSpec -> ratpackServerSpec.serverConfig(serverConfigBuilder ->
-        serverConfigBuilder.baseDir(BaseDir.find()).yaml("datasource.yaml").require("/test",Config.class).props("ratpack.properties").env().sysProps().development(false).build())
+        serverConfigBuilder.baseDir(BaseDir.find()).yaml("datasource.yaml").require("/db",Config.class).props("ratpack.properties").env().sysProps().development(false).build())
             .registry(Guice.registry(bindingsSpec ->  bindingsSpec.module(ConfigBinder.class).module(ServiceCommonConfigModule.class))).handlers(chain -> chain.prefix("banner", ba ->
             ba.post(CreateBannerHandler.class)
-            ).prefix("reserve", res -> res.post(ReserveBannerSpaceHandler.class)))
+            ).prefix("reserve", res -> res.post(":email/:idx",ReserveBannerSpaceHandler.class)))
     );
 
     }

@@ -39,7 +39,7 @@ public class BannerNode extends Entity {
     private  String counterUrl;
     @JsonProperty
     private Integer counter;
-    private String bannerSpaceToken;
+    private List<String> bannerSpaceToken;
     private  String pictureUrl;
     private  String javaScriptUrl;
 
@@ -178,11 +178,11 @@ private List<String> labels = new ArrayList<>();
     }
 
 
-    public String getBannerSpaceToken() {
+    public List<String> getBannerSpaceToken() {
         return bannerSpaceToken;
     }
 
-    public void setBannerSpaceToken(String bannerSpaceToken) {
+    public void setBannerSpaceToken(List<String> bannerSpaceToken) {
         this.bannerSpaceToken = bannerSpaceToken;
     }
 
