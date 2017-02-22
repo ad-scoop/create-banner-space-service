@@ -1,9 +1,11 @@
 package com.adscoop.bannerspace.handlers.website;
 
 import com.adscoop.bannerspace.nodeServices.CompanyService;
+import com.adscoop.entiites.Company;
+import com.adscoop.entiites.WebSiteNode;
 import com.google.inject.Inject;
-import com.kleistit.entiites.user.Company;
-import com.kleistit.entiites.user.WebSiteNode;
+
+
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
 

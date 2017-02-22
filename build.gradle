@@ -49,10 +49,10 @@ dependencies {
 
     compile group: 'org.neo4j', name: 'neo4j-ogm-core', version: '2.0.4'
 
-    compile group: 'com.kleistit.adbanner', name: 'adbanner-entites', version: '1.0-SNAPSHOT'
+    compile group: 'com.adscoop', name: 'adbanner-entites', version: '1.0-SNAPSHOT'
 
-    compile group: 'com.addscoope', name: 'service-common', version: '1.0-SNAPSHOT'
-
+    compile group: 'com.adscoop', name: 'service-common', version: '1.0-SNAPSHOT'
+    compile group: 'com.adscoop' , name: 'authorazation-service', version: '1.0-SNAPSHOT'
 
 }
 mainClassName = "StartApp"

@@ -2,7 +2,7 @@ package com.adscoop.bannerspace.nodeServices;
 
 import com.adscoop.entiites.BannerSpace;
 import com.adscoop.services.neo4j.connection.ConnectionSource;
-import com.adscoop.services.neo4j.connection.ServiceCommonConfig;
+
 import com.google.inject.Inject;
 
 

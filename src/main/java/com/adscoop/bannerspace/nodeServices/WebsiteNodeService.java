@@ -1,17 +1,15 @@
 package com.adscoop.bannerspace.nodeServices;
 
+import com.adscoop.entiites.Company;
+import com.adscoop.entiites.WebSiteNode;
 import com.adscoop.services.neo4j.connection.ConnectionSource;
-import com.adscoop.services.neo4j.connection.ServiceCommonConfig;
+
 import com.google.inject.Inject;
-import com.kleistit.entiites.user.Company;
-import com.kleistit.entiites.user.WebSiteNode;
+
 import org.neo4j.ogm.model.Result;
 import org.neo4j.ogm.session.Session;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by thokle on 29/10/2016.
@@ -36,23 +34,18 @@ public class WebsiteNodeService {
        return  session.session().queryForObject(WebSiteNode.class,"match (w:WebSiteNode) where w.path="+ path+" return w", Collections.EMPTY_MAP);
     }
 
-    public List<WebSiteNode> findByCompanyName(String companyname){
-        List<WebSiteNode> webSiteNodes = new ArrayList<>();
-        try {
-            Result result = session.session().query("", Collections.EMPTY_MAP);
+    public Optional<Company> findCompanyFindByName(String token, String companyname){
 
-            Iterator iterator = result.iterator();
-            while (iterator.hasNext()) {
-                webSiteNodes.add((WebSiteNode) iterator.next());
+        return Optional.of(session.session().queryForObject(Company.class,"match (c:Company)<-[:USER_HAS_COMPANY]-(u:UserNode) where u.token = '"+token+"' and c.companyname='"+companyname+"' return c", Collections.EMPTY_MAP));
+    }
 
-            }
 
-        } catch (Exception e){
 
-        }
-        return webSiteNodes;
+    public Optional<WebSiteNode> findByCompanyName(String companyName){
+      return  Optional.of(session.session().queryForObject(WebSiteNode.class, "match (c:Company)-[:COMPANY_HAS_WEBSITE]->(w:WebSiteNode) where c.companyname='"+companyName+"' return w limit 1",Collections.EMPTY_MAP ));
 
     }
+
 
 
 }

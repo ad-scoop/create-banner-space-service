@@ -1,11 +1,16 @@
 package com.adscoop.bannerspace.handlers.banner;
 
 import com.adscoop.bannerspace.nodeServices.WebsiteNodeService;
+import com.adscoop.entiites.BannerNode;
+import com.adscoop.entiites.BannerSpace;
+import com.adscoop.entiites.Company;
+import com.adscoop.entiites.WebSiteNode;
 import com.google.inject.Inject;
-import com.kleistit.entiites.user.BannerSpace;
-import com.kleistit.entiites.user.WebSiteNode;
+
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
+
+import java.util.Optional;
 
 import static ratpack.jackson.Jackson.fromJson;
 import static ratpack.jackson.Jackson.json;
@@ -26,11 +31,14 @@ public class CreateBannerHandler implements Handler {
     public void handle(Context ctx) throws Exception {
 
         if (ctx.getRequest().getHeaders().get("token") != null) {
-            String path = ctx.getPathTokens().get("path");
+            String companyname = ctx.getPathTokens().get("companyname");
+            String token = ctx.getRequest().getHeaders().get("token");
             ctx.parse(fromJson(BannerSpace.class)).then(bannerSpace -> {
 
 
-                WebSiteNode webSiteNode = websiteNodeService.findByPath(path);
+                Optional<WebSiteNode> webSiteNode = websiteNodeService.findByCompanyName(companyname);
+
+
                 BannerSpace bannerSpace1 = new BannerSpace();
                 bannerSpace1.setLattiude(bannerSpace.getLattiude());
 
@@ -58,7 +66,8 @@ public class CreateBannerHandler implements Handler {
 
                 });
 
-                webSiteNode.addBannerSpace(bannerSpace1);
+
+                webSiteNode.get().addBannerSpace(bannerSpace1);
 
 
                 ctx.render(json(bannerSpace1));
