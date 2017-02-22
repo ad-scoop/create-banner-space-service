@@ -2,11 +2,18 @@ package com.adscoop.bannerspace.entites;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+<<<<<<< HEAD
 import jdk.nashorn.internal.ir.annotations.Ignore;
+=======
+>>>>>>> 864a243ee82c65a8969aa46223a6b9d5ae852251
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import org.neo4j.ogm.annotations.Labels;
 
+<<<<<<< HEAD
+=======
+import java.net.URL;
+>>>>>>> 864a243ee82c65a8969aa46223a6b9d5ae852251
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -29,7 +36,11 @@ public class BannerNode extends Entity {
     @JsonProperty
     private String positionSiteL;
     @JsonProperty
+<<<<<<< HEAD
     private String url;
+=======
+    private URL Url;
+>>>>>>> 864a243ee82c65a8969aa46223a6b9d5ae852251
     private String uniqeToken;
     @JsonProperty
     private Integer lenght;
@@ -39,10 +50,17 @@ public class BannerNode extends Entity {
     private  String counterUrl;
     @JsonProperty
     private Integer counter;
+<<<<<<< HEAD
     private List<String> bannerSpaceToken  = new ArrayList<>();
     private  String pictureUrl;
     private  String javaScriptUrl;
     private String filetype;
+=======
+    private List<String> bannerSpaceToken;
+    private  String pictureUrl;
+    private  String javaScriptUrl;
+
+>>>>>>> 864a243ee82c65a8969aa46223a6b9d5ae852251
 @Labels
 private List<String> labels = new ArrayList<>();
 
@@ -61,7 +79,10 @@ private List<String> labels = new ArrayList<>();
     private Set<FootPrintInformationNode> footPrintInformationNodes = new HashSet<>();
 
 
+<<<<<<< HEAD
     @Ignore
+=======
+>>>>>>> 864a243ee82c65a8969aa46223a6b9d5ae852251
     @Relationship(type = "HAS_BANNER_NODES", direction = Relationship.INCOMING)
     private Set<UserNode> userNodes  = new HashSet<>();
 
@@ -89,12 +110,21 @@ private List<String> labels = new ArrayList<>();
         this.positionSiteL = positionSiteL;
     }
 
+<<<<<<< HEAD
     public String getUrl() {
         return url;
     }
 
     public void setUrl(String url) {
         url = url;
+=======
+    public URL getUrl() {
+        return Url;
+    }
+
+    public void setUrl(URL url) {
+        Url = url;
+>>>>>>> 864a243ee82c65a8969aa46223a6b9d5ae852251
     }
 
     public String getUniqeToken() {
@@ -172,6 +202,7 @@ private List<String> labels = new ArrayList<>();
     }
 
 
+<<<<<<< HEAD
     public String getFiletype() {
         return filetype;
     }
@@ -179,6 +210,8 @@ private List<String> labels = new ArrayList<>();
     public void setFiletype(String filetype) {
         this.filetype = filetype;
     }
+=======
+>>>>>>> 864a243ee82c65a8969aa46223a6b9d5ae852251
 
     public void addCategory(Category category){
         categories.add(category);

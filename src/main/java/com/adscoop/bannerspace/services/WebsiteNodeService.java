@@ -1,9 +1,14 @@
-package com.adscoop.bannerspace.nodeServices;
+package com.adscoop.bannerspace.services;
 
+<<<<<<< HEAD:src/main/java/com/adscoop/bannerspace/nodeServices/WebsiteNodeService.java
 import com.adscoop.entiites.Company;
 import com.adscoop.entiites.WebSiteNode;
 import com.adscoop.services.neo4j.connection.ConnectionSource;
 
+=======
+
+import com.adscoop.bannerspace.entites.WebSiteNode;
+>>>>>>> 864a243ee82c65a8969aa46223a6b9d5ae852251:src/main/java/com/adscoop/bannerspace/services/WebsiteNodeService.java
 import com.google.inject.Inject;
 
 import org.neo4j.ogm.model.Result;
@@ -16,25 +21,32 @@ import java.util.*;
  */
 public class WebsiteNodeService {
 
-    private ConnectionSource session;
+    private Session session;
 
     @Inject
-    public WebsiteNodeService(ConnectionSource session) {
+    public WebsiteNodeService(Session session) {
         this.session = session;
     }
 
 
     public void save(WebSiteNode webSiteNode){
-        session.session().save(webSiteNode);
+        session.save(webSiteNode);
 
 
     }
 
     public WebSiteNode findByPath(String path){
-       return  session.session().queryForObject(WebSiteNode.class,"match (w:WebSiteNode) where w.path="+ path+" return w", Collections.EMPTY_MAP);
+       return  session.queryForObject(WebSiteNode.class,"match (w:WebSiteNode) where w.path="+ path+" return w", Collections.EMPTY_MAP);
     }
 
+<<<<<<< HEAD:src/main/java/com/adscoop/bannerspace/nodeServices/WebsiteNodeService.java
     public Optional<Company> findCompanyFindByName(String token, String companyname){
+=======
+    public List<WebSiteNode> findByCompanyName(String companyname){
+        List<WebSiteNode> webSiteNodes = new ArrayList<>();
+        try {
+            Result result = session.query("", Collections.EMPTY_MAP);
+>>>>>>> 864a243ee82c65a8969aa46223a6b9d5ae852251:src/main/java/com/adscoop/bannerspace/services/WebsiteNodeService.java
 
         return Optional.of(session.session().queryForObject(Company.class,"match (c:Company)<-[:USER_HAS_COMPANY]-(u:UserNode) where u.token = '"+token+"' and c.companyname='"+companyname+"' return c", Collections.EMPTY_MAP));
     }

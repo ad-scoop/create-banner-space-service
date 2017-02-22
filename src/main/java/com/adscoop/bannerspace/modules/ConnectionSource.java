@@ -18,7 +18,11 @@ public class ConnectionSource {
 
 @Inject
     public ConnectionSource(Config config) throws  IOException {
+<<<<<<< HEAD
     sessionFactory = new SessionFactory(configuration(config),"modules");
+=======
+    sessionFactory = new SessionFactory(configuration(config),"com.adscoop.bannerspace.entites");
+>>>>>>> 864a243ee82c65a8969aa46223a6b9d5ae852251
         configuration(config);
     }
 
