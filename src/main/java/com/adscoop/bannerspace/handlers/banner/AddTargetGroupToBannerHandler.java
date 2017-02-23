@@ -4,10 +4,9 @@ import ratpack.handling.Context;
 import ratpack.handling.Handler;
 
 /**
- * Created by thokle on 19/11/2016.
+ * Created by kleistit on 23/02/2017.
  */
-public class GetBannerSpaces implements Handler
-{
+public class AddTargetGroupToBannerHandler implements Handler {
 
 
 

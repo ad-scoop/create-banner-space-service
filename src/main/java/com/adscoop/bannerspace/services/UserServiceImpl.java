@@ -1,10 +1,11 @@
 package com.adscoop.bannerspace.services;
 
-import com.adscoop.bannerspace.entites.UserNode;
-import org.neo4j.ogm.session.Session;
-
 import java.util.Collections;
 import java.util.Optional;
+
+import org.neo4j.ogm.session.Session;
+
+import com.adscoop.bannerspace.entites.UserNode;
 
 /**
  * Created by kleistit on 21/02/2017.

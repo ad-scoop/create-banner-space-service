@@ -55,14 +55,11 @@ dependencies {
 
     compile group: 'org.neo4j', name: 'neo4j-ogm-bolt-driver', version: '2.1.0'
 
-<<<<<<< HEAD
-    compile group: 'com.adscoop', name: 'adbanner-entites', version: '1.0-SNAPSHOT'
-=======
+
+
     compile group: 'org.neo4j', name: 'neo4j-ogm-api', version: '2.1.0'
 
->>>>>>> 864a243ee82c65a8969aa46223a6b9d5ae852251
 
-    compile group: 'com.adscoop', name: 'service-common', version: '1.0-SNAPSHOT'
     compile group: 'com.adscoop' , name: 'authorazation-service', version: '1.0-SNAPSHOT'
 
     runtime 'org.apache.logging.log4j:log4j-slf4j-impl:2.0.2'

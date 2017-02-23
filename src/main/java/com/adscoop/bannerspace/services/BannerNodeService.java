@@ -1,8 +1,8 @@
 package com.adscoop.bannerspace.services;
 
-import com.adscoop.bannerspace.entites.BannerNode;
-
 import java.util.Optional;
+
+import com.adscoop.bannerspace.entites.BannerNode;
 
 /**
  * Created by kleistit on 21/02/2017.

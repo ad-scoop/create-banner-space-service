@@ -1,14 +1,12 @@
 package com.adscoop.bannerspace.services;
 
 
+import java.util.Collections;
 
+import org.neo4j.ogm.session.Session;
 
 import com.adscoop.bannerspace.entites.Company;
 import com.google.inject.Inject;
-import org.neo4j.ogm.session.Session;
-
-
-import java.util.Collections;
 
 /**
  * Created by thokle on 16/11/2016.

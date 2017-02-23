@@ -1,7 +1,6 @@
 package com.adscoop.bannerspace.exceptions;
 
 import ratpack.error.ClientErrorHandler;
-import ratpack.func.Action;
 import ratpack.handling.Context;
 
 /**

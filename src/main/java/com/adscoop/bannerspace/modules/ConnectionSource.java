@@ -1,11 +1,12 @@
 package com.adscoop.bannerspace.modules;
 
-import com.google.inject.Inject;
+import java.io.IOException;
+
 import org.neo4j.ogm.config.Configuration;
 import org.neo4j.ogm.session.Session;
 import org.neo4j.ogm.session.SessionFactory;
 
-import java.io.IOException;
+import com.google.inject.Inject;
 
 
 public class ConnectionSource {
@@ -18,11 +19,9 @@ public class ConnectionSource {
 
 @Inject
     public ConnectionSource(Config config) throws  IOException {
-<<<<<<< HEAD
-    sessionFactory = new SessionFactory(configuration(config),"modules");
-=======
+
     sessionFactory = new SessionFactory(configuration(config),"com.adscoop.bannerspace.entites");
->>>>>>> 864a243ee82c65a8969aa46223a6b9d5ae852251
+
         configuration(config);
     }
 

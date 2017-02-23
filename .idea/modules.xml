@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/create-banner-space.iml" filepath="$PROJECT_DIR$/.idea/modules/create-banner-space.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/create-banner-space-service.iml" filepath="$PROJECT_DIR$/.idea/modules/create-banner-space-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/create-banner-space-service_main.iml" filepath="$PROJECT_DIR$/.idea/modules/create-banner-space-service_main.iml" group="create-banner-space-service" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/create-banner-space-service_test.iml" filepath="$PROJECT_DIR$/.idea/modules/create-banner-space-service_test.iml" group="create-banner-space-service" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/create-banner-space_main.iml" filepath="$PROJECT_DIR$/.idea/modules/create-banner-space_main.iml" group="create-banner-space" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/create-banner-space_test.iml" filepath="$PROJECT_DIR$/.idea/modules/create-banner-space_test.iml" group="create-banner-space" />
     </modules>

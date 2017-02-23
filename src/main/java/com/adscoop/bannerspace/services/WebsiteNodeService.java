@@ -1,20 +1,15 @@
 package com.adscoop.bannerspace.services;
 
-<<<<<<< HEAD:src/main/java/com/adscoop/bannerspace/nodeServices/WebsiteNodeService.java
-import com.adscoop.entiites.Company;
-import com.adscoop.entiites.WebSiteNode;
-import com.adscoop.services.neo4j.connection.ConnectionSource;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
-=======
-
-import com.adscoop.bannerspace.entites.WebSiteNode;
->>>>>>> 864a243ee82c65a8969aa46223a6b9d5ae852251:src/main/java/com/adscoop/bannerspace/services/WebsiteNodeService.java
-import com.google.inject.Inject;
-
-import org.neo4j.ogm.model.Result;
+import com.adscoop.bannerspace.entites.Category;
+import com.adscoop.bannerspace.entites.TargetGroups;
 import org.neo4j.ogm.session.Session;
 
-import java.util.*;
+import com.adscoop.bannerspace.entites.WebSiteNode;
+import com.google.inject.Inject;
 
 /**
  * Created by thokle on 29/10/2016.
@@ -29,7 +24,7 @@ public class WebsiteNodeService {
     }
 
 
-    public void save(WebSiteNode webSiteNode){
+    public void save(com.adscoop.bannerspace.entites.WebSiteNode webSiteNode){
         session.save(webSiteNode);
 
 
@@ -39,25 +34,27 @@ public class WebsiteNodeService {
        return  session.queryForObject(WebSiteNode.class,"match (w:WebSiteNode) where w.path="+ path+" return w", Collections.EMPTY_MAP);
     }
 
-<<<<<<< HEAD:src/main/java/com/adscoop/bannerspace/nodeServices/WebsiteNodeService.java
-    public Optional<Company> findCompanyFindByName(String token, String companyname){
-=======
-    public List<WebSiteNode> findByCompanyName(String companyname){
-        List<WebSiteNode> webSiteNodes = new ArrayList<>();
-        try {
-            Result result = session.query("", Collections.EMPTY_MAP);
->>>>>>> 864a243ee82c65a8969aa46223a6b9d5ae852251:src/main/java/com/adscoop/bannerspace/services/WebsiteNodeService.java
 
-        return Optional.of(session.session().queryForObject(Company.class,"match (c:Company)<-[:USER_HAS_COMPANY]-(u:UserNode) where u.token = '"+token+"' and c.companyname='"+companyname+"' return c", Collections.EMPTY_MAP));
-    }
 
 
 
     public Optional<WebSiteNode> findByCompanyName(String companyName){
-      return  Optional.of(session.session().queryForObject(WebSiteNode.class, "match (c:Company)-[:COMPANY_HAS_WEBSITE]->(w:WebSiteNode) where c.companyname='"+companyName+"' return w limit 1",Collections.EMPTY_MAP ));
+      return  Optional.of(session.queryForObject(WebSiteNode.class, "match (c:Company)-[:COMPANY_HAS_WEBSITE]->(w:WebSiteNode) where c.companyname='"+companyName+"' return w limit 1",Collections.EMPTY_MAP ));
 
     }
 
+
+    public Optional<Iterable<WebSiteNode>> finByCriteria(List<Category> categoryList, List<TargetGroups> targetGroupss) throws Exception{
+        try{
+
+
+            return  Optional.ofNullable(session.query(WebSiteNode.class,"match (w) where w.category in"+categoryList+ "",Collections.EMPTY_MAP));
+
+        }catch (Exception e){
+            throw  new Exception(e.getMessage());
+        }
+
+    }
 
 
 }

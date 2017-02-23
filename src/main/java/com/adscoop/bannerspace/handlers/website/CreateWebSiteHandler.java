@@ -1,24 +1,16 @@
 package com.adscoop.bannerspace.handlers.website;
 
-<<<<<<< HEAD
-import com.adscoop.bannerspace.nodeServices.CompanyService;
-import com.adscoop.entiites.Company;
-import com.adscoop.entiites.WebSiteNode;
-import com.google.inject.Inject;
 
+import static ratpack.jackson.Jackson.fromJson;
+import static ratpack.jackson.Jackson.json;
 
-=======
 import com.adscoop.bannerspace.entites.Company;
 import com.adscoop.bannerspace.entites.WebSiteNode;
 import com.adscoop.bannerspace.services.CompanyService;
 import com.google.inject.Inject;
 
->>>>>>> 864a243ee82c65a8969aa46223a6b9d5ae852251
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
-
-import static ratpack.jackson.Jackson.fromJson;
-import static ratpack.jackson.Jackson.json;
 
 /**
  * Created by thokle on 15/11/2016.
