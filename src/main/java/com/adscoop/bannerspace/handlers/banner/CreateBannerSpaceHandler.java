@@ -17,12 +17,12 @@ import ratpack.handling.Handler;
 /**
  * Created by thokle on 17/10/2016.
  */
-public class CreateBannerHandler implements Handler {
+public class CreateBannerSpaceHandler implements Handler {
 
     private WebsiteNodeService websiteNodeService;
 
     @Inject
-    public CreateBannerHandler(WebsiteNodeService websiteNodeService) {
+    public CreateBannerSpaceHandler(WebsiteNodeService websiteNodeService) {
         this.websiteNodeService = websiteNodeService;
     }
 
@@ -30,12 +30,12 @@ public class CreateBannerHandler implements Handler {
     public void handle(Context ctx) throws Exception {
 
         if (ctx.getRequest().getHeaders().get("token") != null) {
-            String companyname = ctx.getPathTokens().get("companyname");
+
             String token = ctx.getRequest().getHeaders().get("token");
             ctx.parse(fromJson(BannerSpace.class)).then(bannerSpace -> {
 
 
-                Optional<WebSiteNode> webSiteNode = websiteNodeService.findByCompanyName(companyname);
+                Optional<WebSiteNode> webSiteNode = websiteNodeService.findWebSiteByUserToken(token);
 
 
                 BannerSpace bannerSpace1 = new BannerSpace();
@@ -72,6 +72,7 @@ public class CreateBannerHandler implements Handler {
                 ctx.render(json(bannerSpace1));
 
 
+                websiteNodeService.save(webSiteNode.get());
             });
 
 

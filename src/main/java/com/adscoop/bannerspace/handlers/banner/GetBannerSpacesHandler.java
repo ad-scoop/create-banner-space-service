@@ -6,7 +6,7 @@ import ratpack.handling.Handler;
 /**
  * Created by thokle on 19/11/2016.
  */
-public class GetBannerSpaces implements Handler
+public class GetBannerSpacesHandler implements Handler
 {
 
 

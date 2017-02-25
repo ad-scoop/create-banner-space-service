@@ -38,8 +38,7 @@ public class Company  extends Entity {
     private Set<Branches> branches = new HashSet<>();
 
 
-   @Relationship(direction = Relationship.OUTGOING, type = "COMPANY_HAS_WEBSITE")
-   private Set<WebSiteNode> webSiteNodes = new HashSet<>();
+
 
 
     public String getCompanyname() {
@@ -100,11 +99,7 @@ public class Company  extends Entity {
         branches.getCompanyNodes().add(this);
     }
 
-    public void addWebSite(WebSiteNode webSiteNode){
-        this.webSiteNodes.add(webSiteNode);
-        webSiteNode.getCompanyNodes().add(this);
 
-    }
 
     public Set<AddressNode> getAddressNodes() {
         return addressNodes;
@@ -122,11 +117,5 @@ public class Company  extends Entity {
         this.branches = branches;
     }
 
-    public Set<WebSiteNode> getWebSiteNodes() {
-        return webSiteNodes;
-    }
 
-    public void setWebSiteNodes(Set<WebSiteNode> webSiteNodes) {
-        this.webSiteNodes = webSiteNodes;
-    }
 }

@@ -9,5 +9,5 @@ import java.util.Optional;
  */
 public interface BannerService {
 
-    Optional<BannerSpace>
+
 }
