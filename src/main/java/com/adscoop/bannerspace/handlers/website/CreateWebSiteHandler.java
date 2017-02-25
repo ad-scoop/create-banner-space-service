@@ -44,6 +44,8 @@ public class CreateWebSiteHandler implements Handler {
                     webSiteNode1.setHostname(webSiteNode.getHostname());
                     webSiteNode1.setPath(webSiteNode.getPath());
                     webSiteNode1.setPort(webSiteNode.getPort());
+
+                    userNode.get().addWebSite(webSiteNode1);
                     userService.save(userNode.get());
                     ctx.render(json(webSiteNode1));
                 }else {
