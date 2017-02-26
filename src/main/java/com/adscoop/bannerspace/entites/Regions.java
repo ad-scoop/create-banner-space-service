@@ -16,6 +16,15 @@ import java.util.Set;
 @NodeEntity
 public class Regions extends Entity {
 
+    private String regionname;
+
+    private String country;
+
+    private long logitude;
+
+    private long lattiude;
+
+
     @Labels
     private List<String> labels = new ArrayList<>();
 
@@ -49,5 +58,38 @@ public class Regions extends Entity {
 
     public void setWebSiteNodes(Set<WebSiteNode> webSiteNodes) {
         this.webSiteNodes = webSiteNodes;
+    }
+
+
+    public String getRegionname() {
+        return regionname;
+    }
+
+    public void setRegionname(String regionname) {
+        this.regionname = regionname;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public long getLogitude() {
+        return logitude;
+    }
+
+    public void setLogitude(long logitude) {
+        this.logitude = logitude;
+    }
+
+    public long getLattiude() {
+        return lattiude;
+    }
+
+    public void setLattiude(long lattiude) {
+        this.lattiude = lattiude;
     }
 }

@@ -10,11 +10,16 @@ import java.util.*;
  */
 public class TargetGroups extends Entity {
 
+
+    private  String gender;
+    private int from;
+    private int to;
+
     @Labels
     private List<String> labels = new ArrayList<>();
 
 
-    private Map<String, Object> targetGroups  = new HashMap<>();
+
 
     @Relationship(direction = Relationship.INCOMING, type = "TARGET_BELONGS_TO_BANNERSPACE")
     private Set<BannerSpace> tarbannerSpaceSet = new HashSet<>();
@@ -48,8 +53,28 @@ public class TargetGroups extends Entity {
         this.tarbannerNodes = tarbannerNodes;
     }
 
-    public void addTargerVariable(String key, Object value){
 
-        targetGroups.put(key,value);
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getFrom() {
+        return from;
+    }
+
+    public void setFrom(int from) {
+        this.from = from;
+    }
+
+    public int getTo() {
+        return to;
+    }
+
+    public void setTo(int to) {
+        this.to = to;
     }
 }

@@ -7,6 +7,7 @@ import static ratpack.jackson.Jackson.json;
 import java.util.Optional;
 
 import com.adscoop.bannerspace.entites.BannerSpace;
+import com.adscoop.bannerspace.entites.Regions;
 import com.adscoop.bannerspace.entites.WebSiteNode;
 import com.adscoop.bannerspace.services.WebsiteNodeService;
 import com.google.inject.Inject;
@@ -54,16 +55,7 @@ public class CreateBannerSpaceHandler implements Handler {
                 bannerSpace1.setPositionSiteM(bannerSpace.getPositionSiteM());
                 bannerSpace1.setPrice(bannerSpace.getPrice());
 
-                bannerSpace.getRegions().stream().filter(fil -> fil != null).forEach(reg -> {
 
-                    bannerSpace1.addRegion(reg);
-
-                });
-
-                bannerSpace.getCategories().stream().filter(catfil -> catfil != null).forEach(category -> {
-                    bannerSpace1.addCategory(category);
-
-                });
 
 
                 webSiteNode.get().addBannerSpace(bannerSpace1);
