@@ -40,6 +40,9 @@ public class CreateWebSiteHandler implements Handler {
 
                 companyService.save(company);
                 ctx.render(json(webSiteNode1));
+            }if(companyname == null){
+
+
             }
 
 

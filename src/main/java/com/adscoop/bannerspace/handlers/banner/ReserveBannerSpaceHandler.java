@@ -42,7 +42,7 @@ public class ReserveBannerSpaceHandler implements Handler {
                 node.getBannerSpaceToken().add(webSiteUser.get().getToken());
                 bannerNodeService.saveOrUpdate(node);
                Optional<UserNode> bannerNodeUser = userService.findUserbyBannerId(bannerNode.get().getId());
-                ctx.render(json(bannerNodeUser.get()));
+                ctx.render(json("Bannerspace reserved"));
 
             } else {
                 ctx.render(json("Banner or user does not exist"));

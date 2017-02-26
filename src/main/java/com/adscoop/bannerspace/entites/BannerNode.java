@@ -2,6 +2,7 @@ package com.adscoop.bannerspace.entites;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import org.neo4j.ogm.annotations.Labels;
@@ -29,7 +30,7 @@ public class BannerNode extends Entity {
     @JsonProperty
     private String positionSiteL;
     @JsonProperty
-    private URL Url;
+    private String url;
     private String uniqeToken;
     @JsonProperty
     private Integer lenght;
@@ -39,10 +40,10 @@ public class BannerNode extends Entity {
     private  String counterUrl;
     @JsonProperty
     private Integer counter;
-    private List<String> bannerSpaceToken;
+    private List<String> bannerSpaceToken  = new ArrayList<>();
     private  String pictureUrl;
     private  String javaScriptUrl;
-
+    private String filetype;
 @Labels
 private List<String> labels = new ArrayList<>();
 
@@ -61,6 +62,7 @@ private List<String> labels = new ArrayList<>();
     private Set<FootPrintInformationNode> footPrintInformationNodes = new HashSet<>();
 
 
+    @Ignore
     @Relationship(type = "HAS_BANNER_NODES", direction = Relationship.INCOMING)
     private Set<UserNode> userNodes  = new HashSet<>();
 
@@ -88,12 +90,12 @@ private List<String> labels = new ArrayList<>();
         this.positionSiteL = positionSiteL;
     }
 
-    public URL getUrl() {
-        return Url;
+    public String getUrl() {
+        return url;
     }
 
-    public void setUrl(URL url) {
-        Url = url;
+    public void setUrl(String url) {
+        url = url;
     }
 
     public String getUniqeToken() {
@@ -171,6 +173,13 @@ private List<String> labels = new ArrayList<>();
     }
 
 
+    public String getFiletype() {
+        return filetype;
+    }
+
+    public void setFiletype(String filetype) {
+        this.filetype = filetype;
+    }
 
     public void addCategory(Category category){
         categories.add(category);

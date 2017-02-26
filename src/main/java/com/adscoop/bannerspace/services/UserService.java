@@ -11,4 +11,5 @@ public interface UserService {
 
     Optional<UserNode> findUserByEmail(String email) throws Exception;
     Optional<UserNode> findUserbyBannerId(Long id) throws Exception;
+
 }

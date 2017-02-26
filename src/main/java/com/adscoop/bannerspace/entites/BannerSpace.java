@@ -15,7 +15,7 @@ import java.util.Set;
  * Created by thokle on 24/08/2016.
  */
 @NodeEntity
-public class BannerSpace  extends Entity {
+public class   BannerSpace  extends Entity {
 
 
 
@@ -46,12 +46,11 @@ public class BannerSpace  extends Entity {
     @Relationship(type = "BELONGS_TO_WEBSITE", direction = Relationship.INCOMING)
     private Set<WebSiteNode> webSiteNodeSet = new HashSet<>();
 
-    @Relationship(type = "BANNERSPACE_HAS_BANNERS" , direction = Relationship.OUTGOING)
-    private Set<BannerNode> bannerNodesbannerSpaces = new HashSet<>();
 
 
-    @Relationship(type = "HAS_CATEGORIES" , direction = Relationship.OUTGOING)
-    private  Set<Category> categories = new HashSet<>();
+    private List<String> categories = new ArrayList<>();
+
+    private List<String> targetgroups = new ArrayList<>();
 
     public String getDomain() {
         return domain;
@@ -154,26 +153,13 @@ public class BannerSpace  extends Entity {
         this.webSiteNodeSet = webSiteNodeSet;
     }
 
-    public Set<BannerNode> getBannerNodesbannerSpaces() {
-        return bannerNodesbannerSpaces;
-    }
-
-
-    public Set<Category> getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 
-
-    public  void addCategory(Category category){
-        categories.add(category);
-        category.getBannerSpaces().add(this);
+    public List<String> getTargetgroups() {
+        return targetgroups;
     }
 
 
-
-    public void addRegion(Regions regions){
-        getRegions().add(regions);
-        regions.getBannerSpaces().add(this);
-
-    }
 }

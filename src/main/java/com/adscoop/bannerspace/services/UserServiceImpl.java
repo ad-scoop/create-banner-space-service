@@ -1,6 +1,8 @@
 package com.adscoop.bannerspace.services;
 
+import com.adscoop.bannerspace.entites.BannerNode;
 import com.adscoop.bannerspace.entites.UserNode;
+import com.google.inject.Inject;
 import org.neo4j.ogm.session.Session;
 
 import java.util.Collections;
@@ -14,6 +16,7 @@ public class UserServiceImpl implements UserService {
     private Session session;
 
 
+    @Inject
     public UserServiceImpl(Session session) {
         this.session = session;
     }

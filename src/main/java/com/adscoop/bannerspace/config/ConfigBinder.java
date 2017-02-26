@@ -4,6 +4,7 @@ import com.adscoop.bannerspace.exceptions.BannerServiceClientException;
 import com.adscoop.bannerspace.exceptions.BannerServiceServerException;
 import com.adscoop.bannerspace.handlers.banner.CreateBannerHandler;
 import com.adscoop.bannerspace.handlers.banner.ReserveBannerSpaceHandler;
+import com.adscoop.bannerspace.handlers.bannerspace.AddBannerSpaceToWebsite;
 import com.adscoop.bannerspace.handlers.website.CreateWebSiteHandler;
 import com.adscoop.bannerspace.handlers.website.GetWebsiteHandler;
 import com.adscoop.bannerspace.services.BannerNodeService;
@@ -20,6 +21,8 @@ public class ConfigBinder extends AbstractModule {
     protected void configure() {
 
 
+
+        bind(AddBannerSpaceToWebsite.class).asEagerSingleton();
 
         bind(CreateWebSiteHandler.class).asEagerSingleton();
         bind(GetWebsiteHandler.class).asEagerSingleton();

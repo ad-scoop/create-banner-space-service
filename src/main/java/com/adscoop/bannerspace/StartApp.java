@@ -23,7 +23,7 @@ public  static void main(String ... args ) throws Exception {
         serverConfigBuilder.baseDir(BaseDir.find()).yaml("datasource.yaml").require("/db",Config.class).props("ratpack.properties").env().sysProps().development(false).build())
             .registry(Guice.registry(bindingsSpec ->  bindingsSpec.module(ConfigBinder.class).module(ServiceCommonConfigModule.class))).handlers(chain -> chain.prefix("banner", ba ->
             ba.post(CreateBannerHandler.class)
-            ).prefix("reserve", res -> res.post(":email/:idx",ReserveBannerSpaceHandler.class)))
+            ).prefix("reserve", res -> res.post(":email/:bid",ReserveBannerSpaceHandler.class)))
     );
 
     }
