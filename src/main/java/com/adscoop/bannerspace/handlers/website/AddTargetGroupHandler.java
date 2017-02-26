@@ -15,12 +15,12 @@ import static ratpack.jackson.Jackson.json;
 /**
  * Created by kleistit on 23/02/2017.
  */
-public class AddTargetGroupToBannerHandler implements Handler {
+public class AddTargetGroupHandler implements Handler {
 
     private WebsiteNodeService websiteNodeService;
 
     @Inject
-    public AddTargetGroupToBannerHandler(WebsiteNodeService websiteNodeService) {
+    public AddTargetGroupHandler(WebsiteNodeService websiteNodeService) {
         this.websiteNodeService = websiteNodeService;
     }
 
