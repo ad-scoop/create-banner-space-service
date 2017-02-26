@@ -9,57 +9,59 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 /**
  * Created by thokle on 24/08/2016.
  */
 @NodeEntity
 public class UserNode extends Entity {
 
-
-
-
     private String firstname;
-
 
     private String middlename;
 
 
-    private String lastname;
+    private boolean isActivated;
 
+    private String lastname;
 
     private String username;
 
-
     private String email;
 
-
-    private  String password;
+    private String password;
 
     private String token;
 
     @Labels
     private List<String> labels = new ArrayList<>();
 
-
-
-
-    @Relationship(direction = Relationship.OUTGOING, type =  "USER_HAS_CREDITINFO")
+    @Relationship(direction = Relationship.OUTGOING, type = "USER_HAS_CREDITINFO")
     private Set<CreditInfo> creditInfos = new HashSet<>();
 
-
-    @Relationship(direction = Relationship.OUTGOING ,type = "USER_HAS_COMPANY")
+    @Relationship(direction = Relationship.OUTGOING, type = "USER_HAS_COMPANY")
     private Set<Company> companyNodes = new HashSet<>();
 
-
-    @Relationship(direction = Relationship.OUTGOING , type = "USER_HAS_ADDRESS")
+    @Relationship(direction = Relationship.OUTGOING, type = "USER_HAS_ADDRESS")
     private Set<AddressNode> addressNodes = new HashSet<>();
 
     @Relationship(direction = Relationship.OUTGOING, type = "HAS_ACCOUNT_INFORMATION")
     private Set<AccountInformation> accountInformations = new HashSet<>();
 
-    @Relationship(direction = Relationship.OUTGOING, type =  "HAS_BANNER_NODES")
+    @Relationship(direction = Relationship.OUTGOING, type = "HAS_BANNER_NODES")
     private Set<BannerNode> bannerNodes = new HashSet<>();
+
+
+    @Relationship(direction = Relationship.OUTGOING, type = "USER_HAS_WEBSITE")
+    private Set<WebSiteNode> webSiteNodes = new HashSet<>();
+    private boolean activated;
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -109,7 +111,6 @@ public class UserNode extends Entity {
         this.password = password;
     }
 
-
     public Set<AddressNode> getAddressNodes() {
         return addressNodes;
     }
@@ -122,22 +123,18 @@ public class UserNode extends Entity {
         return bannerNodes;
     }
 
-
-
     public void setBannerNodes(Set<BannerNode> bannerNodes) {
         this.bannerNodes = bannerNodes;
     }
 
-    public void addCreditInfo(CreditInfo creditInfo){
-       this.creditInfos.add(creditInfo);
+    public void addCreditInfo(CreditInfo creditInfo) {
+        this.creditInfos.add(creditInfo);
         creditInfo.getUserNodeSet().add(this);
-
     }
 
-    public  void setAccountInformation(AccountInformation accountInformation){
+    public void setAccountInformation(AccountInformation accountInformation) {
         this.accountInformations.add(accountInformation);
         accountInformation.getUserNodeSet().add(this);
-
     }
 
     public String getToken() {
@@ -156,15 +153,13 @@ public class UserNode extends Entity {
         this.labels = labels;
     }
 
-    public  void setLabel(String s){
+    public void setLabel(String s) {
         this.labels.add(s);
     }
 
-    public void setCompanyNode(Company companyNode)
-    {
-       this.getCompanyNodes().add(companyNode);
+    public void setCompanyNode(Company companyNode) {
+        this.getCompanyNodes().add(companyNode);
         companyNode.getUserNodes().add(this);
-
     }
 
     public Set<Company> getCompanyNodes() {
@@ -191,16 +186,25 @@ public class UserNode extends Entity {
         this.accountInformations = accountInformations;
     }
 
-
-    public void addBanner(BannerNode bannerNode){
+    public void addBanner(BannerNode bannerNode) {
         bannerNodes.add(bannerNode);
         bannerNode.getUserNodes().add(this);
     }
 
-    public void addAddress(AddressNode addressNode){
-
+    public void addAddress(AddressNode addressNode) {
         addressNodes.add(addressNode);
         addressNode.getUserNodes().add(this);
     }
-}
 
+    public UserNode activated() {
+        this.activated = true;
+        return this;
+    }
+
+    public void addWebSite(WebSiteNode webSiteNode) {
+        webSiteNodes.add(webSiteNode);
+        webSiteNode.getUserNodes().add(this);
+    }
+
+
+}

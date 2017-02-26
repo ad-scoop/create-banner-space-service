@@ -1,12 +1,12 @@
-package com.adscoop.bannerspace.handlers.bannerspace;
+package com.adscoop.bannerspace.handlers.banner;
 
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
 
 /**
- * Created by thokle on 23/02/2017.
+ * Created by thokle on 19/11/2016.
  */
-public class AddBannerSpaceToWebsite implements Handler {
+public class GetBannerSpacesHandler implements Handler {
 
 
     @Override

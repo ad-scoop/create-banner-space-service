@@ -3,25 +3,30 @@ package com.adscoop.bannerspace.entites;
 import org.neo4j.ogm.annotation.Relationship;
 import org.neo4j.ogm.annotations.Labels;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by thokle on 25/08/2016.
  */
 public class TargetGroups extends Entity {
 
+
+    private String gender;
+    private int from;
+    private int to;
+
     @Labels
     private List<String> labels = new ArrayList<>();
 
 
-    private Map<String, Object> targetGroups  = new HashMap<>();
-
-    @Relationship(direction = Relationship.INCOMING, type = "TARGET_BELONGS_TO_BANNERSPACE")
-    private Set<BannerSpace> tarbannerSpaceSet = new HashSet<>();
-
+    @Relationship(type = "WEBSITE_TARGETGROUPT", direction = Relationship.INCOMING)
+    private Set<WebSiteNode> websiteNodes = new HashSet<>();
 
     @Relationship(direction = Relationship.INCOMING, type = "TARGET_BELONGS_TO_BANNER")
-    private  Set<BannerNode> tarbannerNodes = new HashSet<>();
+    private Set<BannerNode> tarbannerNodes = new HashSet<>();
 
 
     public List<String> getLabels() {
@@ -32,13 +37,6 @@ public class TargetGroups extends Entity {
         this.labels = labels;
     }
 
-    public Set<BannerSpace> getTarbannerSpaceSet() {
-        return tarbannerSpaceSet;
-    }
-
-    public void setTarbannerSpaceSet(Set<BannerSpace> tarbannerSpaceSet) {
-        this.tarbannerSpaceSet = tarbannerSpaceSet;
-    }
 
     public Set<BannerNode> getTarbannerNodes() {
         return tarbannerNodes;
@@ -48,8 +46,37 @@ public class TargetGroups extends Entity {
         this.tarbannerNodes = tarbannerNodes;
     }
 
-    public void addTargerVariable(String key, Object value){
 
-        targetGroups.put(key,value);
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getFrom() {
+        return from;
+    }
+
+    public void setFrom(int from) {
+        this.from = from;
+    }
+
+    public int getTo() {
+        return to;
+    }
+
+    public void setTo(int to) {
+        this.to = to;
+    }
+
+
+    public Set<WebSiteNode> getWebsiteNodes() {
+        return websiteNodes;
+    }
+
+    public void setWebsiteNodes(Set<WebSiteNode> websiteNodes) {
+        this.websiteNodes = websiteNodes;
     }
 }

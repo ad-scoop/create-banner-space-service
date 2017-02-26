@@ -10,7 +10,7 @@ import ratpack.handling.Handler;
  */
 public class GetWebsiteHandler implements Handler {
 
-WebsiteNodeService     websiteNodeService;
+    WebsiteNodeService websiteNodeService;
 
     @Inject
     public GetWebsiteHandler(WebsiteNodeService websiteNodeService) {

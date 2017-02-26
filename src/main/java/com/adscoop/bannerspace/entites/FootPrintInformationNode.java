@@ -19,9 +19,8 @@ public class FootPrintInformationNode extends Entity {
     @Labels
     private List<String> list = new ArrayList<>();
 
-    @Relationship(type = "BELONGS_TO_BANNER",direction = Relationship.INCOMING)
-    private   List<BannerNode> bannerNodeSet = new ArrayList<>();
-
+    @Relationship(type = "BELONGS_TO_BANNER", direction = Relationship.INCOMING)
+    private List<BannerNode> bannerNodeSet = new ArrayList<>();
 
 
     private Map<String, Object> information = new HashMap<>();

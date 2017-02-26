@@ -2,12 +2,10 @@ package com.adscoop.bannerspace.entites;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+import org.neo4j.ogm.annotation.Labels;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
-import org.neo4j.ogm.annotations.Labels;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -30,41 +28,43 @@ public class BannerNode extends Entity {
     @JsonProperty
     private String positionSiteL;
     @JsonProperty
+
     private String url;
+
     private String uniqeToken;
     @JsonProperty
     private Integer lenght;
     @JsonProperty
     private Integer height;
     @JsonProperty
-    private  String counterUrl;
+    private String counterUrl;
     @JsonProperty
     private Integer counter;
-    private List<String> bannerSpaceToken  = new ArrayList<>();
-    private  String pictureUrl;
-    private  String javaScriptUrl;
-    private String filetype;
-@Labels
-private List<String> labels = new ArrayList<>();
+
+    private List<String> bannerSpaceToken = new ArrayList<>();
+    private String pictureUrl;
+    private String javaScriptUrl;
 
 
+    @Labels
+    private List<String> labels = new ArrayList<>();
 
 
-
-    @Relationship(type = "HAS_CATEGORIES",direction = Relationship.OUTGOING)
+    @Relationship(type = "HAS_CATEGORIES", direction = Relationship.OUTGOING)
     private Set<Category> categories = new HashSet<>();
 
-    @Relationship(type = "HAS_TARGETGROUPS",direction = Relationship.OUTGOING)
-    private  Set<TargetGroups> targetGroupses = new HashSet<>();
+    @Relationship(type = "HAS_TARGETGROUPS", direction = Relationship.OUTGOING)
+    private Set<TargetGroups> targetGroupses = new HashSet<>();
 
 
     @Relationship(type = "HAS_FOOTPRINT", direction = Relationship.OUTGOING)
     private Set<FootPrintInformationNode> footPrintInformationNodes = new HashSet<>();
 
 
-    @Ignore
+    @JsonIgnore
     @Relationship(type = "HAS_BANNER_NODES", direction = Relationship.INCOMING)
-    private Set<UserNode> userNodes  = new HashSet<>();
+    private Set<UserNode> userNodes = new HashSet<>();
+
 
     public String getDomain() {
         return domain;
@@ -95,7 +95,7 @@ private List<String> labels = new ArrayList<>();
     }
 
     public void setUrl(String url) {
-        url = url;
+        this.url = url;
     }
 
     public String getUniqeToken() {
@@ -138,14 +138,13 @@ private List<String> labels = new ArrayList<>();
         this.counter = counter;
     }
 
-    public List<String> getLabels() {
-        return labels;
+    public List<String> getBannerSpaceToken() {
+        return bannerSpaceToken;
     }
 
-    public void setLabels(List<String> labels) {
-        this.labels = labels;
+    public void setBannerSpaceToken(List<String> bannerSpaceToken) {
+        this.bannerSpaceToken = bannerSpaceToken;
     }
-
 
     public String getPictureUrl() {
         return pictureUrl;
@@ -155,44 +154,20 @@ private List<String> labels = new ArrayList<>();
         this.pictureUrl = pictureUrl;
     }
 
-    public void setFootPrintInformationNodes(FootPrintInformationNode footPrintInformationNodes){
-   this.footPrintInformationNodes.add(footPrintInformationNodes);
-}
-
-    public Set<FootPrintInformationNode> getFootPrintInformationNodes() {
-        return footPrintInformationNodes;
+    public String getJavaScriptUrl() {
+        return javaScriptUrl;
     }
 
-    public void setLabel(String label){
-  this.labels.add(label);
+    public void setJavaScriptUrl(String javaScriptUrl) {
+        this.javaScriptUrl = javaScriptUrl;
     }
 
-    public void addFootPrint(FootPrintInformationNode footPrintInformationNode){
-        footPrintInformationNodes.add(footPrintInformationNode);
-        footPrintInformationNode.getBannerNodeSet().add(this);
+    public List<String> getLabels() {
+        return labels;
     }
 
-
-    public String getFiletype() {
-        return filetype;
-    }
-
-    public void setFiletype(String filetype) {
-        this.filetype = filetype;
-    }
-
-    public void addCategory(Category category){
-        categories.add(category);
-        category.getCatbannerNodes().add(this);
-    }
-
-
-    public List<String> getBannerSpaceToken() {
-        return bannerSpaceToken;
-    }
-
-    public void setBannerSpaceToken(List<String> bannerSpaceToken) {
-        this.bannerSpaceToken = bannerSpaceToken;
+    public void setLabels(List<String> labels) {
+        this.labels = labels;
     }
 
     public Set<Category> getCategories() {
@@ -211,17 +186,14 @@ private List<String> labels = new ArrayList<>();
         this.targetGroupses = targetGroupses;
     }
 
-
-
-    public String getJavaScriptUrl() {
-        return javaScriptUrl;
+    public Set<FootPrintInformationNode> getFootPrintInformationNodes() {
+        return footPrintInformationNodes;
     }
 
-    public void setJavaScriptUrl(String javaScriptUrl) {
-        this.javaScriptUrl = javaScriptUrl;
+    public void setFootPrintInformationNodes(Set<FootPrintInformationNode> footPrintInformationNodes) {
+        this.footPrintInformationNodes = footPrintInformationNodes;
     }
 
-    @JsonIgnore
     public Set<UserNode> getUserNodes() {
         return userNodes;
     }
@@ -229,4 +201,6 @@ private List<String> labels = new ArrayList<>();
     public void setUserNodes(Set<UserNode> userNodes) {
         this.userNodes = userNodes;
     }
+
+
 }

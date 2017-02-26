@@ -15,8 +15,7 @@ import java.util.Set;
  * Created by thokle on 01/10/2016.
  */
 @NodeEntity
-public class Company  extends Entity {
-
+public class Company extends Entity {
 
 
     private String companyname;
@@ -31,15 +30,11 @@ public class Company  extends Entity {
     @Relationship(direction = "INCOMING", type = "USER_HAS_COMPANY")
     private Set<UserNode> userNodes = new HashSet<>();
 
-    @Relationship(direction = Relationship.OUTGOING , type = "COMPANY_HAS_ADDRESS")
-    private  Set<AddressNode> addressNodes = new HashSet<>();
+    @Relationship(direction = Relationship.OUTGOING, type = "COMPANY_HAS_ADDRESS")
+    private Set<AddressNode> addressNodes = new HashSet<>();
 
-    @Relationship(direction = Relationship.OUTGOING , type = "COMPANY_HAS_BRANCH")
+    @Relationship(direction = Relationship.OUTGOING, type = "COMPANY_HAS_BRANCH")
     private Set<Branches> branches = new HashSet<>();
-
-
-   @Relationship(direction = Relationship.OUTGOING, type = "COMPANY_HAS_WEBSITE")
-   private Set<WebSiteNode> webSiteNodes = new HashSet<>();
 
 
     public String getCompanyname() {
@@ -59,7 +54,6 @@ public class Company  extends Entity {
     }
 
 
-
     public Long getCvr() {
         return cvr;
     }
@@ -76,7 +70,7 @@ public class Company  extends Entity {
         this.labeles = labeles;
     }
 
-   @JsonIgnore
+    @JsonIgnore
     public Set<UserNode> getUserNodes() {
 
         return userNodes;
@@ -90,21 +84,16 @@ public class Company  extends Entity {
         this.labeles.add(label);
     }
 
-    public   void addAddress(AddressNode addressNode){
+    public void addAddress(AddressNode addressNode) {
         addressNodes.add(addressNode);
         addressNode.getCompanyNodes().add(this);
     }
 
-    public void addBrandh(Branches branches){
+    public void addBrandh(Branches branches) {
         this.branches.add(branches);
         branches.getCompanyNodes().add(this);
     }
 
-    public void addWebSite(WebSiteNode webSiteNode){
-        this.webSiteNodes.add(webSiteNode);
-        webSiteNode.getCompanyNodes().add(this);
-
-    }
 
     public Set<AddressNode> getAddressNodes() {
         return addressNodes;
@@ -122,11 +111,5 @@ public class Company  extends Entity {
         this.branches = branches;
     }
 
-    public Set<WebSiteNode> getWebSiteNodes() {
-        return webSiteNodes;
-    }
 
-    public void setWebSiteNodes(Set<WebSiteNode> webSiteNodes) {
-        this.webSiteNodes = webSiteNodes;
-    }
 }

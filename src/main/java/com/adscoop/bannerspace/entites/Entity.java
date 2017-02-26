@@ -26,11 +26,11 @@ public abstract class Entity {
 
     @Override
     public boolean equals(Object obj) {
-        if(this == obj) return true;
-        if(obj == null || id == null || getClass() != obj.getClass()) return false;
+        if (this == obj) return true;
+        if (obj == null || id == null || getClass() != obj.getClass()) return false;
         Entity entity = (Entity) obj;
 
-        if(!id.equals(entity.getId()))return false;
+        if (!id.equals(entity.getId())) return false;
 
         return true;
 

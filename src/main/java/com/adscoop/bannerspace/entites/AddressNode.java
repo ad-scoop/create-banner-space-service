@@ -18,15 +18,15 @@ public class AddressNode extends Entity {
 
 
     @JsonIgnore
-    @Relationship(direction =  Relationship.INCOMING, type = "COMPANY_HAS_ADDRESS")
+    @Relationship(direction = Relationship.INCOMING, type = "COMPANY_HAS_ADDRESS")
     Set<Company> companyNodes = new HashSet<>();
     @JsonIgnore
     @Relationship(direction = Relationship.INCOMING, type = "USER_HAS_ADDRESS")
-    Set<UserNode>  userNodes = new HashSet<>();
+    Set<UserNode> userNodes = new HashSet<>();
     private String streetname;
     private Integer streetNumber;
     private Integer floor;
-    private  String site;
+    private String site;
     private Integer zipcode;
     private String city;
     private String region;
@@ -115,7 +115,7 @@ public class AddressNode extends Entity {
         this.labels = labels;
     }
 
-    public void setLabel(String label){
+    public void setLabel(String label) {
         this.labels.add(label);
     }
 

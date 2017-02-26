@@ -7,7 +7,7 @@ import java.util.Optional;
 /**
  * Created by kleistit on 21/02/2017.
  */
-public interface BannerNodeService  {
+public interface BannerNodeService {
 
     Optional<BannerNode> findbyId(Long id) throws Exception;
 

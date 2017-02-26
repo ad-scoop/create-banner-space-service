@@ -13,9 +13,6 @@ import java.io.IOException;
 public class ServiceCommonConfigModule extends AbstractModule {
 
 
-
-
-
     @Override
     protected void configure() {
 
@@ -23,11 +20,9 @@ public class ServiceCommonConfigModule extends AbstractModule {
 
     @Singleton
     @Provides
-    public Session connectionSource(Config config) throws IOException{
+    public Session connectionSource(Config config) throws IOException {
         return new ConnectionSource(config).session();
     }
-
-
 
 
 }

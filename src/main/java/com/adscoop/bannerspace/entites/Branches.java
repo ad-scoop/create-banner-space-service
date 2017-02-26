@@ -16,7 +16,7 @@ import java.util.Set;
 @NodeEntity
 public class Branches extends Entity {
 
-    private  String name;
+    private String name;
 
     @Labels
     private List<String> labels = new ArrayList<>();
@@ -27,10 +27,10 @@ public class Branches extends Entity {
     @Relationship(direction = Relationship.OUTGOING, type = "BRANCH_HAS_ADDRESS")
     private Set<AddressNode> addressNodeList = new HashSet<>();
 
-    @Relationship(direction = Relationship.INCOMING , type = "BRANCH_BELONGS_TO")
+    @Relationship(direction = Relationship.INCOMING, type = "BRANCH_BELONGS_TO")
     private Set<Company> companyNodes = new HashSet<>();
 
-    @Relationship(direction = Relationship.OUTGOING , type="CATEGORIES")
+    @Relationship(direction = Relationship.OUTGOING, type = "CATEGORIES")
     private Set<Category> categories = new HashSet<>();
 
 

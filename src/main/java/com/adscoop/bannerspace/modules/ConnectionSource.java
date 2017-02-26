@@ -11,20 +11,20 @@ import java.io.IOException;
 public class ConnectionSource {
 
 
-
     SessionFactory sessionFactory;
 
 
+    @Inject
+    public ConnectionSource(Config config) throws IOException {
 
-@Inject
-    public ConnectionSource(Config config) throws  IOException {
-    sessionFactory = new SessionFactory(configuration(config),"com.adscoop.bannerspace.entites");
+        sessionFactory = new SessionFactory(configuration(config), "com.adscoop.bannerspace.entites");
+
         configuration(config);
     }
 
     private Configuration configuration(Config config) throws IOException {
         Configuration configuration = new Configuration();
-     configuration.driverConfiguration().setDriverClassName(config.getDriver_class_name()).setCredentials(config.getUsername(),config.getPassword()).setURI(config.getNeo4Url());
+        configuration.driverConfiguration().setDriverClassName(config.getDriver_class_name()).setCredentials(config.getUsername(), config.getPassword()).setURI(config.getNeo4Url());
         return configuration;
 
     }
@@ -34,11 +34,6 @@ public class ConnectionSource {
         return sessionFactory.openSession();
 
     }
-
-
-
-
-
 
 
 }

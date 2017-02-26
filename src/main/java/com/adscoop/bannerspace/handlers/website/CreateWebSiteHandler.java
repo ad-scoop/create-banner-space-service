@@ -1,12 +1,14 @@
 package com.adscoop.bannerspace.handlers.website;
 
-import com.adscoop.bannerspace.entites.Company;
-import com.adscoop.bannerspace.entites.WebSiteNode;
-import com.adscoop.bannerspace.services.CompanyService;
-import com.google.inject.Inject;
 
+import com.adscoop.bannerspace.entites.UserNode;
+import com.adscoop.bannerspace.entites.WebSiteNode;
+import com.adscoop.bannerspace.services.UserService;
+import com.google.inject.Inject;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
+
+import java.util.Optional;
 
 import static ratpack.jackson.Jackson.fromJson;
 import static ratpack.jackson.Jackson.json;
@@ -16,40 +18,59 @@ import static ratpack.jackson.Jackson.json;
  */
 public class CreateWebSiteHandler implements Handler {
 
-    CompanyService companyService;
+    UserService userService;
 
     @Inject
-    public CreateWebSiteHandler(CompanyService companyService) {
-        this.companyService = companyService;
+    public CreateWebSiteHandler(UserService userService) {
+        this.userService = userService;
 
     }
 
     @Override
     public void handle(Context ctx) throws Exception {
-        ctx.parse(fromJson(WebSiteNode.class)).then(webSiteNode ->  {
-            String token = ctx.getRequest().getHeaders().get("token");
-            String companyname = ctx.getPathTokens().get("companyname");
-            if(token != null && companyname !=null){
-                Company company =  companyService.findByUserToken(token,companyname);
-                WebSiteNode webSiteNode1 = new WebSiteNode();
-                webSiteNode1.setHostname(webSiteNode.getHostname());
-                webSiteNode1.setPath(webSiteNode.getPath());
-                webSiteNode1.setPort(webSiteNode.getPort());
-                company.getWebSiteNodes().add(webSiteNode1);
+        String token = ctx.getRequest().getHeaders().get("token");
+        if (ctx.getRequest().getMethod().isPost()) {
+            ctx.parse(fromJson(WebSiteNode.class)).then(webSiteNode -> {
 
 
-                companyService.save(company);
-                ctx.render(json(webSiteNode1));
-            }if(companyname == null){
+                if (token != null) {
 
+                    Optional<UserNode> userNode = userService.findUserByToken(token);
+                    if (userNode.isPresent()) {
+                        WebSiteNode webSiteNode1 = new WebSiteNode();
+                        webSiteNode1.setHostname(webSiteNode.getHostname());
+                        webSiteNode1.setPath(webSiteNode.getPath());
+                        webSiteNode1.setPort(webSiteNode.getPort());
 
-            }
+                        userNode.get().addWebSite(webSiteNode1);
+                        userService.save(userNode.get());
+                        ctx.render(json(webSiteNode1));
+                    } else {
 
+                        ctx.render(json("User not found"));
 
+                    }
 
+                } else {
+                    ctx.render(json("no token present in header"));
+                }
+            });
+        } else {
+            ctx.next();
+        }
 
-        });
     }
 
 
+    /**
+     * Created by kleistit on 23/02/2017.
+     */
+    public static class AddCategoryToBannerHandler implements Handler {
+
+
+        @Override
+        public void handle(Context ctx) throws Exception {
+
+        }
+    }
 }

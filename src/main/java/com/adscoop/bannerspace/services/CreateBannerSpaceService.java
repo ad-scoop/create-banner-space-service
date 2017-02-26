@@ -5,7 +5,6 @@ import com.adscoop.bannerspace.entites.BannerSpace;
 import com.google.inject.Inject;
 import org.neo4j.ogm.session.Session;
 
-
 import java.io.IOException;
 
 /**
@@ -13,7 +12,7 @@ import java.io.IOException;
  */
 public class CreateBannerSpaceService {
 
-        Session connectionSource;
+    Session connectionSource;
 
 
     @Inject
@@ -23,14 +22,12 @@ public class CreateBannerSpaceService {
 
 
     public void createBannerSpace(BannerSpace bannerSpace) throws IOException {
-            connectionSource.save(bannerSpace);
+        connectionSource.save(bannerSpace);
     }
 
 
-
-
-    public  BannerSpace findById(Long id){
-     return null;
+    public BannerSpace findById(Long id) {
+        return null;
     }
 
 

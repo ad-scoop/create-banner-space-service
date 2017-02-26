@@ -1,6 +1,5 @@
 package com.adscoop.bannerspace.services;
 
-import com.adscoop.bannerspace.entites.BannerNode;
 import com.adscoop.bannerspace.entites.UserNode;
 import com.google.inject.Inject;
 import org.neo4j.ogm.session.Session;
@@ -15,7 +14,6 @@ public class UserServiceImpl implements UserService {
 
     private Session session;
 
-
     @Inject
     public UserServiceImpl(Session session) {
         this.session = session;
@@ -23,11 +21,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<UserNode> findUserByEmail(String email) throws Exception {
-       try{
-           return Optional.ofNullable(session.queryForObject(UserNode.class,"match (u) where u.email='"+email+"' return u", Collections.EMPTY_MAP));
-       } catch (Exception e){
-           throw new Exception(e.getMessage());
-       }
+        try {
+            return Optional.ofNullable(session.queryForObject(UserNode.class, "match (u) where u.email='" + email + "' return u", Collections.EMPTY_MAP));
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
 
     }
 
@@ -35,5 +33,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<UserNode> findUserbyBannerId(Long id) throws Exception {
         return null;
+    }
+
+    @Override
+    public Optional<UserNode> findUserByToken(String token) throws Exception {
+        try {
+            return Optional.ofNullable(session.queryForObject(UserNode.class, "match (u) where u.token='" + token + "' return u", Collections.EMPTY_MAP));
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+
+        }
+    }
+
+
+    @Override
+    public void save(UserNode userNode) throws Exception {
+        try {
+            session.save(userNode);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 }

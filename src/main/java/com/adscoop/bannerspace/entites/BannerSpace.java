@@ -15,8 +15,7 @@ import java.util.Set;
  * Created by thokle on 24/08/2016.
  */
 @NodeEntity
-public class   BannerSpace  extends Entity {
-
+public class BannerSpace extends Entity {
 
 
     private String userId;
@@ -27,11 +26,11 @@ public class   BannerSpace  extends Entity {
 
     private String positionSiteL;
 
-        private URL Url;
+    private URL Url;
 
     private String uniqeToken;
 
-   private Double price;
+    private Double price;
 
     private Integer lattiude;
 
@@ -45,7 +44,6 @@ public class   BannerSpace  extends Entity {
 
     @Relationship(type = "BELONGS_TO_WEBSITE", direction = Relationship.INCOMING)
     private Set<WebSiteNode> webSiteNodeSet = new HashSet<>();
-
 
 
     private List<String> categories = new ArrayList<>();
@@ -132,7 +130,7 @@ public class   BannerSpace  extends Entity {
         this.labels = labels;
     }
 
-    public void setLabel(String label){
+    public void setLabel(String label) {
         this.labels.add(label);
     }
 

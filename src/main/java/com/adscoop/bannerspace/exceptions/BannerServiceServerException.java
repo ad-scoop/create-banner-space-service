@@ -9,6 +9,6 @@ import ratpack.handling.Context;
 public class BannerServiceServerException implements ServerErrorHandler {
     @Override
     public void error(Context context, Throwable throwable) throws Exception {
-        context.getResponse().status(500).send("text",throwable.getMessage());
+        context.getResponse().status(500).send("text", throwable.getMessage());
     }
 }
