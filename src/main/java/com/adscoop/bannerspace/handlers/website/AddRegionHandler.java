@@ -27,10 +27,10 @@ public class AddRegionHandler implements Handler {
     @Override
     public void handle(Context ctx) throws Exception {
         String token = ctx.getRequest().getHeaders().get("token");
+        String hostname = ctx.getPathTokens().get("hostname");
+        if (!token.isEmpty() && !hostname.isEmpty()) {
 
-        if (!token.isEmpty()) {
-
-            Optional<WebSiteNode> webSiteNode = websiteNodeService.findWebSiteByUserToken(token);
+            Optional<WebSiteNode> webSiteNode = websiteNodeService.findWebSiteByUserTokenAndHostname(token, hostname);
             if (webSiteNode.isPresent()) {
                 ctx.parse(fromJson(Regions.class)).then(regions -> {
                     Regions regions1 = new Regions();

@@ -33,7 +33,7 @@ public class WebsiteNodeServiceImpl implements WebsiteNodeService {
     @Override
     public Optional<WebSiteNode> findByHostName(String hostname) throws Exception {
         try{
-        return Optional.ofNullable(session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode) where w.hostname=" + hostname+ " return w", Collections.EMPTY_MAP));
+        return Optional.ofNullable(session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode) where w.hostname='" + hostname+ "' return w", Collections.EMPTY_MAP));
     }catch (Exception e){
             throw  new Exception(e.getMessage());
         }
@@ -62,9 +62,9 @@ public class WebsiteNodeServiceImpl implements WebsiteNodeService {
 
 
     @Override
-    public Optional<WebSiteNode> findWebSiteByUserToken(String token) throws Exception {
+    public Optional<WebSiteNode> findWebSiteByUserTokenAndHostname(String token, String hostname) throws Exception {
         try {
-            return Optional.ofNullable(session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode)<-[:USER_HAS_WEBSITE]-(u:UserNode) where u.token='" + token + "' return w limit 1", Collections.EMPTY_MAP));
+            return Optional.ofNullable(session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode)<-[:USER_HAS_WEBSITE]-(u:UserNode) where u.token='" + token + "' and w.hostname CONTAINS '"+hostname+"' return w ", Collections.EMPTY_MAP));
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

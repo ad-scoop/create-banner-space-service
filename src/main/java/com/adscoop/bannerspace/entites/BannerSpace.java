@@ -5,7 +5,6 @@ import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 import org.neo4j.ogm.annotations.Labels;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -18,15 +17,15 @@ import java.util.Set;
 public class BannerSpace extends Entity {
 
 
-    private String positionSiteM;
+    private String position;
 
-    private String positionSiteL;
+
 
     private Double price;
 
     private int width;
 
-    private int heihht;
+    private int height;
 
 
 
@@ -44,25 +43,13 @@ public class BannerSpace extends Entity {
     private List<String> targetgroups = new ArrayList<>();
 
 
-
-    public String getPositionSiteM() {
-        return positionSiteM;
+    public String getPosition() {
+        return position;
     }
 
-    public void setPositionSiteM(String positionSiteM) {
-        this.positionSiteM = positionSiteM;
+    public void setPosition(String position) {
+        this.position = position;
     }
-
-    public String getPositionSiteL() {
-        return positionSiteL;
-    }
-
-    public void setPositionSiteL(String positionSiteL) {
-        this.positionSiteL = positionSiteL;
-    }
-
-
-
 
     public List<String> getLabels() {
         return labels;
@@ -112,11 +99,11 @@ public class BannerSpace extends Entity {
         this.width = width;
     }
 
-    public int getHeihht() {
-        return heihht;
+    public int getHeight() {
+        return height;
     }
 
-    public void setHeihht(int heihht) {
-        this.heihht = heihht;
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

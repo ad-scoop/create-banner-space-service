@@ -19,5 +19,5 @@ public interface WebsiteNodeService {
 
     Optional<Iterable<WebSiteNode>> finByCriteria(List<Category> categoryList, List<TargetGroups> targetGroups) throws Exception;
 
-    Optional<WebSiteNode> findWebSiteByUserToken(String token) throws Exception;
+    Optional<WebSiteNode> findWebSiteByUserTokenAndHostname(String token, String hostname) throws Exception;
 }

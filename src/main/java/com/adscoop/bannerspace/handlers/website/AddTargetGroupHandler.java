@@ -27,10 +27,10 @@ public class AddTargetGroupHandler implements Handler {
     @Override
     public void handle(Context ctx) throws Exception {
         String token = ctx.getRequest().getHeaders().get("token");
+String hostname = ctx.getPathTokens().get("hostname");
 
-
-        if (!token.isEmpty()) {
-            Optional<WebSiteNode> webSiteNode = websiteNodeService.findWebSiteByUserToken(token);
+        if (!token.isEmpty() && !hostname.isEmpty()) {
+            Optional<WebSiteNode> webSiteNode = websiteNodeService.findWebSiteByUserTokenAndHostname(token,hostname);
             if (webSiteNode.isPresent()) {
                 ctx.parse(fromJson(TargetGroups.class)).then(targetGroups -> {
 

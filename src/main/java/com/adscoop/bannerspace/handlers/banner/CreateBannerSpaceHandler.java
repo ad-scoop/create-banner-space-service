@@ -28,13 +28,14 @@ public class CreateBannerSpaceHandler implements Handler {
     @Override
     public void handle(Context ctx) throws Exception {
 String token = ctx.getRequest().getHeaders().get("token");
-        if (!token.isEmpty()) {
+String hostname = ctx.getPathTokens().get("hostname");
+        if (!token.isEmpty()  && !hostname.isEmpty())  {
 
 
             ctx.parse(fromJson(BannerSpace.class)).then(bannerSpace -> {
 
 
-                Optional<WebSiteNode> webSiteNode = websiteNodeService.findWebSiteByUserToken(token);
+                Optional<WebSiteNode> webSiteNode = websiteNodeService.findWebSiteByUserTokenAndHostname(token, hostname);
 
                 if(webSiteNode.isPresent()) {
                     BannerSpace bannerSpace1 = new BannerSpace();
@@ -46,18 +47,19 @@ String token = ctx.getRequest().getHeaders().get("token");
                     });
 
 
-                    bannerSpace1.setPositionSiteL(bannerSpace.getPositionSiteL());
-                    bannerSpace1.setPositionSiteM(bannerSpace.getPositionSiteM());
+                    bannerSpace1.setPosition(bannerSpace.getPosition());
+                  bannerSpace1.setHeight(bannerSpace.getHeight());
                     bannerSpace1.setPrice(bannerSpace.getPrice());
 
 
                     webSiteNode.get().addBannerSpace(bannerSpace1);
 
 
-                    ctx.render(json(bannerSpace1));
 
 
                     websiteNodeService.save(webSiteNode.get());
+
+                    ctx.render(json(bannerSpace1));
                 } else {
                     ctx.render(json("no website found"));
 
