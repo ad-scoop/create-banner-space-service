@@ -13,7 +13,7 @@ import ratpack.handling.Chain;
 public class WebSiteChainAction implements Action<Chain> {
     @Override
     public void execute(Chain chain) throws Exception {
-        chain.post(CreateWebSiteHandler.class).get(GetWebsiteHandler.class).post("region", AddRegionHandler.class).post("targetgroup/:hostname",AddTargetGroupHandler.class);
+        chain.post(CreateWebSiteHandler.class).get(GetWebsiteHandler.class).post("region/:hostname", AddRegionHandler.class).post("targetgroup/:hostname",AddTargetGroupHandler.class);
 
 
     }
