@@ -36,7 +36,7 @@ public class BannerSpace extends Entity {
 
     private Integer longitude;
 
-    private List<Regions> regions;
+
 
     @Labels
     private List<String> labels = new ArrayList<>();
@@ -114,13 +114,7 @@ public class BannerSpace extends Entity {
         this.longitude = longitude;
     }
 
-    public List<Regions> getRegions() {
-        return regions;
-    }
 
-    public void setRegions(List<Regions> regions) {
-        this.regions = regions;
-    }
 
     public List<String> getLabels() {
         return labels;

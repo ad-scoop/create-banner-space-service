@@ -28,7 +28,7 @@ bind(AddTargetGroupHandler.class).asEagerSingleton();
         bind(CreateWebSiteHandler.class).asEagerSingleton();
 
         bind(WebSiteChainAction.class).asEagerSingleton();
-
+bind(AddBannerSpaceToWebsite.class).asEagerSingleton();
         bind(CreateBannerSpaceHandler.class).asEagerSingleton();
         bind(GetWebsiteHandler.class).asEagerSingleton();
         //exceptions
