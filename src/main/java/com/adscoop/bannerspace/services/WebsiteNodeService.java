@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface WebsiteNodeService {
     void save(com.adscoop.bannerspace.entites.WebSiteNode webSiteNode);
 
-    WebSiteNode findByPath(String path);
+    Optional<WebSiteNode> findByHostName(String path) throws Exception;
 
     Optional<WebSiteNode> findByCompanyName(String companyName);
 

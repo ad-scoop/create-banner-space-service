@@ -31,8 +31,12 @@ public class WebsiteNodeServiceImpl implements WebsiteNodeService {
     }
 
     @Override
-    public WebSiteNode findByPath(String path) {
-        return session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode) where w.path=" + path + " return w", Collections.EMPTY_MAP);
+    public Optional<WebSiteNode> findByHostName(String hostname) throws Exception {
+        try{
+        return Optional.ofNullable(session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode) where w.hostname=" + hostname+ " return w", Collections.EMPTY_MAP));
+    }catch (Exception e){
+            throw  new Exception(e.getMessage());
+        }
     }
 
 

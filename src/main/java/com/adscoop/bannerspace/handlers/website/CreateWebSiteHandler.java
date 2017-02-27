@@ -4,6 +4,7 @@ package com.adscoop.bannerspace.handlers.website;
 import com.adscoop.bannerspace.entites.UserNode;
 import com.adscoop.bannerspace.entites.WebSiteNode;
 import com.adscoop.bannerspace.services.UserService;
+import com.adscoop.bannerspace.services.WebsiteNodeService;
 import com.google.inject.Inject;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
@@ -19,11 +20,11 @@ import static ratpack.jackson.Jackson.json;
 public class CreateWebSiteHandler implements Handler {
 
     UserService userService;
-
+WebsiteNodeService websiteNodeService;
     @Inject
-    public CreateWebSiteHandler(UserService userService) {
+    public CreateWebSiteHandler(UserService userService, WebsiteNodeService websiteNodeService) {
         this.userService = userService;
-
+        this.websiteNodeService = websiteNodeService;
     }
 
     @Override
@@ -31,28 +32,31 @@ public class CreateWebSiteHandler implements Handler {
         String token = ctx.getRequest().getHeaders().get("token");
         if (ctx.getRequest().getMethod().isPost()) {
             ctx.parse(fromJson(WebSiteNode.class)).then(webSiteNode -> {
+            Optional<WebSiteNode> hostname = websiteNodeService.findByHostName(webSiteNode.getHostname());
+                if(!hostname.isPresent()) {
+                    if (token != null) {
 
+                        Optional<UserNode> userNode = userService.findUserByToken(token);
+                        if (userNode.isPresent()) {
+                            WebSiteNode webSiteNode1 = new WebSiteNode();
+                            webSiteNode1.setHostname(webSiteNode.getHostname());
+                            webSiteNode1.setPath(webSiteNode.getPath());
+                            webSiteNode1.setPort(webSiteNode.getPort());
 
-                if (token != null) {
+                            userNode.get().addWebSite(webSiteNode1);
+                            userService.save(userNode.get());
+                            ctx.render(json(webSiteNode1));
+                        } else {
 
-                    Optional<UserNode> userNode = userService.findUserByToken(token);
-                    if (userNode.isPresent()) {
-                        WebSiteNode webSiteNode1 = new WebSiteNode();
-                        webSiteNode1.setHostname(webSiteNode.getHostname());
-                        webSiteNode1.setPath(webSiteNode.getPath());
-                        webSiteNode1.setPort(webSiteNode.getPort());
+                            ctx.render(json("User not found"));
 
-                        userNode.get().addWebSite(webSiteNode1);
-                        userService.save(userNode.get());
-                        ctx.render(json(webSiteNode1));
+                        }
+
                     } else {
-
-                        ctx.render(json("User not found"));
-
+                        ctx.render(json("no token present in header"));
                     }
-
-                } else {
-                    ctx.render(json("no token present in header"));
+                }else {
+                  ctx.render(json("Hostname already exist please use another one"));
                 }
             });
         } else {
@@ -62,15 +66,5 @@ public class CreateWebSiteHandler implements Handler {
     }
 
 
-    /**
-     * Created by kleistit on 23/02/2017.
-     */
-    public static class AddCategoryToBannerHandler implements Handler {
 
-
-        @Override
-        public void handle(Context ctx) throws Exception {
-
-        }
-    }
 }
