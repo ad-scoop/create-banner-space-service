@@ -60,7 +60,7 @@ public class WebsiteNodeServiceImpl implements WebsiteNodeService {
     @Override
     public Optional<WebSiteNode> findWebSiteByUserToken(String token) throws Exception {
         try {
-            return Optional.ofNullable(session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode)<-[:USER_HAS_WEBSITE]-(u:UserNode) where u.token='" + token + "' return w", Collections.EMPTY_MAP));
+            return Optional.ofNullable(session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode)<-[:USER_HAS_WEBSITE]-(u:UserNode) where u.token='" + token + "' return w limit 1", Collections.EMPTY_MAP));
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

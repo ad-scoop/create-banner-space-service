@@ -18,23 +18,16 @@ import java.util.Set;
 public class BannerSpace extends Entity {
 
 
-    private String userId;
-
-    private String domain;
-
     private String positionSiteM;
 
     private String positionSiteL;
 
-    private URL Url;
-
-    private String uniqeToken;
-
     private Double price;
 
-    private Integer lattiude;
+    private int width;
 
-    private Integer longitude;
+    private int heihht;
+
 
 
 
@@ -50,13 +43,7 @@ public class BannerSpace extends Entity {
 
     private List<String> targetgroups = new ArrayList<>();
 
-    public String getDomain() {
-        return domain;
-    }
 
-    public void setDomain(String domain) {
-        this.domain = domain;
-    }
 
     public String getPositionSiteM() {
         return positionSiteM;
@@ -74,45 +61,6 @@ public class BannerSpace extends Entity {
         this.positionSiteL = positionSiteL;
     }
 
-    public URL getUrl() {
-        return Url;
-    }
-
-    public void setUrl(URL url) {
-        Url = url;
-    }
-
-    public String getUniqeToken() {
-        return uniqeToken;
-    }
-
-    public void setUniqeToken(String uniqeToken) {
-        this.uniqeToken = uniqeToken;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Integer getLattiude() {
-        return lattiude;
-    }
-
-    public void setLattiude(Integer lattiude) {
-        this.lattiude = lattiude;
-    }
-
-    public Integer getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Integer longitude) {
-        this.longitude = longitude;
-    }
 
 
 
@@ -128,13 +76,7 @@ public class BannerSpace extends Entity {
         this.labels.add(label);
     }
 
-    public String getUserId() {
-        return userId;
-    }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     @JsonIgnore
     public Set<WebSiteNode> getWebSiteNodeSet() {
@@ -154,4 +96,27 @@ public class BannerSpace extends Entity {
     }
 
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeihht() {
+        return heihht;
+    }
+
+    public void setHeihht(int heihht) {
+        this.heihht = heihht;
+    }
 }

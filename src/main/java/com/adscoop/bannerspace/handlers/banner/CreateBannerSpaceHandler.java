@@ -27,43 +27,46 @@ public class CreateBannerSpaceHandler implements Handler {
 
     @Override
     public void handle(Context ctx) throws Exception {
+String token = ctx.getRequest().getHeaders().get("token");
+        if (!token.isEmpty()) {
 
-        if (ctx.getRequest().getHeaders().get("token") != null) {
 
-            String token = ctx.getRequest().getHeaders().get("token");
             ctx.parse(fromJson(BannerSpace.class)).then(bannerSpace -> {
 
 
                 Optional<WebSiteNode> webSiteNode = websiteNodeService.findWebSiteByUserToken(token);
 
-
-                BannerSpace bannerSpace1 = new BannerSpace();
-                bannerSpace1.setLattiude(bannerSpace.getLattiude());
-
-                bannerSpace.getLabels().stream().filter(labelfil -> labelfil != null).forEach(la -> {
-
-                    bannerSpace1.getLabels().add(la);
-                });
+                if(webSiteNode.isPresent()) {
+                    BannerSpace bannerSpace1 = new BannerSpace();
 
 
-                bannerSpace1.setDomain(bannerSpace.getDomain());
-                bannerSpace1.setLongitude(bannerSpace.getLongitude());
-                bannerSpace1.setLattiude(bannerSpace.getLattiude());
-                bannerSpace1.setPositionSiteL(bannerSpace.getPositionSiteL());
-                bannerSpace1.setPositionSiteM(bannerSpace.getPositionSiteM());
-                bannerSpace1.setPrice(bannerSpace.getPrice());
+                    bannerSpace.getLabels().stream().filter(labelfil -> labelfil != null).forEach(la -> {
+
+                        bannerSpace1.getLabels().add(la);
+                    });
 
 
-                webSiteNode.get().addBannerSpace(bannerSpace1);
+                    bannerSpace1.setPositionSiteL(bannerSpace.getPositionSiteL());
+                    bannerSpace1.setPositionSiteM(bannerSpace.getPositionSiteM());
+                    bannerSpace1.setPrice(bannerSpace.getPrice());
 
 
-                ctx.render(json(bannerSpace1));
+                    webSiteNode.get().addBannerSpace(bannerSpace1);
 
 
-                websiteNodeService.save(webSiteNode.get());
+                    ctx.render(json(bannerSpace1));
+
+
+                    websiteNodeService.save(webSiteNode.get());
+                } else {
+                    ctx.render(json("no website found"));
+
+                }
             });
 
 
+        } else {
+            ctx.render(json("No token present"));
         }
 
     }

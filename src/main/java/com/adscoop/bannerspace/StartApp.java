@@ -4,7 +4,6 @@ import com.adscoop.bannerspace.chains.WebSiteChainAction;
 import com.adscoop.bannerspace.config.ConfigBinder;
 import com.adscoop.bannerspace.handlers.banner.CreateBannerSpaceHandler;
 import com.adscoop.bannerspace.handlers.banner.ReserveBannerSpaceHandler;
-import com.adscoop.bannerspace.handlers.bannerspace.AddBannerSpaceToWebsite;
 import com.adscoop.bannerspace.modules.Config;
 import com.adscoop.bannerspace.modules.ServiceCommonConfigModule;
 import ratpack.guice.Guice;
@@ -25,7 +24,7 @@ public class StartApp {
                 .registry(Guice.registry(bindingsSpec -> bindingsSpec.module(ConfigBinder.class).module(ServiceCommonConfigModule.class))).handlers(chain -> chain.prefix("banner", ba ->
                         ba.post(CreateBannerSpaceHandler.class)
                 ).prefix("reserve", res -> res.post(":email/:bid", ReserveBannerSpaceHandler.class)).prefix("website", WebSiteChainAction.class).prefix("bannerspace", bach -> {
-                    bach.post(AddBannerSpaceToWebsite.class);
+                    bach.post(CreateBannerSpaceHandler.class);
 
                 }))
         );
