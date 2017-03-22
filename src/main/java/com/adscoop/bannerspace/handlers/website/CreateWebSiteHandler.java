@@ -6,6 +6,7 @@ import com.adscoop.bannerspace.entites.WebSiteNode;
 import com.adscoop.bannerspace.services.UserService;
 import com.adscoop.bannerspace.services.WebsiteNodeService;
 import com.google.inject.Inject;
+import ratpack.exec.Promise;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
 
@@ -20,7 +21,7 @@ import static ratpack.jackson.Jackson.json;
 public class CreateWebSiteHandler implements Handler {
 
     UserService userService;
-WebsiteNodeService websiteNodeService;
+    WebsiteNodeService websiteNodeService;
     @Inject
     public CreateWebSiteHandler(UserService userService, WebsiteNodeService websiteNodeService) {
         this.userService = userService;
@@ -32,32 +33,21 @@ WebsiteNodeService websiteNodeService;
         String token = ctx.getRequest().getHeaders().get("token");
         if (ctx.getRequest().getMethod().isPost()) {
             ctx.parse(fromJson(WebSiteNode.class)).then(webSiteNode -> {
-            Optional<WebSiteNode> hostname = websiteNodeService.findByHostName(webSiteNode.getHostname());
-                if(!hostname.isPresent()) {
+            Promise<WebSiteNode> hostname = websiteNodeService.findByHostName(webSiteNode.getHostname());
+                hostname.then(webSiteNode1 ->   {
                     if (token != null) {
-
                         Optional<UserNode> userNode = userService.findUserByToken(token);
                         if (userNode.isPresent()) {
-                            WebSiteNode webSiteNode1 = new WebSiteNode();
-                            webSiteNode1.setHostname(webSiteNode.getHostname());
-                            webSiteNode1.setPath(webSiteNode.getPath());
-                            webSiteNode1.setPort(webSiteNode.getPort());
-
                             userNode.get().addWebSite(webSiteNode1);
                             userService.save(userNode.get());
                             ctx.render(json(webSiteNode1));
                         } else {
-
                             ctx.render(json("User not found"));
-
                         }
-
                     } else {
                         ctx.render(json("no token present in header"));
                     }
-                }else {
-                  ctx.render(json("Hostname already exist please use another one"));
-                }
+                });
             });
         } else {
             ctx.next();

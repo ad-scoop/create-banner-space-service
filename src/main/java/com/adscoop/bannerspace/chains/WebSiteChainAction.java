@@ -1,7 +1,5 @@
 package com.adscoop.bannerspace.chains;
 
-import com.adscoop.bannerspace.handlers.website.AddRegionHandler;
-import com.adscoop.bannerspace.handlers.website.AddTargetGroupHandler;
 import com.adscoop.bannerspace.handlers.website.CreateWebSiteHandler;
 import com.adscoop.bannerspace.handlers.website.GetWebsiteHandler;
 import ratpack.func.Action;
@@ -13,7 +11,7 @@ import ratpack.handling.Chain;
 public class WebSiteChainAction implements Action<Chain> {
     @Override
     public void execute(Chain chain) throws Exception {
-        chain.post(CreateWebSiteHandler.class).get(GetWebsiteHandler.class).post("region/:hostname", AddRegionHandler.class).post("targetgroup/:hostname",AddTargetGroupHandler.class);
+        chain.post(CreateWebSiteHandler.class);
 
 
     }

@@ -1,89 +1,66 @@
 package com.adscoop.bannerspace.entites;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.Setter;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by thokle on 18/10/2016.
  */
 @NodeEntity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class WebSiteNode extends Entity {
 
 
+    @Setter
+    @Getter
     private int port;
+
+    @Getter
+    @Setter
     private String hostname;
+
+    @Getter
+    @Setter
     private String path;
 
+    @Getter
+    @Setter
+    private String userToken;
+
+
+    @Getter
+    @Setter
     @Relationship(type = "WEBSITE_HAS_BANNERSPACE", direction = Relationship.OUTGOING)
-    private Set<BannerSpace> bannerSpaceSet = new HashSet<>();
+    private List<BannerSpace> bannerSpaceSet = new ArrayList<>();
 
 
+    @Getter
+    @Setter
     @Relationship(type = "USER_HAS_WEBSITE ", direction = Relationship.INCOMING)
-    private Set<UserNode> userNodes = new HashSet<>();
+    private List<UserNode> userNodes = new ArrayList<>();
 
 
-    @Relationship(type = "WEBSITE_TARGETGROUPT", direction = Relationship.OUTGOING)
-    private Set<TargetGroups> targetGroupss = new HashSet<>();
 
 
+    @Getter
+    @Setter
     @Relationship(type = "WEBSITE_REGIONS", direction = Relationship.OUTGOING)
-    private Set<Regions> regionss = new HashSet<>();
+    private List<Regions> regionss = new ArrayList<>();
 
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    public String getHostname() {
-        return hostname;
-    }
-
-    public void setHostname(String hostname) {
-        this.hostname = hostname;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public Set<BannerSpace> getBannerSpaceSet() {
-        return bannerSpaceSet;
-    }
-
-    public void setBannerSpaceSet(Set<BannerSpace> bannerSpaceSet) {
-        this.bannerSpaceSet = bannerSpaceSet;
-    }
-
-    @JsonIgnore
-    public Set<UserNode> getUserNodes() {
-        return userNodes;
-    }
-
-    public void setUserNodes(Set<UserNode> userNodes) {
-        this.userNodes = userNodes;
-    }
 
     public void addBannerSpace(BannerSpace bannerSpace) {
         bannerSpaceSet.add(bannerSpace);
         bannerSpace.getWebSiteNodeSet().add(this);
     }
 
-
-    public void addTargetGroup(TargetGroups targetGroups) {
-        targetGroupss.add(targetGroups);
-        targetGroups.getWebsiteNodes().add(this);
-    }
+    
 
     public void addRegion(Regions regions) {
         regionss.add(regions);
