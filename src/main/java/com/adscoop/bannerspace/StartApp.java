@@ -2,9 +2,11 @@ package com.adscoop.bannerspace;
 
 import com.adscoop.bannerspace.chains.WebSiteChainAction;
 import com.adscoop.bannerspace.config.ConfigBinder;
+import com.adscoop.bannerspace.handlers.CORSHandler;
 import com.adscoop.bannerspace.modules.Config;
 import com.adscoop.bannerspace.modules.ServiceCommonConfigModule;
 import ratpack.guice.Guice;
+import ratpack.health.HealthCheckHandler;
 import ratpack.rx.RxRatpack;
 import ratpack.server.BaseDir;
 import ratpack.server.RatpackServer;
@@ -17,10 +19,18 @@ public class StartApp {
     public static void main(String... args) throws Exception {
         RxRatpack.initialize();
 
-        RatpackServer.start(ratpackServerSpec -> ratpackServerSpec.serverConfig(serverConfigBuilder ->
-                serverConfigBuilder.baseDir(BaseDir.find()).yaml("datasource.yaml").require("/db", Config.class).props("ratpack.properties").env().sysProps().development(false).build())
-                .registry(Guice.registry(bindingsSpec -> bindingsSpec.module(ConfigBinder.class).module(ServiceCommonConfigModule.class))).handlers(chain -> chain.prefix("website",wchaim -> wchaim.chain(WebSiteChainAction.class))));
-
+        RatpackServer.start(ratpackServerSpec -> ratpackServerSpec
+                .serverConfig(sfb -> sfb.baseDir(BaseDir.find())
+                        .props("ratpack.properties")
+                        .yaml("database.yaml")
+                        .require("/db", Config.class)
+                        .env().development(true)
+                        .sysProps()
+                        .build())
+                .registry(Guice.registry(bindingsSpec -> bindingsSpec.module(ConfigBinder.class).module(ServiceCommonConfigModule.class)))
+                .handlers(chain -> chain
+                        .all(CORSHandler.class)
+                        .prefix("website", WebSiteChainAction.class)));
 
     }
 

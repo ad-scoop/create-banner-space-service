@@ -10,6 +10,6 @@ public class BannerServiceClientException implements ClientErrorHandler {
 
     @Override
     public void error(Context context, int statusCode) throws Exception {
-        context.render(statusCode);
+        context.file("404.html");
     }
 }

@@ -1,5 +1,6 @@
 package com.adscoop.bannerspace.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,6 +42,7 @@ public class WebSiteNode extends Entity {
     private List<BannerSpace> bannerSpaceSet = new ArrayList<>();
 
 
+    @JsonIgnore
     @Getter
     @Setter
     @Relationship(type = "USER_HAS_WEBSITE ", direction = Relationship.INCOMING)

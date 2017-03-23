@@ -1,6 +1,7 @@
 package com.adscoop.bannerspace.services;
 
 import com.adscoop.bannerspace.entites.UserNode;
+import ratpack.exec.Promise;
 
 import java.util.Optional;
 
@@ -13,7 +14,7 @@ public interface UserService {
 
     Optional<UserNode> findUserbyBannerId(Long id) throws Exception;
 
-    Optional<UserNode> findUserByToken(String token) throws Exception;
+    Promise<UserNode> findUserByToken(String token) throws Exception;
 
     void save(UserNode userNode) throws Exception;
 

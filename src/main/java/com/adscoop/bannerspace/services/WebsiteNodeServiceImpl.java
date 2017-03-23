@@ -31,7 +31,7 @@ public class WebsiteNodeServiceImpl implements WebsiteNodeService {
     @Override
     public Promise<WebSiteNode> findByHostName(String hostname) throws Exception {
         try{
-        return Promise.value(session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode {hostname:"+ hostname+ "}) return w", Collections.emptyMap()));
+        return Promise.value(session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode {hostname:'{hostname}'}) return w",Collections.singletonMap("hostname",hostname)));
     }catch (Exception e){
             throw  new Exception(e.getMessage());
         }
@@ -40,11 +40,14 @@ public class WebsiteNodeServiceImpl implements WebsiteNodeService {
     @Override
     public Promise<WebSiteNode> findWebSiteByUserTokenAndHostname(String token, String hostname) throws Exception {
         try {
-            return Promise.value(session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode)<-[:USER_HAS_WEBSITE]-(u:UserNode) where u.token='" + token + "' and w.hostname CONTAINS '"+hostname+"' return w ", Collections.EMPTY_MAP));
+            return Promise.value(session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode )<-[:USER_HAS_WEBSITE]-(u:UserNode) where u.token='" + token + "' and w.hostname CONTAINS '"+hostname+"' return w ", Collections.EMPTY_MAP));
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
-
+    @Override
+    public Promise<Iterable<WebSiteNode>> findWebSitesByToken(String token) throws Exception {
+        return Promise.value(session.query(WebSiteNode.class,"match (u:UserNode {token:'{token}'})-[:USER_HAS_WEBSITE]->(w:WebSiteNode)  return w",Collections.singletonMap("token",token)));
+    }
 }

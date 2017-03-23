@@ -28,10 +28,10 @@ public class GetWebsiteHandler implements Handler {
         String usertoken = ctx.getRequest().getHeaders().get("token");
                 if(ctx.getRequest().getMethod().isGet()){
                     if(!usertoken.isEmpty()){
-                      RxRatpack.observe(websiteNodeService.findWebSiteByUserTokenAndHostname(usertoken,ctx.getPathTokens().get("hostname"))).subscribe( webSiteNode -> {
+                      RxRatpack.observe(websiteNodeService.findWebSitesByToken(usertoken)).subscribe( webSiteNode -> {
                           String s = JsonUtil.toString(webSiteNode);
-                          ByteBuf ByteBuf = Unpooled.copiedBuffer(s, Charset.defaultCharset());
-                         ctx.getResponse().send("application/json", ByteBuf);
+
+                         ctx.getResponse().send("application/json", s);
                       });
                     }
 

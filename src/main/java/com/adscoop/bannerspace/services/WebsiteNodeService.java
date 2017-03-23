@@ -16,4 +16,6 @@ public interface WebsiteNodeService {
 
 
     Promise<WebSiteNode> findWebSiteByUserTokenAndHostname(String token, String hostname) throws Exception;
+
+    Promise<Iterable<WebSiteNode>> findWebSitesByToken(String token) throws  Exception;
 }

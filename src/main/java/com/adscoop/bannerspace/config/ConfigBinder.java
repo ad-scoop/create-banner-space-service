@@ -4,10 +4,12 @@ package com.adscoop.bannerspace.config;
 import com.adscoop.bannerspace.chains.WebSiteChainAction;
 import com.adscoop.bannerspace.exceptions.BannerServiceClientException;
 import com.adscoop.bannerspace.exceptions.BannerServiceServerException;
+import com.adscoop.bannerspace.handlers.CORSHandler;
 import com.adscoop.bannerspace.handlers.website.CreateWebSiteHandler;
 import com.adscoop.bannerspace.handlers.website.GetWebsiteHandler;
 import com.adscoop.bannerspace.services.*;
 import com.google.inject.AbstractModule;
+import io.netty.handler.codec.http.cors.CorsHandler;
 
 /**
  * Created by thokle on 01/10/2016.
@@ -31,6 +33,7 @@ public class ConfigBinder extends AbstractModule {
 
         bind(WebsiteNodeService.class).to(WebsiteNodeServiceImpl.class).asEagerSingleton();
         bind(JsonUtil.class).asEagerSingleton();
+        bind(CORSHandler.class).asEagerSingleton();
     }
 
 }

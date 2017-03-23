@@ -33,28 +33,30 @@ public class CreateWebSiteHandler implements Handler {
         String token = ctx.getRequest().getHeaders().get("token");
         if (ctx.getRequest().getMethod().isPost()) {
             ctx.parse(fromJson(WebSiteNode.class)).then(webSiteNode -> {
-            Promise<WebSiteNode> hostname = websiteNodeService.findByHostName(webSiteNode.getHostname());
-                hostname.then(webSiteNode1 ->   {
-                    if (token != null) {
-                        Optional<UserNode> userNode = userService.findUserByToken(token);
-                        if (userNode.isPresent()) {
-                            userNode.get().addWebSite(webSiteNode1);
-                            userService.save(userNode.get());
-                            ctx.render(json(webSiteNode1));
+                Promise<WebSiteNode> hostname = websiteNodeService.findByHostName(webSiteNode.getHostname());
+
+                hostname.then(webSiteNode1 -> {
+                    if(webSiteNode1 == null) {
+                        if (token != null) {
+                            userService.findUserByToken(token).then(userNode -> {
+
+                                userNode.addWebSite(webSiteNode);
+                                userService.save(userNode);
+                                ctx.render(json(webSiteNode));
+
+                            });
+
                         } else {
-                            ctx.render(json("User not found"));
+                            ctx.next();
                         }
                     } else {
-                        ctx.render(json("no token present in header"));
+                        ctx.render("Web site exist");
                     }
                 });
+
             });
         } else {
-            ctx.next();
+ctx.next();
         }
-
     }
-
-
-
 }

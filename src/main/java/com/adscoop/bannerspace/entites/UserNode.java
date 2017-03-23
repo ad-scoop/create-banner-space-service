@@ -56,9 +56,7 @@ public class UserNode extends Entity {
     @Labels
     private List<String> labels = new ArrayList<>();
 
-    @Getter
-    @Setter
-    @Relationship(direction = Relationship.OUTGOING, type = "USER_HAS_WEBSITE")
+
     private Set<WebSiteNode> webSiteNodes = new HashSet<>();
 
     @Getter
