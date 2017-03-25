@@ -11,7 +11,7 @@ import ratpack.handling.Chain;
 public class WebSiteChainAction implements Action<Chain> {
     @Override
     public void execute(Chain chain) throws Exception {
-        chain.post(CreateWebSiteHandler.class).get(GetWebsiteHandler.class);
+        chain.post("create",CreateWebSiteHandler.class).get("get",GetWebsiteHandler.class);
 
 
     }

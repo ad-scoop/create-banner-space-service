@@ -22,7 +22,7 @@ public class StartApp {
         RatpackServer.start(ratpackServerSpec -> ratpackServerSpec
                 .serverConfig(sfb -> sfb.baseDir(BaseDir.find())
                         .props("ratpack.properties")
-                        .yaml("database.yaml")
+                        .yaml("datasource.yaml")
                         .require("/db", Config.class)
                         .env().development(true)
                         .sysProps()

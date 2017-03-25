@@ -56,7 +56,6 @@ public class UserNode extends Entity {
     @Labels
     private List<String> labels = new ArrayList<>();
 
-
     private Set<WebSiteNode> webSiteNodes = new HashSet<>();
 
     @Getter

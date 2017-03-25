@@ -48,6 +48,6 @@ public class WebsiteNodeServiceImpl implements WebsiteNodeService {
 
     @Override
     public Promise<Iterable<WebSiteNode>> findWebSitesByToken(String token) throws Exception {
-        return Promise.value(session.query(WebSiteNode.class,"match (u:UserNode {token:'{token}'})-[:USER_HAS_WEBSITE]->(w:WebSiteNode)  return w",Collections.singletonMap("token",token)));
+        return Promise.value(session.query(WebSiteNode.class,"match (u:UserNode {token:{token}})-[:USER_HAS_WEBSITE]-(w:WebSiteNode)--(a)  return w,a",Collections.singletonMap("token",token)));
     }
 }
