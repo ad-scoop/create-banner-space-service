@@ -5,8 +5,8 @@ import com.adscoop.bannerspace.config.ConfigBinder;
 import com.adscoop.bannerspace.handlers.CORSHandler;
 import com.adscoop.bannerspace.modules.Config;
 import com.adscoop.bannerspace.modules.ServiceCommonConfigModule;
+
 import ratpack.guice.Guice;
-import ratpack.health.HealthCheckHandler;
 import ratpack.rx.RxRatpack;
 import ratpack.server.BaseDir;
 import ratpack.server.RatpackServer;

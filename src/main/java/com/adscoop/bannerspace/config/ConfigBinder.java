@@ -18,7 +18,6 @@ public class ConfigBinder extends AbstractModule {
     @Override
     protected void configure() {
 
-
         bind(CreateWebSiteHandler.class).asEagerSingleton();
 
         bind(WebSiteChainAction.class).asEagerSingleton();

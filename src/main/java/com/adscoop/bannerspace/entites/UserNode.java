@@ -3,18 +3,16 @@ package com.adscoop.bannerspace.entites;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+
+import org.neo4j.ogm.annotation.Labels;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
-import org.neo4j.ogm.annotations.Labels;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by thokle on 24/08/2016.
- */
 @NodeEntity
 @JsonIgnoreProperties( ignoreUnknown = true)
 public class UserNode extends Entity {

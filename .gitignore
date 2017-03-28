@@ -7,3 +7,7 @@
 /.gradle/
 /out/
 /gradle/
+/bin/
+/.classpath
+/.project
+/.settings

@@ -8,17 +8,15 @@ import com.google.inject.Inject;
  */
 public class JsonUtil {
 
-   static Gson gson;
+	static Gson gson;
 
-    @Inject
-    public JsonUtil(Gson gson) {
-        this.gson = gson;
-    }
+	@Inject
+	public JsonUtil(Gson gson) {
+		JsonUtil.gson = gson;
+	}
 
-
-    public  static  String toString(Object o){
-
-       return gson.toJson(o);
-    }
+	public static String toString(Object o) {
+		return gson.toJson(o);
+	}
 
 }
