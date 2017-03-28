@@ -1,14 +1,16 @@
 package com.adscoop.bannerspace.services;
 
-import com.adscoop.bannerspace.entites.UserNode;
-import com.google.inject.Inject;
-import org.neo4j.ogm.session.Session;
-import ratpack.exec.Promise;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
+import org.neo4j.ogm.session.Session;
+
+import com.adscoop.bannerspace.entites.UserNode;
+import com.google.inject.Inject;
+
+import ratpack.exec.Promise;
 
 /**
  * Created by kleistit on 21/02/2017.
@@ -26,7 +28,7 @@ public class UserServiceImpl implements UserService {
     public Optional<UserNode> findUserByEmail(String email) throws Exception {
         try {
 
-            return Optional.ofNullable(session.queryForObject(UserNode.class, "match (u) where u.email='" + email + "' return u", Collections.EMPTY_MAP));
+            return Optional.ofNullable(session.queryForObject(UserNode.class, "match (u) where u.email='" + email + "' return u", Collections.emptyMap()));
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -42,7 +44,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Promise<UserNode> findUserByToken(String token) throws Exception {
         try {
-            Map<String,String> stringMap = new HashMap();
+            Map<String,String> stringMap = new HashMap<>();
             stringMap.put("token",token);
             return Promise.value(session.queryForObject(UserNode.class,"match (u:UserNode  {token:{token}}) return u",stringMap));
         } catch (Exception e) {

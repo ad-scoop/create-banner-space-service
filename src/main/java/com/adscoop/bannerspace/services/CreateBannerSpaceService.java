@@ -1,11 +1,12 @@
 package com.adscoop.bannerspace.services;
 
 
-import com.adscoop.bannerspace.entites.BannerSpace;
-import com.google.inject.Inject;
+import java.io.IOException;
+
 import org.neo4j.ogm.session.Session;
 
-import java.io.IOException;
+import com.adscoop.bannerspace.entites.BannerSpace;
+import com.google.inject.Inject;
 
 /**
  * Created by thokle on 29/10/2016.

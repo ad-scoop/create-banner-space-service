@@ -1,7 +1,8 @@
 package com.adscoop.bannerspace.entites;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.neo4j.ogm.annotation.GraphId;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created by thokle on 24/08/2016.

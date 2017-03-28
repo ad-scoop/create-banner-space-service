@@ -1,12 +1,13 @@
 package com.adscoop.bannerspace.services;
 
+import java.util.Collections;
+
+import org.neo4j.ogm.session.Session;
+
 import com.adscoop.bannerspace.entites.WebSiteNode;
 import com.google.inject.Inject;
-import org.neo4j.ogm.session.Session;
-import ratpack.exec.Promise;
 
-import java.util.Collections;
-import java.util.List;
+import ratpack.exec.Promise;
 
 /**
  * Created by thokle on 29/10/2016.
@@ -40,7 +41,7 @@ public class WebsiteNodeServiceImpl implements WebsiteNodeService {
     @Override
     public Promise<WebSiteNode> findWebSiteByUserTokenAndHostname(String token, String hostname) throws Exception {
         try {
-            return Promise.value(session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode )<-[:USER_HAS_WEBSITE]-(u:UserNode) where u.token='" + token + "' and w.hostname CONTAINS '"+hostname+"' return w ", Collections.EMPTY_MAP));
+            return Promise.value(session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode )<-[:USER_HAS_WEBSITE]-(u:UserNode) where u.token='" + token + "' and w.hostname CONTAINS '"+hostname+"' return w ", Collections.emptyMap()));
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

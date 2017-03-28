@@ -1,19 +1,17 @@
 package com.adscoop.bannerspace.handlers.website;
 
 
-import com.adscoop.bannerspace.entites.UserNode;
+import static ratpack.jackson.Jackson.fromJson;
+import static ratpack.jackson.Jackson.json;
+
 import com.adscoop.bannerspace.entites.WebSiteNode;
 import com.adscoop.bannerspace.services.UserService;
 import com.adscoop.bannerspace.services.WebsiteNodeService;
 import com.google.inject.Inject;
+
 import ratpack.exec.Promise;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
-
-import java.util.Optional;
-
-import static ratpack.jackson.Jackson.fromJson;
-import static ratpack.jackson.Jackson.json;
 
 /**
  * Created by thokle on 15/11/2016.

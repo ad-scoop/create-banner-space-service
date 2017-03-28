@@ -1,9 +1,10 @@
 package com.adscoop.bannerspace.services;
 
-import com.adscoop.bannerspace.entites.UserNode;
-import ratpack.exec.Promise;
-
 import java.util.Optional;
+
+import com.adscoop.bannerspace.entites.UserNode;
+
+import ratpack.exec.Promise;
 
 /**
  * Created by kleistit on 21/02/2017.

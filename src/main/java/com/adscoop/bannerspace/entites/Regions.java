@@ -1,14 +1,15 @@
 package com.adscoop.bannerspace.entites;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
-import org.neo4j.ogm.annotations.Labels;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.neo4j.ogm.annotation.Labels;
+import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Created by thokle on 25/08/2016.
@@ -17,11 +18,8 @@ import java.util.Set;
 public class Regions extends Entity {
 
     private String regionname;
-
     private String country;
-
     private long logitude;
-
     private long lattiude;
 
 
