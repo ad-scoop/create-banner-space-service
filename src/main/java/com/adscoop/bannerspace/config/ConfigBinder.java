@@ -7,9 +7,11 @@ import com.adscoop.bannerspace.exceptions.BannerServiceServerException;
 import com.adscoop.bannerspace.handlers.CORSHandler;
 import com.adscoop.bannerspace.handlers.website.CreateWebSiteHandler;
 import com.adscoop.bannerspace.handlers.website.GetWebsiteHandler;
-import com.adscoop.bannerspace.services.*;
+import com.adscoop.bannerspace.services.UserService;
+import com.adscoop.bannerspace.services.UserServiceImpl;
+import com.adscoop.bannerspace.services.WebsiteNodeService;
+import com.adscoop.bannerspace.services.WebsiteNodeServiceImpl;
 import com.google.inject.AbstractModule;
-import io.netty.handler.codec.http.cors.CorsHandler;
 
 /**
  * Created by thokle on 01/10/2016.
