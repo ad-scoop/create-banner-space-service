@@ -1,5 +1,6 @@
 package com.adscoop.bannerspace;
 
+import com.adscoop.bannerspace.chains.BannerSpaceChainAction;
 import com.adscoop.bannerspace.chains.WebSiteChainAction;
 import com.adscoop.bannerspace.config.ConfigBinder;
 import com.adscoop.bannerspace.handlers.CORSHandler;
@@ -30,7 +31,7 @@ public class StartApp {
                 .registry(Guice.registry(bindingsSpec -> bindingsSpec.module(ConfigBinder.class).module(ServiceCommonConfigModule.class)))
                 .handlers(chain -> chain
                         .all(CORSHandler.class)
-                        .prefix("website", WebSiteChainAction.class)));
+                        .prefix("website", WebSiteChainAction.class).prefix("bannerspace", BannerSpaceChainAction.class)));
 
     }
 
