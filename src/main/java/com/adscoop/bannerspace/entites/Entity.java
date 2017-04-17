@@ -31,9 +31,7 @@ public abstract class Entity {
         if (obj == null || id == null || getClass() != obj.getClass()) return false;
         Entity entity = (Entity) obj;
 
-        if (!id.equals(entity.getId())) return false;
-
-        return true;
+        return id.equals(entity.getId());
 
 
     }

@@ -48,7 +48,7 @@ public class BannerSpace extends Entity {
 
 
     @Relationship(type = "BELONGS_TO_WEBSITE", direction = Relationship.INCOMING)
-    private Set<WebSiteNode> webSiteNodeSet = new HashSet<>();
+    private Set<WebSite> webSiteSet = new HashSet<>();
 
     @Getter
     @Setter
@@ -63,8 +63,8 @@ public class BannerSpace extends Entity {
 
 
     @JsonIgnore
-    public Set<WebSiteNode> getWebSiteNodeSet() {
-        return webSiteNodeSet;
+    public Set<WebSite> getWebSiteSet() {
+        return webSiteSet;
     }
 
 }

@@ -1,10 +1,12 @@
 package com.adscoop.bannerspace.services;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.neo4j.ogm.session.Session;
 
-import com.adscoop.bannerspace.entites.WebSiteNode;
+import com.adscoop.bannerspace.entites.WebSite;
 import com.google.inject.Inject;
 
 import ratpack.exec.Promise;
@@ -23,32 +25,43 @@ public class WebsiteNodeServiceImpl implements WebsiteNodeService {
 
 
     @Override
-    public void save(com.adscoop.bannerspace.entites.WebSiteNode webSiteNode) {
-        session.save(webSiteNode);
+    public void save(WebSite webSite) {
+        session.save(webSite);
 
 
     }
 
     @Override
-    public Promise<WebSiteNode> findByHostName(String hostname) throws Exception {
+    public Promise<WebSite> findByHostName(String hostname) throws Exception {
         try{
-        return Promise.value(session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode {hostname:'{hostname}'}) return w",Collections.singletonMap("hostname",hostname)));
+        return Promise.value(session.queryForObject(WebSite.class, "match (w:WebSiteNode {hostname:'{hostname}'}) return w",Collections.singletonMap("hostname",hostname)));
     }catch (Exception e){
             throw  new Exception(e.getMessage());
         }
     }
 
     @Override
-    public Promise<WebSiteNode> findWebSiteByUserTokenAndHostname(String token, String hostname) throws Exception {
+    public Promise<WebSite> findWebSiteByUserTokenAndHostname(String token, String hostname) throws Exception {
         try {
-            return Promise.value(session.queryForObject(WebSiteNode.class, "match (w:WebSiteNode )<-[:USER_HAS_WEBSITE]-(u:UserNode) where u.token='" + token + "' and w.hostname CONTAINS '"+hostname+"' return w ", Collections.emptyMap()));
+            Map<String, Object> stringObjectMap = new HashMap<>();
+            stringObjectMap.put("hostname",hostname);
+            stringObjectMap.put("token",token);
+            return Promise.value(session.queryForObject(WebSite.class, "match (u:UserNode {token:{token}} )-[:USER_HAS_WEBSITE]->(w:WebSite {hostname:{hostname}})  return w, u ", stringObjectMap));
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
     @Override
-    public Promise<Iterable<WebSiteNode>> findWebSitesByToken(String token) throws Exception {
-        return Promise.value(session.query(WebSiteNode.class,"match (u:UserNode {token:{token}})-[:USER_HAS_WEBSITE]-(w:WebSiteNode)--(a)  return w,a",Collections.singletonMap("token",token)));
+    public Promise<Iterable<WebSite>> findWebSitesByToken(String token) throws Exception {
+        return Promise.value(session.query(WebSite.class,"match (u:UserNode {token:{token}})-[:USER_HAS_WEBSITE]->(w:WebSite) return w,u",Collections.singletonMap("token",token)));
+    }
+
+
+    @Override
+    public void delete(WebSite webSite) {
+
+        session.detachNodeEntity(webSite.getId());
+        session.delete(webSite);
     }
 }

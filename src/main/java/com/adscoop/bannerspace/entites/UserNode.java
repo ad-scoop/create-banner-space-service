@@ -1,10 +1,9 @@
 package com.adscoop.bannerspace.entites;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.neo4j.ogm.annotation.Labels;
 import org.neo4j.ogm.annotation.NodeEntity;
 
@@ -12,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.neo4j.ogm.annotation.Relationship;
 
 @NodeEntity
 @JsonIgnoreProperties( ignoreUnknown = true)
@@ -54,7 +54,12 @@ public class UserNode extends Entity {
     @Labels
     private List<String> labels = new ArrayList<>();
 
-    private Set<WebSiteNode> webSiteNodes = new HashSet<>();
+
+    @Getter
+    @Setter
+    @JsonIgnore
+    @Relationship(type = "USER_HAS_WEBSITE")
+    private List<WebSite> webSites = new ArrayList<>();
 
     @Getter
     @Setter
@@ -65,9 +70,9 @@ public class UserNode extends Entity {
         return this;
     }
 
-    public void addWebSite(WebSiteNode webSiteNode) {
-        webSiteNodes.add(webSiteNode);
-        webSiteNode.getUserNodes().add(this);
+    public void addWebSite(WebSite webSite) {
+        webSites.add(webSite);
+        webSite.getUserNodes().add(this);
     }
 
 

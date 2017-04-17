@@ -1,6 +1,6 @@
 package com.adscoop.bannerspace.handlers.website;
 
-import com.adscoop.bannerspace.entites.WebSiteNode;
+import com.adscoop.bannerspace.entites.WebSite;
 import com.adscoop.bannerspace.services.WebsiteNodeService;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
@@ -24,24 +24,28 @@ public class UpdateWebSisteHandler implements Handler {
 
     @Override
     public void handle(Context ctx) throws Exception {
-
+            if(ctx.getRequest().getMethod().isPut()){
         String token = ctx.getRequest().getHeaders().get("token");
         String hostname = ctx.getPathTokens().get("hostname");
         if (!token.isEmpty() && !hostname.isEmpty()) {
-            ctx.parse(fromJson(WebSiteNode.class)).then(w -> {
+            ctx.parse(fromJson(WebSite.class)).then(w -> {
 
 
                 websiteNodeService.findWebSiteByUserTokenAndHostname(hostname, token).then(webSiteNode -> {
-                     webSiteNode.setHostname(w.getHostname());
-                     webSiteNode.setPath(w.getPath());
-                     webSiteNode.setPort(w.getPort());
+                    webSiteNode.setHostname(w.getHostname());
+                    webSiteNode.setPath(w.getPath());
+                    webSiteNode.setPort(w.getPort());
 
-                     websiteNodeService.save(webSiteNode);
+                    websiteNodeService.save(webSiteNode);
 
-                     ctx.render(json(webSiteNode));
+                    ctx.render(json(webSiteNode));
                 });
 
             });
         }
+        } else
+            {
+                ctx.next();
+            }
     }
 }

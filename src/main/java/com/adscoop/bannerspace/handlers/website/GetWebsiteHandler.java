@@ -24,12 +24,17 @@ public class GetWebsiteHandler implements Handler {
     @Override
     public void handle(Context ctx) throws Exception {
         String usertoken = ctx.getRequest().getHeaders().get("token");
-                if(ctx.getRequest().getMethod().isGet()){
+        String hostname = ctx.getPathTokens().get("hostname");
+                if(ctx.getRequest().getMethod().isGet() && !hostname.isEmpty()){
                     if(!usertoken.isEmpty()){
-                      RxRatpack.observe(websiteNodeService.findWebSitesByToken(usertoken)).forEach(webSiteNodes -> {
+                      RxRatpack.observe(websiteNodeService.findWebSiteByUserTokenAndHostname(usertoken,hostname)).forEach(webSiteNodes -> {
                           ctx.render(json(webSiteNodes));
                       });
                     }
+
+                } else if(hostname.isEmpty()){
+
+                } else {
 
                 }
 

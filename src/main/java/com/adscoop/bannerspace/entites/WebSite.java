@@ -14,7 +14,7 @@ import lombok.Setter;
 
 @NodeEntity
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WebSiteNode extends Entity {
+public class WebSite extends Entity {
 
 	@Getter
 	@Setter
@@ -29,26 +29,26 @@ public class WebSiteNode extends Entity {
 	@Setter
 	private String userToken;
 
-	@Relationship(type = "WEBSITE_HAS_BANNERSPACE", direction = Relationship.OUTGOING)
+	@Relationship(type = "WEBSITE_HAS_BANNERSPACE")
 	private List<BannerSpace> bannerSpaceSet = new ArrayList<>();
 
 	@Getter
 	@Setter
 	@JsonIgnore
-	@Relationship(type = "USER_HAS_WEBSITE ", direction = Relationship.INCOMING)
+	@Relationship(type = "USER_HAS_WEBSITE",direction = Relationship.INCOMING)
 	private List<UserNode> userNodes = new ArrayList<>();
 
-	@Relationship(type = "WEBSITE_REGIONS", direction = Relationship.OUTGOING)
+	@Relationship(type = "WEBSITE_REGIONS")
 	private List<Regions> regionss = new ArrayList<>();
 
 	public void addBannerSpace(BannerSpace bannerSpace) {
 		bannerSpaceSet.add(bannerSpace);
-		bannerSpace.getWebSiteNodeSet().add(this);
+		bannerSpace.getWebSiteSet().add(this);
 	}
 
 	public void addRegion(Regions regions) {
 		regionss.add(regions);
-		regions.getWebSiteNodes().add(this);
+		regions.getWebSites().add(this);
 	}
 
 }

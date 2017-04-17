@@ -1,12 +1,12 @@
 package com.adscoop.bannerspace.config;
 
 
+import com.adscoop.bannerspace.chains.BannerSpaceChainAction;
 import com.adscoop.bannerspace.chains.WebSiteChainAction;
 import com.adscoop.bannerspace.exceptions.BannerServiceClientException;
 import com.adscoop.bannerspace.exceptions.BannerServiceServerException;
 import com.adscoop.bannerspace.handlers.CORSHandler;
-import com.adscoop.bannerspace.handlers.website.CreateWebSiteHandler;
-import com.adscoop.bannerspace.handlers.website.GetWebsiteHandler;
+import com.adscoop.bannerspace.handlers.website.*;
 import com.adscoop.bannerspace.services.UserService;
 import com.adscoop.bannerspace.services.UserServiceImpl;
 import com.adscoop.bannerspace.services.WebsiteNodeService;
@@ -23,8 +23,11 @@ public class ConfigBinder extends AbstractModule {
         bind(CreateWebSiteHandler.class).asEagerSingleton();
 
         bind(WebSiteChainAction.class).asEagerSingleton();
-
+        bind(BannerSpaceChainAction.class).asEagerSingleton();
         bind(GetWebsiteHandler.class).asEagerSingleton();
+        bind(GetWebSitesHandler.class).asEagerSingleton();
+        bind(DeleteWebSiteHandler.class).asEagerSingleton();
+        bind(UpdateWebSisteHandler.class).asEagerSingleton();
         //exceptions
 
         bind(BannerServiceClientException.class).asEagerSingleton();

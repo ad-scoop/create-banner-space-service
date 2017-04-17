@@ -4,7 +4,7 @@ package com.adscoop.bannerspace.handlers.website;
 import static ratpack.jackson.Jackson.fromJson;
 import static ratpack.jackson.Jackson.json;
 
-import com.adscoop.bannerspace.entites.WebSiteNode;
+import com.adscoop.bannerspace.entites.WebSite;
 import com.adscoop.bannerspace.services.UserService;
 import com.adscoop.bannerspace.services.WebsiteNodeService;
 import com.google.inject.Inject;
@@ -30,8 +30,8 @@ public class CreateWebSiteHandler implements Handler {
     public void handle(Context ctx) throws Exception {
         String token = ctx.getRequest().getHeaders().get("token");
         if (ctx.getRequest().getMethod().isPost()) {
-            ctx.parse(fromJson(WebSiteNode.class)).then(webSiteNode -> {
-                Promise<WebSiteNode> hostname = websiteNodeService.findByHostName(webSiteNode.getHostname());
+            ctx.parse(fromJson(WebSite.class)).then(webSiteNode -> {
+                Promise<WebSite> hostname = websiteNodeService.findByHostName(webSiteNode.getHostname());
 
                 hostname.then(webSiteNode1 -> {
                     if(webSiteNode1 == null) {

@@ -1,7 +1,6 @@
 package com.adscoop.bannerspace.chains;
 
-import com.adscoop.bannerspace.handlers.website.CreateWebSiteHandler;
-import com.adscoop.bannerspace.handlers.website.GetWebsiteHandler;
+import com.adscoop.bannerspace.handlers.website.*;
 import ratpack.func.Action;
 import ratpack.handling.Chain;
 
@@ -11,7 +10,7 @@ import ratpack.handling.Chain;
 public class WebSiteChainAction implements Action<Chain> {
     @Override
     public void execute(Chain chain) throws Exception {
-        chain.post("create",CreateWebSiteHandler.class).get("get",GetWebsiteHandler.class);
+        chain.post("create",CreateWebSiteHandler.class).get("get/:hostname",GetWebsiteHandler.class).get("all", GetWebSitesHandler.class).put("update/:hostname", UpdateWebSisteHandler.class).delete("delete", DeleteWebSiteHandler.class);
 
 
     }

@@ -12,7 +12,7 @@ public class BannerServiceServerException implements ServerErrorHandler {
     private  static Logger logger = LoggerFactory.getLogger(BannerServiceServerException.class);
     @Override
     public void error(Context context, Throwable throwable) throws Exception {
-        logger.debug(throwable.getMessage());
+        logger.debug("Error has occured = "+throwable.getMessage());
         context.getResponse().status(500).send("text", throwable.getMessage());
         throwable.printStackTrace();
     }

@@ -30,7 +30,7 @@ public class Regions extends Entity {
     private Set<BannerSpace> bannerSpaces = new HashSet<>();
 
     @Relationship(direction = Relationship.OUTGOING, type = "WEBSITE_REGIONS")
-    private Set<WebSiteNode> webSiteNodes = new HashSet<>();
+    private Set<WebSite> webSites = new HashSet<>();
 
     public List<String> getLabels() {
         return labels;
@@ -50,12 +50,12 @@ public class Regions extends Entity {
     }
 
     @JsonIgnore
-    public Set<WebSiteNode> getWebSiteNodes() {
-        return webSiteNodes;
+    public Set<WebSite> getWebSites() {
+        return webSites;
     }
 
-    public void setWebSiteNodes(Set<WebSiteNode> webSiteNodes) {
-        this.webSiteNodes = webSiteNodes;
+    public void setWebSites(Set<WebSite> webSites) {
+        this.webSites = webSites;
     }
 
 
