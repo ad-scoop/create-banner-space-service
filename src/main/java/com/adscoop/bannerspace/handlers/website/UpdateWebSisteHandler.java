@@ -4,6 +4,7 @@ import com.adscoop.bannerspace.entites.WebSite;
 import com.adscoop.bannerspace.services.WebsiteNodeService;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
+import ratpack.rx.RxRatpack;
 
 import javax.inject.Inject;
 
@@ -28,20 +29,13 @@ public class UpdateWebSisteHandler implements Handler {
         String token = ctx.getRequest().getHeaders().get("token");
         String hostname = ctx.getPathTokens().get("hostname");
         if (!token.isEmpty() && !hostname.isEmpty()) {
-            ctx.parse(fromJson(WebSite.class)).then(w -> {
-
-
-                websiteNodeService.findWebSiteByUserTokenAndHostname(hostname, token).then(webSiteNode -> {
-                    webSiteNode.setHostname(w.getHostname());
-                    webSiteNode.setPath(w.getPath());
-                    webSiteNode.setPort(w.getPort());
-
-                    websiteNodeService.save(webSiteNode);
-
-                    ctx.render(json(webSiteNode));
-                });
-
-            });
+            ctx.parse(fromJson(WebSite.class)).then(w -> RxRatpack.observe(websiteNodeService.findWebSiteByUserTokenAndHostname(token, hostname)).forEach(webSiteNode -> {
+                webSiteNode.setHostname(w.getHostname());
+                webSiteNode.setPath(w.getPath());
+                webSiteNode.setPort(w.getPort());
+                websiteNodeService.save(webSiteNode);
+                ctx.render(json(webSiteNode));
+            }));
         }
         } else
             {
