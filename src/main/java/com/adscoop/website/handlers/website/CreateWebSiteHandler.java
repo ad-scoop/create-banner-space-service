@@ -6,7 +6,7 @@ import static ratpack.jackson.Jackson.json;
 
 import com.adscoop.website.entites.WebSite;
 import com.adscoop.website.services.UserService;
-import com.adscoop.website.services.WebsiteNodeService;
+import com.adscoop.website.services.WebsiteService;
 import com.google.inject.Inject;
 
 import ratpack.exec.Promise;
@@ -19,11 +19,11 @@ import ratpack.handling.Handler;
 public class CreateWebSiteHandler implements Handler {
 
     UserService userService;
-    WebsiteNodeService websiteNodeService;
+    WebsiteService websiteService;
     @Inject
-    public CreateWebSiteHandler(UserService userService, WebsiteNodeService websiteNodeService) {
+    public CreateWebSiteHandler(UserService userService, WebsiteService websiteService) {
         this.userService = userService;
-        this.websiteNodeService = websiteNodeService;
+        this.websiteService = websiteService;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class CreateWebSiteHandler implements Handler {
         String token = ctx.getRequest().getHeaders().get("token");
         if (ctx.getRequest().getMethod().isPost()) {
             ctx.parse(fromJson(WebSite.class)).then(webSiteNode -> {
-                Promise<WebSite> hostname = websiteNodeService.findByHostName(webSiteNode.getHostname());
+                Promise<WebSite> hostname = websiteService.findByHostName(webSiteNode.getHostname());
 
                 hostname.then(webSiteNode1 -> {
                     if(webSiteNode1 == null) {

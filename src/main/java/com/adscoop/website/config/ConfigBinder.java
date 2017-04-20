@@ -9,8 +9,8 @@ import com.adscoop.website.handlers.CORSHandler;
 import com.adscoop.website.handlers.website.*;
 import com.adscoop.website.services.UserService;
 import com.adscoop.website.services.UserServiceImpl;
-import com.adscoop.website.services.WebsiteNodeService;
-import com.adscoop.website.services.WebsiteNodeServiceImpl;
+import com.adscoop.website.services.WebsiteService;
+import com.adscoop.website.services.WebsiteServiceImpl;
 import com.google.inject.AbstractModule;
 
 /**
@@ -35,7 +35,7 @@ public class ConfigBinder extends AbstractModule {
 
         bind(UserService.class).to(UserServiceImpl.class).asEagerSingleton();
 
-        bind(WebsiteNodeService.class).to(WebsiteNodeServiceImpl.class).asEagerSingleton();
+        bind(WebsiteService.class).to(WebsiteServiceImpl.class).asEagerSingleton();
         bind(JsonUtil.class).asEagerSingleton();
         bind(CORSHandler.class).asEagerSingleton();
     }

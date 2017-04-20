@@ -1,7 +1,7 @@
 package com.adscoop.website.handlers.banner;
 
 import com.adscoop.website.entites.BannerSpace;
-import com.adscoop.website.services.WebsiteNodeService;
+import com.adscoop.website.services.WebsiteService;
 import com.google.inject.Inject;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
@@ -15,12 +15,12 @@ import static ratpack.jackson.Jackson.fromJson;
 public class CreateBannerSpaceHandler implements Handler {
 
 
-    private WebsiteNodeService websiteNodeService;
+    private WebsiteService websiteService;
 
 
     @Inject
-    public CreateBannerSpaceHandler(WebsiteNodeService websiteNodeService) {
-        this.websiteNodeService = websiteNodeService;
+    public CreateBannerSpaceHandler(WebsiteService websiteService) {
+        this.websiteService = websiteService;
     }
 
     @Override
@@ -31,13 +31,13 @@ public class CreateBannerSpaceHandler implements Handler {
 
         if(ctx.getRequest().getMethod().isPost() && ctx.getRequest().getHeaders().get("token") !=null)
 
-        websiteNodeService.findWebSiteByUserTokenAndHostname(token,hostname).then( webSiteNode -> {
+        websiteService.findWebSiteByUserTokenAndHostname(token,hostname).then(webSiteNode -> {
 
             ctx.parse(fromJson(BannerSpace.class)).then( bannerSpace -> {
 
 
                     webSiteNode.addBannerSpace(bannerSpace);
-                websiteNodeService.save(webSiteNode);
+                websiteService.save(webSiteNode);
 
 
             });

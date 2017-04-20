@@ -7,7 +7,7 @@ import ratpack.exec.Promise;
 /**
  * Created by thokle on 25/02/2017.
  */
-public interface WebsiteNodeService {
+public interface WebsiteService {
     void save(WebSite webSite);
 
     Promise<WebSite> findByHostName(String path) throws Exception;

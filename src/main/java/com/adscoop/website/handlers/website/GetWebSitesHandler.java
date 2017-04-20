@@ -1,6 +1,6 @@
 package com.adscoop.website.handlers.website;
 
-import com.adscoop.website.services.WebsiteNodeService;
+import com.adscoop.website.services.WebsiteService;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
 
@@ -13,11 +13,11 @@ import static ratpack.jackson.Jackson.json;
  */
 public class GetWebSitesHandler implements Handler {
 
-    private WebsiteNodeService websiteNodeService;
+    private WebsiteService websiteService;
 
     @Inject
-    public GetWebSitesHandler(WebsiteNodeService websiteNodeService) {
-        this.websiteNodeService = websiteNodeService;
+    public GetWebSitesHandler(WebsiteService websiteService) {
+        this.websiteService = websiteService;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class GetWebSitesHandler implements Handler {
         String token = ctx.getRequest().getHeaders().get("token");
         if (ctx.getRequest().getMethod().isGet()) {
             if (!token.isEmpty()) {
-                websiteNodeService.findWebSitesByToken(token).then( webSites ->  {
+                websiteService.findWebSitesByToken(token).then(webSites ->  {
                     ctx.render(json(webSites));
                 });
 

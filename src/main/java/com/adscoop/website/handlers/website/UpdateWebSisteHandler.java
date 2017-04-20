@@ -1,7 +1,7 @@
 package com.adscoop.website.handlers.website;
 
 import com.adscoop.website.entites.WebSite;
-import com.adscoop.website.services.WebsiteNodeService;
+import com.adscoop.website.services.WebsiteService;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
 import ratpack.rx.RxRatpack;
@@ -16,11 +16,11 @@ import static ratpack.jackson.Jackson.json;
  */
 public class UpdateWebSisteHandler implements Handler {
 
-    private WebsiteNodeService websiteNodeService;
+    private WebsiteService websiteService;
 
     @Inject
-    public UpdateWebSisteHandler(WebsiteNodeService websiteNodeService) {
-        this.websiteNodeService = websiteNodeService;
+    public UpdateWebSisteHandler(WebsiteService websiteService) {
+        this.websiteService = websiteService;
     }
 
     @Override
@@ -29,11 +29,11 @@ public class UpdateWebSisteHandler implements Handler {
         String token = ctx.getRequest().getHeaders().get("token");
         String hostname = ctx.getPathTokens().get("hostname");
         if (!token.isEmpty() && !hostname.isEmpty()) {
-            ctx.parse(fromJson(WebSite.class)).then(w -> RxRatpack.observe(websiteNodeService.findWebSiteByUserTokenAndHostname(token, hostname)).forEach(webSiteNode -> {
+            ctx.parse(fromJson(WebSite.class)).then(w -> RxRatpack.observe(websiteService.findWebSiteByUserTokenAndHostname(token, hostname)).forEach(webSiteNode -> {
                 webSiteNode.setHostname(w.getHostname());
                 webSiteNode.setPath(w.getPath());
                 webSiteNode.setPort(w.getPort());
-                websiteNodeService.save(webSiteNode);
+                websiteService.save(webSiteNode);
                 ctx.render(json(webSiteNode));
             }));
         }

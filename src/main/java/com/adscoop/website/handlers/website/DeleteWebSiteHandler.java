@@ -1,6 +1,6 @@
 package com.adscoop.website.handlers.website;
 
-import com.adscoop.website.services.WebsiteNodeService;
+import com.adscoop.website.services.WebsiteService;
 
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
@@ -15,12 +15,12 @@ import javax.inject.Inject;
  */
 public class DeleteWebSiteHandler implements Handler{
 
-    private WebsiteNodeService websiteNodeService;
+    private WebsiteService websiteService;
 
 
     @Inject
-    public DeleteWebSiteHandler(WebsiteNodeService websiteNodeService) {
-        this.websiteNodeService = websiteNodeService;
+    public DeleteWebSiteHandler(WebsiteService websiteService) {
+        this.websiteService = websiteService;
     }
 
     @Override
@@ -30,9 +30,9 @@ public class DeleteWebSiteHandler implements Handler{
 
         if(ctx.getRequest().getMethod().isDelete()) {
             if (!token.isEmpty() && !hostname.isEmpty()) {
-                websiteNodeService.findWebSiteByUserTokenAndHostname(token, hostname).then(webSite -> {
+                websiteService.findWebSiteByUserTokenAndHostname(token, hostname).then(webSite -> {
                     if(webSite !=null) {
-                        websiteNodeService.delete(webSite);
+                        websiteService.delete(webSite);
                         ctx.getResponse().status(Status.OK).send("application/json", "{ \"Hostname\" :" + hostname + " ,\"was deletede\" }");
                     } else {
                         ctx.render("Hostname "+hostname + "  does not exits");

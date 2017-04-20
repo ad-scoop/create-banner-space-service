@@ -14,12 +14,12 @@ import ratpack.exec.Promise;
 /**
  * Created by thokle on 29/10/2016.
  */
-public class WebsiteNodeServiceImpl implements WebsiteNodeService {
+public class WebsiteServiceImpl implements WebsiteService {
 
     private Session session;
 
     @Inject
-    public WebsiteNodeServiceImpl(Session session) {
+    public WebsiteServiceImpl(Session session) {
         this.session = session;
     }
 
