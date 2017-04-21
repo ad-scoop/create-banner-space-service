@@ -15,7 +15,6 @@ public class WebSiteChainAction implements Action<Chain> {
         	.get("all", GetWebSitesHandler.class)
         	.put("update/:hostname", UpdateWebSisteHandler.class)
         	.delete("delete/:hostname", DeleteWebSiteHandler.class);
-
-
     }
+    
 }
