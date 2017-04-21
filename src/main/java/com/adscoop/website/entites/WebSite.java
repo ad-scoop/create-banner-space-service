@@ -9,11 +9,13 @@ import org.neo4j.ogm.annotation.Relationship;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @NodeEntity
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Builder
 public class WebSite extends Entity {
 
 	@Getter

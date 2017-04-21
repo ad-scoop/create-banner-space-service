@@ -23,33 +23,22 @@ public class WebsiteServiceImpl implements WebsiteService {
         this.session = session;
     }
 
-
     @Override
     public void save(WebSite webSite) {
         session.save(webSite);
-
-
     }
 
     @Override
-    public Promise<WebSite> findByHostName(String hostname) throws Exception {
-        try{
-        return Promise.value(session.queryForObject(WebSite.class, "match (w:WebSiteNode {hostname:'{hostname}'}) return w",Collections.singletonMap("hostname",hostname)));
-    }catch (Exception e){
-            throw  new Exception(e.getMessage());
-        }
+    public Promise<WebSite> findByHostName(String hostname) {
+        return Promise.value(session.queryForObject(WebSite.class, "match (w:WebSiteNode {hostname:'{hostname}'}) return w", Collections.singletonMap("hostname",hostname)));
     }
 
     @Override
-    public Promise<WebSite> findWebSiteByUserTokenAndHostname(String token, String hostname) throws Exception {
-        try {
-            Map<String, Object> stringObjectMap = new HashMap<>();
-            stringObjectMap.put("hostname",hostname);
-            stringObjectMap.put("token",token);
-            return Promise.value(session.queryForObject(WebSite.class, "match (u:UserNode {token:{token}} )-[:USER_HAS_WEBSITE]->(w:WebSite {hostname:{hostname}})  return w, u ", stringObjectMap));
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+    public Promise<WebSite> findWebSiteByUserTokenAndHostname(String token, String hostname) {
+        Map<String, Object> stringObjectMap = new HashMap<>();
+        stringObjectMap.put("hostname",hostname);
+        stringObjectMap.put("token",token);
+        return Promise.value(session.queryForObject(WebSite.class, "match (u:UserNode {token:{token}} )-[:USER_HAS_WEBSITE]->(w:WebSite {hostname:{hostname}})  return w, u ", stringObjectMap));
     }
 
     @Override
