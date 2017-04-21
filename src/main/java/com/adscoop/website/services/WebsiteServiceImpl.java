@@ -60,7 +60,6 @@ public class WebsiteServiceImpl implements WebsiteService {
 
     @Override
     public void delete(WebSite webSite) {
-
         session.detachNodeEntity(webSite.getId());
         session.delete(webSite);
     }

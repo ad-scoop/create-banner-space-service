@@ -10,7 +10,11 @@ import ratpack.handling.Chain;
 public class WebSiteChainAction implements Action<Chain> {
     @Override
     public void execute(Chain chain) throws Exception {
-        chain.post("create",CreateWebSiteHandler.class).get("get/:hostname",GetWebsiteHandler.class).get("all", GetWebSitesHandler.class).put("update/:hostname", UpdateWebSisteHandler.class).delete("delete/:hostname", DeleteWebSiteHandler.class);
+        chain.post("create",CreateWebSiteHandler.class)
+        	.get("get/:hostname",GetWebsiteHandler.class)
+        	.get("all", GetWebSitesHandler.class)
+        	.put("update/:hostname", UpdateWebSisteHandler.class)
+        	.delete("delete/:hostname", DeleteWebSiteHandler.class);
 
 
     }

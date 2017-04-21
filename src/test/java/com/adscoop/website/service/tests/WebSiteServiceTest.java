@@ -15,6 +15,7 @@ import ratpack.test.exec.ExecHarness;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
@@ -23,7 +24,6 @@ import static org.mockito.Mockito.when;
  * Created by thokle on 20/04/2017.
  */
 
-@Slf4j
 @RunWith(MockitoJUnitRunner.class)
 public class WebSiteServiceTest {
 
@@ -44,8 +44,7 @@ public class WebSiteServiceTest {
             assertEquals("test", execResult.getValue().getHostname());
 
         } catch (Exception e) {
-
-            log.debug(e.getLocalizedMessage());
+        	fail(e.getLocalizedMessage());
         }
     }
 
