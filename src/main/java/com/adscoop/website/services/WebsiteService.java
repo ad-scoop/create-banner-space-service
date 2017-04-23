@@ -1,20 +1,57 @@
 package com.adscoop.website.services;
 
+import java.util.Collection;
+
+import org.neo4j.ogm.cypher.Filter;
+import org.neo4j.ogm.session.Session;
+
 import com.adscoop.website.entites.WebSite;
+import com.adscoop.website.handlers.Const;
+import com.google.inject.Inject;
 
 import ratpack.exec.Promise;
 
-/**
- * Created by thokle on 25/02/2017.
- */
-public interface WebsiteService {
-	void save(WebSite webSite);
+public class WebsiteService {
 
-	Promise<WebSite> findByHostName(String path) throws Exception;
+    private Session session;
 
-	Promise<WebSite> findWebSiteByUserTokenAndHostname(String token, String hostname) throws Exception;
+    @Inject
+    public WebsiteService(Session session) {
+        this.session = session;
+    }
 
-	Promise<Iterable<WebSite>> findWebSitesByToken(String token) throws Exception;
+    public void save(WebSite webSite) {
+        session.save(webSite);
+        session.clear();
+    }
 
-	void delete(WebSite webSite);
+    public Promise<Boolean> hostNameExists(String hostname) {
+        return Promise.value(findSingelByHost(hostname).isNotEmpty());
+    }
+    
+    public Promise<WebSite> findByHostName(String hostname) {
+    	return Promise.value(findSingelByHost(hostname));
+    }
+
+    public Promise<Iterable<WebSite>> findByToken(String token) {
+        return Promise.value(session.loadAll(WebSite.class, new Filter("token", token)));
+    }
+
+    public void delete(String host) {
+        WebSite webSite = this.findSingelByHost(host);
+        if (webSite != null) {
+        	session.delete(webSite);
+        	session.clear();
+        }
+    }
+    
+	private WebSite findSingelByHost(String hostname) {
+		Collection<WebSite> all = session.loadAll(WebSite.class, new Filter(Const.Parameter.HOST, hostname));
+    	if (all.isEmpty()) {
+    		return WebSite.builder().build();
+    	} else {
+    		return all.iterator().next();
+    	}
+	}
+
 }
