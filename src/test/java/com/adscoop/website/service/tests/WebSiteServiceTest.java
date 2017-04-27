@@ -32,7 +32,7 @@ public class WebSiteServiceTest {
 
     private static final String TOKEN = "";
 
-	private WebsiteService websiteService;
+	private WebsiteServiceImpl websiteService;
 
     @Mock
     private Session session;
@@ -69,14 +69,10 @@ public class WebSiteServiceTest {
                     .thenReturn(WebSite.builder()
                             .hostname(HOST_NAME).
                                     build());
-
             //When
             ExecResult<WebSite> result  = execHarness.yield(execution -> websiteService.findWebSiteByUserTokenAndHostname(TOKEN,HOST_NAME)) ;
-
-
             //then
             assertEquals(HOST_NAME,result.getValue().getHostname());
-
             verify(session,times(1)).queryForObject(eq(WebSite.class),anyString(),anyMapOf(String.class,String.class));
 
 
