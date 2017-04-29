@@ -23,26 +23,30 @@ import lombok.Setter;
 @AllArgsConstructor
 public class WebSite extends AbstractEntity {
 
-	private String host;
-	
-	private int port;
-	private String path;
+	private String url;
+	private boolean accepted;
 	@Setter
 	private String userToken;
+
+	@Relationship(type = "SEX", direction = Relationship.INCOMING)
+	private Demografi demografi;
+
+	@Relationship(type = "PLACE", direction = Relationship.INCOMING)
+	private Area area;
+
+	@Relationship(type = "COOPERATION", direction = Relationship.INCOMING)
+	private Organisation organisation;
 
 	@Relationship(type = "WEBSITE_HAS_BANNERSPACE")
 	@Builder.Default
 	private List<BannerSpace> bannerSpaceSet = new ArrayList<>();
 
-	@Builder.Default
-	private List<String> regions = new ArrayList<>();
-	
 	public boolean isEmpty() {
-		return StringUtils.isEmpty(host);
+		return StringUtils.isEmpty(url);
 	}
 
 	public boolean isNotEmpty() {
-		return StringUtils.isNotEmpty(host);
+		return StringUtils.isNotEmpty(url);
 	}
 
 }

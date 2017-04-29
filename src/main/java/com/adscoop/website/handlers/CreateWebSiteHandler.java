@@ -22,7 +22,7 @@ public class CreateWebSiteHandler extends AbstractTokenHandler {
 	@Override
 	protected void handleWithToken(Context ctx, final String token) {
         ctx.parse(fromJson(WebSite.class)).then(webSite -> {
-            this.websiteService.hostNameExists(webSite.getHost()).then(exists -> {
+            this.websiteService.urlNameExists(webSite.getUrl()).then(exists -> {
             		if (exists) {
             			ctx.getResponse().status(Status.of(409));
             			ctx.render("Web site exist");

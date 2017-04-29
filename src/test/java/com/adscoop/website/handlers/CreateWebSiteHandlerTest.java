@@ -27,7 +27,7 @@ import ratpack.test.handling.RequestFixture;
 @RunWith(MockitoJUnitRunner.class)
 public class CreateWebSiteHandlerTest {
 
-	private static final String HOST = "www.gundmann.dk";
+	private static final String URL = "www.gundmann.dk";
 
 	@Mock
 	private Session session;
@@ -59,7 +59,7 @@ public class CreateWebSiteHandlerTest {
 	public void verifyThatAwebsiteIsNotCreatedIfexists() throws Exception {
 		// given
 		WebSite existingWebSite = WebSite.builder()
-				.host(HOST)
+				.url(URL)
 				.build();
 		
 		doReturn(Lists.newArrayList(existingWebSite))

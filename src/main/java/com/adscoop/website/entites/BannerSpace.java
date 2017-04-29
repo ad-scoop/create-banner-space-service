@@ -1,8 +1,5 @@
 package com.adscoop.website.entites;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.neo4j.ogm.annotation.NodeEntity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -20,15 +17,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BannerSpace extends AbstractEntity {
 
-    private String position;
-    private Double price;
+    private PlaceType place;
     private int width;
     private int height;
-
-    @Builder.Default
-    private List<String> categories = new ArrayList<>();
-
-    @Builder.Default
-    private List<String> targetgroups = new ArrayList<>();
+    private boolean standardSize;
+    private int top;
+    private int left;
 
 }

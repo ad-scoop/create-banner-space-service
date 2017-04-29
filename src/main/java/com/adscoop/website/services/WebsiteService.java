@@ -25,28 +25,28 @@ public class WebsiteService {
         session.clear();
     }
 
-    public Promise<Boolean> hostNameExists(String hostname) {
-        return Promise.value(findSingelByHost(hostname).isNotEmpty());
+    public Promise<Boolean> urlNameExists(String url) {
+        return Promise.value(findSingelByUrl(url).isNotEmpty());
     }
     
-    public Promise<WebSite> findByHostName(String hostname) {
-    	return Promise.value(findSingelByHost(hostname));
+    public Promise<WebSite> findByUrlName(String url) {
+    	return Promise.value(findSingelByUrl(url));
     }
 
     public Promise<Iterable<WebSite>> findByToken(String token) {
         return Promise.value(session.loadAll(WebSite.class, new Filter("token", token)));
     }
 
-    public void delete(String host) {
-        WebSite webSite = this.findSingelByHost(host);
+    public void delete(String url) {
+        WebSite webSite = this.findSingelByUrl(url);
         if (webSite != null) {
         	session.delete(webSite);
         	session.clear();
         }
     }
     
-	private WebSite findSingelByHost(String hostname) {
-		Collection<WebSite> all = session.loadAll(WebSite.class, new Filter(Const.Parameter.HOST, hostname));
+	private WebSite findSingelByUrl(String url) {
+		Collection<WebSite> all = session.loadAll(WebSite.class, new Filter(Const.Parameter.URL, url));
     	if (all.isEmpty()) {
     		return WebSite.builder().build();
     	} else {

@@ -1,5 +1,6 @@
 package com.adscoop.website;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -8,7 +9,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.adscoop.website.entites.Area;
 import com.adscoop.website.entites.BannerSpace;
+import com.adscoop.website.entites.Demografi;
+import com.adscoop.website.entites.Gender;
+import com.adscoop.website.entites.PlaceType;
 import com.adscoop.website.entites.WebSite;
 import com.adscoop.website.handlers.Const;
 import com.adscoop.website.utils.RxRule;
@@ -21,7 +26,7 @@ import ratpack.test.MainClassApplicationUnderTest;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class StartWebsiteServcieTest {
 
-	private static final String HOST = "www.gundmann.dk";
+	private static final String URL = "www.gundmann.dk";
 	private static final String USER_TOKEN = "user_token";
 	
 	@Rule public RxRule rxRule = new RxRule();
@@ -68,7 +73,7 @@ public class StartWebsiteServcieTest {
 		assertThat(
 				"Http requst status was no ok", service.getHttpClient()
 						.requestSpec(r -> r.getHeaders().add(Const.Headers.TOKEN, USER_TOKEN))
-						.get("websites/" + HOST)
+						.get("websites/" + URL)
 						.getStatus(),
 				equalTo(Status.OK));
 		}
@@ -81,7 +86,7 @@ public class StartWebsiteServcieTest {
 		// given
 		String json = service.getHttpClient()
 			.requestSpec(r -> r.getHeaders().add(Const.Headers.TOKEN, USER_TOKEN))
-			.get("websites/" + HOST).getBody().getText();
+			.get("websites/" + URL).getBody().getText();
 			
 		// when then
 		assertThat(
@@ -107,7 +112,7 @@ public class StartWebsiteServcieTest {
 		assertThat(
 				"Http requst status was no ok", service.getHttpClient()
 						.requestSpec(r -> r.getHeaders().add(Const.Headers.TOKEN, USER_TOKEN))
-						.delete("websites/remove/" + HOST)
+						.delete("websites/remove/" + URL)
 						.getStatus(),
 				equalTo(Status.OK));
 		}
@@ -115,17 +120,26 @@ public class StartWebsiteServcieTest {
 
 	private CharSequence buildWebsite() throws Exception {
 		return new ObjectMapper().writeValueAsString(WebSite.builder()
-				.bannerSpaceSet(Lists.newArrayList(BannerSpace.builder()
-						.categories(Lists.newArrayList("Categories"))
+				.bannerSpaceSet(newArrayList(BannerSpace.builder()
 						.height(200)
-						.position("left")
-						.price(300.00)
 						.width(300)
+						.place(PlaceType.Left)
+						.left(100)
+						.standardSize(true)
+						.top(400)
 						.build()))
-				.host(HOST)
-				.path("/")
-				.port(3000)
-				.regions(Lists.newArrayList("Rigion"))
+				.url(URL)
+				.accepted(true)
+				.area(Area.builder()
+						.country("dk")
+						.region("region")
+						.zip("2222")
+						.build())
+				.demografi(Demografi.builder()
+						.maxAge(123)
+						.minAge(2)
+						.genders(newArrayList(Gender.Man, Gender.Woman))
+						.build())
 				.build());
 	}
 
