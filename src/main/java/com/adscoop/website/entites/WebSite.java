@@ -1,9 +1,12 @@
 package com.adscoop.website.entites;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.neo4j.ogm.annotation.Labels;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
@@ -39,8 +42,12 @@ public class WebSite extends AbstractEntity {
 
 	@Relationship(type = "WEBSITE_HAS_BANNERSPACE")
 	@Builder.Default
-	private List<BannerSpace> bannerSpaceSet = new ArrayList<>();
+	private List<BannerSpace> bannerSpaceSet = newArrayList();
 
+	@Labels
+	@Builder.Default
+	public List<String> labels = newArrayList();
+	
 	public boolean isEmpty() {
 		return StringUtils.isEmpty(url);
 	}

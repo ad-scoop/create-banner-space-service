@@ -140,6 +140,7 @@ public class StartWebsiteServcieTest {
 						.minAge(2)
 						.genders(newArrayList(Gender.Man, Gender.Woman))
 						.build())
+				.labels(newArrayList("label"))
 				.build());
 	}
 
