@@ -1,8 +1,6 @@
 package com.adscoop.website.services;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import org.neo4j.ogm.session.Session;
 
@@ -46,6 +44,11 @@ public class WebsiteServiceImpl implements WebsiteService {
         return Promise.value(session.query(WebSite.class,"match (u:UserNode {token:{token}})-[:USER_HAS_WEBSITE]->(w:WebSite) return w,u",Collections.singletonMap("token",token)));
     }
 
+
+    @Override
+    public Promise<Iterable<WebSite>> findWebSiteByRegions(List<String> regions_name) {
+        return Promise.value(session.query(WebSite.class, "match (w:WebSite)-[:WEBSITE_HAS_REGIONS]->(r:Region) where r.region in {regions_name} return w,  r", Collections.singletonMap("region",regions_name)));
+    }
 
     @Override
     public void delete(WebSite webSite) {

@@ -1,20 +1,22 @@
 package com.adscoop.website.chains;
 
-import com.adscoop.website.handlers.website.*;
+import com.adscoop.website.handlers.CreateWebSiteHandler;
+import com.adscoop.website.handlers.DeleteWebSiteHandler;
+import com.adscoop.website.handlers.GetWebSitesHandler;
+import com.adscoop.website.handlers.GetWebsiteHandler;
+import com.adscoop.website.handlers.UpdateWebSisteHandler;
+
 import ratpack.func.Action;
 import ratpack.handling.Chain;
 
-/**
- * Created by thokle on 16/01/2017.
- */
 public class WebSiteChainAction implements Action<Chain> {
     @Override
     public void execute(Chain chain) throws Exception {
         chain.post("create",CreateWebSiteHandler.class)
-        	.get("get/:hostname",GetWebsiteHandler.class)
-        	.get("all", GetWebSitesHandler.class)
-        	.put("update/:hostname", UpdateWebSisteHandler.class)
-        	.delete("delete/:hostname", DeleteWebSiteHandler.class);
+    		.post("update", UpdateWebSisteHandler.class)
+    		.get(GetWebSitesHandler.class)
+        	.get("/:host",GetWebsiteHandler.class)
+        	.delete("remove/:host", DeleteWebSiteHandler.class);
     }
     
 }

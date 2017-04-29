@@ -67,10 +67,10 @@ public class WebSiteServiceTest {
         //Given
             when(session.queryForObject(eq(WebSite.class),anyString(),anyMapOf(String.class,String.class)))
                     .thenReturn(WebSite.builder()
-                            .hostname(HOST_NAME).
+                            (HOST_NAME).
                                     build());
             //When
-            ExecResult<WebSite> result  = execHarness.yield(execution -> websiteService.findWebSiteByUserTokenAndHostname(TOKEN,HOST_NAME)) ;
+            ExecResult<WebSite> result  = execHarness.yield(execution -> websiteService(TOKEN,HOST_NAME)) ;
             //then
             assertEquals(HOST_NAME,result.getValue().getHostname());
             verify(session,times(1)).queryForObject(eq(WebSite.class),anyString(),anyMapOf(String.class,String.class));
