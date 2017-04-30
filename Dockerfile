@@ -8,4 +8,4 @@ RUN rm /usr/lib/adscoop/website-service.zip
 
 EXPOSE 8183
 
-CMD ["sh", "/usr/lib/adscoop/create-banner-space-service/bin/website-service"]
+CMD ["sh", "/usr/lib/adscoop/website-service/bin/website-service"]
