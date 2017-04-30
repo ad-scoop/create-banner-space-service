@@ -27,7 +27,7 @@ public class CreateWebSiteHandler extends AbstractTokenHandler {
             			ctx.getResponse().status(Status.of(409));
             			ctx.render("Web site exist");
             		} else {
-            			webSite.setUserToken(token);
+            			webSite.setToken(token);
             			this.websiteService.save(webSite);
             			ctx.render("Web site created");
             		}

@@ -2,7 +2,6 @@ package com.adscoop.website.entites;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -29,7 +28,7 @@ public class WebSite extends AbstractEntity {
 	private String url;
 	private boolean accepted;
 	@Setter
-	private String userToken;
+	private String token;
 
 	@Relationship(type = "SEX", direction = Relationship.INCOMING)
 	private Demografi demografi;
@@ -42,7 +41,7 @@ public class WebSite extends AbstractEntity {
 
 	@Relationship(type = "WEBSITE_HAS_BANNERSPACE")
 	@Builder.Default
-	private List<BannerSpace> bannerSpaceSet = newArrayList();
+	private List<BannerSpace> bannerSpaces = newArrayList();
 
 	@Labels
 	@Builder.Default
