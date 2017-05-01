@@ -4,7 +4,10 @@ import com.adscoop.website.entites.WebSite;
 
 import com.adscoop.website.handlers.Const;
 import com.google.inject.Inject;
+import lombok.Generated;
+import lombok.Setter;
 import org.neo4j.ogm.cypher.Filter;
+import org.neo4j.ogm.cypher.Filters;
 import org.neo4j.ogm.session.Session;
 import ratpack.exec.Promise;
 
@@ -22,6 +25,8 @@ public class WebsiteService {
 
     private Session session;
 
+    @Setter
+    private String  query;
     @Inject
     public WebsiteService(Session session) {
         this.session = session;
@@ -52,15 +57,11 @@ public class WebsiteService {
         }
     }
 
-    public Promise<Iterable<WebSite>> findWebSiteByRegions(List<String> regions_name) {
-        return Promise.value(session.query(WebSite.class, "MATCH (w:WebSite)-[:WEBSITE_HAS_REGIONS]->(r:Regio{regions_name} RETURN w,  r", Collections.singletonMap("region", regions_name)));
-
-    }
 
     public  Promise<Iterable<WebSite>> findByNames(List<String> names)
         {
-            return  Promise.value(session.query(WebSite.class, "match (w:WebSite) where w.url ingit a {names} return w ",Collections.singletonMap("names",names)));
-
+            //return  Promise.value(session.queryForObject(WebSite.class,"match (w:WebSite) where w.url =~ {names} return w",Collections.singletonMap("names","ad")));
+                return null;
         }
 
     private WebSite findSingelByUrl(String url) {
@@ -72,4 +73,10 @@ public class WebsiteService {
         }
     }
 
+
+    private String queryBuilder(List<String> names){
+
+
+         return query;
+    }
 }
