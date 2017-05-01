@@ -22,7 +22,7 @@ public class UpdateWebSisteHandler extends AbstractTokenHandler {
 	@Override
 	protected void handleWithToken(Context ctx, String token) {
 		ctx.parse(fromJson(WebSite.class)).then(w -> {
-			w.setUserToken(token);
+			w.setToken(token);
 			this.websiteService.save(w);
 			ctx.render(json("update ok"));
 		});

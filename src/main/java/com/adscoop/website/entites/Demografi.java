@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class Demografi extends AbstractEntity {
 
 	@Builder.Default
-    private List<Gender> genders  = newArrayList();
+    private List<String> genders  = newArrayList();
 	private int minAge;
 	private int maxAge;
 

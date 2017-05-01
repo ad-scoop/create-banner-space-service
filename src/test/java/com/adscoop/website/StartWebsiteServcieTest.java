@@ -12,13 +12,10 @@ import org.junit.runners.MethodSorters;
 import com.adscoop.website.entites.Area;
 import com.adscoop.website.entites.BannerSpace;
 import com.adscoop.website.entites.Demografi;
-import com.adscoop.website.entites.Gender;
-import com.adscoop.website.entites.PlaceType;
 import com.adscoop.website.entites.WebSite;
 import com.adscoop.website.handlers.Const;
 import com.adscoop.website.utils.RxRule;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Lists;
 
 import ratpack.http.Status;
 import ratpack.test.MainClassApplicationUnderTest;
@@ -120,10 +117,10 @@ public class StartWebsiteServcieTest {
 
 	private CharSequence buildWebsite() throws Exception {
 		return new ObjectMapper().writeValueAsString(WebSite.builder()
-				.bannerSpaceSet(newArrayList(BannerSpace.builder()
+				.bannerSpaces(newArrayList(BannerSpace.builder()
 						.height(200)
 						.width(300)
-						.place(PlaceType.Left)
+						.place("Left")
 						.left(100)
 						.standardSize(true)
 						.top(400)
@@ -138,7 +135,7 @@ public class StartWebsiteServcieTest {
 				.demografi(Demografi.builder()
 						.maxAge(123)
 						.minAge(2)
-						.genders(newArrayList(Gender.Man, Gender.Woman))
+						.genders(newArrayList("Man", "Woman"))
 						.build())
 				.labels(newArrayList("label"))
 				.build());

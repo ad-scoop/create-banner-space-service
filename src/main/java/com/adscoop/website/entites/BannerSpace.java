@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BannerSpace extends AbstractEntity {
 
-    private PlaceType place;
+    private String place;
     private int width;
     private int height;
     private boolean standardSize;
