@@ -49,7 +49,7 @@ public class WebSite extends AbstractEntity {
 
 	@Relationship(type = "WEBSITE_HAS_REGIONS")
 	@Builder.Default
-	private List<Region> regions = new ArrayList<>();
+	private List<Region> regions =  newArrayList();
 	
 
 
