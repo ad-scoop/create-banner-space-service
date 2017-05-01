@@ -2,6 +2,7 @@ package com.adscoop.website.entites;
 
 import static com.google.common.collect.Lists.newArrayList;
 
+
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.neo4j.ogm.annotation.Labels;
@@ -49,6 +50,7 @@ public class WebSite extends AbstractEntity {
 
 	@Relationship(type = "WEBSITE_HAS_REGIONS")
 	@Builder.Default
+
 	private List<Region> regions =  newArrayList();
 	
 

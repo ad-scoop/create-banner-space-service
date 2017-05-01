@@ -7,6 +7,8 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 /**
  * Created by thokle on 29/04/2017.
  */
@@ -16,7 +18,7 @@ public class SearchParams {
 
     @Getter
     @Setter
-    List<String> names = new ArrayList();
+    List<String> names = newArrayList();
 
 
 
