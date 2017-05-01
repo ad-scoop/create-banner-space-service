@@ -53,13 +53,13 @@ public class WebsiteService {
     }
 
     public Promise<Iterable<WebSite>> findWebSiteByRegions(List<String> regions_name) {
-        return Promise.value(session.query(WebSite.class, "MATCH (w:WebSite)-[:WEBSITE_HAS_REGIONS]->(r:Regio{regions_name} RETURN w,  r", Collections.singletonMap("region", regions_name)));
 
+            return Promise.value(session.loadAll(WebSite.class,new Filter("host",regions_name)));
     }
 
     public  Promise<Iterable<WebSite>> findByNames(List<String> names)
         {
-            return  Promise.value(session.query(WebSite.class, "match (w:WebSite) where w.url ingit a {names} return w ",Collections.singletonMap("names",names)));
+            return  Promise.value(session.query(WebSite.class, "match (w:WebSite) where w.url in {names} return w ",Collections.singletonMap("names",names)));
 
         }
 
