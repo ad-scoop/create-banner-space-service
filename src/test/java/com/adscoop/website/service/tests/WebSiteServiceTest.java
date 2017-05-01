@@ -2,6 +2,7 @@ package com.adscoop.website.service.tests;
 
 import com.adscoop.website.entites.WebSite;
 
+import com.adscoop.website.services.WebsiteService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,14 +27,14 @@ public class WebSiteServiceTest {
 
     private static final String TOKEN = "";
 
-	private WebsiteServiceImpl websiteService;
+	private WebsiteService websiteService;
 
     @Mock
     private Session session;
     
     @Before
     public void setUp() {
-        websiteService = new WebsiteServiceImpl(session);
+        websiteService = new WebsiteService(session);
     }
 
     @Test
@@ -42,14 +43,14 @@ public class WebSiteServiceTest {
         	// given 
             when(session.queryForObject(eq(WebSite.class), anyString(), anyMapOf(String.class, String.class)))
             	.thenReturn(WebSite.builder()
-            		.hostname(HOST_NAME)
+            		.host(HOST_NAME)
             		.build());
             
             // when
-            ExecResult<WebSite> execResult = execHarness.yield(execution -> websiteService.findByHostName(HOST_NAME));
+            ExecResult<WebSite> execResult = execHarness.yield(execution -> websiteService.findByUrlName(HOST_NAME));
 
             // then
-            assertEquals(HOST_NAME, execResult.getValue().getHostname());
+            assertEquals(HOST_NAME, execResult.getValue().getHost());
         }
     }
 
@@ -60,13 +61,11 @@ public class WebSiteServiceTest {
         try(ExecHarness execHarness = ExecHarness.harness()){
         //Given
             when(session.queryForObject(eq(WebSite.class),anyString(),anyMapOf(String.class,String.class)))
-                    .thenReturn(WebSite.builder()
-                            (HOST_NAME).
-                                    build());
+                    .thenReturn(WebSite.builder().host(HOST_NAME).build());
             //When
-            ExecResult<WebSite> result  = execHarness.yield(execution -> websiteService(TOKEN,HOST_NAME)) ;
+            ExecResult<Iterable<WebSite>> result  = execHarness.yield(execution -> websiteService.findByToken("fsdsfdsdf")) ;
             //then
-            assertEquals(HOST_NAME,result.getValue().getHostname());
+
             verify(session,times(1)).queryForObject(eq(WebSite.class),anyString(),anyMapOf(String.class,String.class));
 
 
@@ -81,12 +80,12 @@ public class WebSiteServiceTest {
 
             when(session.queryForObject(eq(WebSite.class),anyString(),anyMapOf(String.class,String.class)))
                     .thenReturn(WebSite.builder()
-                            .hostname(HOST_NAME).
+                            .host(HOST_NAME).
                                     build());
 
-            ExecResult<WebSite> result = execHarness.yield(execution -> websiteService.findByHostName(HOST_NAME));
+            ExecResult<WebSite> result = execHarness.yield(execution -> websiteService.findByUrlName(HOST_NAME));
 
-            assertEquals(HOST_NAME,result.getValue().getHostname());
+            assertEquals(HOST_NAME,result.getValue().getHost());
 
         }
     }

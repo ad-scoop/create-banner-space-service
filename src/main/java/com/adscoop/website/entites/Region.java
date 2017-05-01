@@ -10,6 +10,8 @@ import org.neo4j.ogm.annotation.Relationship;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 /**
  * Created by thokle on 28/04/2017.
  */
@@ -32,7 +34,8 @@ public class Region extends AbstractEntity {
     @Getter
     @Setter
     @Relationship(type = "WEBSITE_HAS_REGIONS")
-    private List<WebSite> webSiteList = new ArrayList();
+    private List<WebSite> webSiteList = newArrayList();
+
 
 
 
