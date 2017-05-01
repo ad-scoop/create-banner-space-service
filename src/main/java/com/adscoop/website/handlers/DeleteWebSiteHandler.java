@@ -20,12 +20,12 @@ public class DeleteWebSiteHandler extends AbstractTokenHandler {
 
 	@Override
 	protected void handleWithToken(Context ctx, String token) {
-		String host = ctx.getPathTokens().get(Const.Parameter.HOST);
-		if (StringUtils.isEmpty(host)) {
+		String url = ctx.getPathTokens().get(Const.Parameter.URL);
+		if (StringUtils.isEmpty(url)) {
 			ctx.getResponse().status(Status.of(412));
-			ctx.render("Website not deleted missing host");
+			ctx.render("Website not deleted missing url");
 		} else {
-			this.websiteService.delete(host);
+			this.websiteService.delete(url);
 			ctx.render("Website deleted");
 		}
 	}

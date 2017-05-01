@@ -27,7 +27,7 @@ import ratpack.test.handling.RequestFixture;
 @RunWith(MockitoJUnitRunner.class)
 public class DeleteWebSiteHandlerTest {
 
-	private static final String HOST = "www.gundmann.dk";
+	private static final String URL = "www.gundmann.dk";
 
 	@Mock
 	private Session session;
@@ -43,7 +43,7 @@ public class DeleteWebSiteHandlerTest {
 	public void verifyThatAWebSiteIsDeleted() throws Exception {
 		// given
 		doReturn(Lists.newArrayList(WebSite.builder()
-				.host(HOST)
+				.url(URL)
 				.build()))
 			.when(session).loadAll(eq(WebSite.class), any(Filter.class));
 		
@@ -51,7 +51,7 @@ public class DeleteWebSiteHandlerTest {
 		HandlingResult result = RequestFixture.handle(handler,
 				fixture -> fixture
 					.header(Const.Headers.TOKEN, "foo")
-					.pathBinding(Collections.singletonMap(Const.Parameter.HOST, HOST)));
+					.pathBinding(Collections.singletonMap(Const.Parameter.URL, URL)));
 
 		// then
 		assertEquals("Website was not deleted", Status.OK, result.getStatus());

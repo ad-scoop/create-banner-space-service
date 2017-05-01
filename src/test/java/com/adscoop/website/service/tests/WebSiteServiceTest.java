@@ -1,9 +1,6 @@
 package com.adscoop.website.service.tests;
 
 import com.adscoop.website.entites.WebSite;
-import com.adscoop.website.services.WebsiteService;
-import com.adscoop.website.services.WebsiteServiceImpl;
-import lombok.extern.slf4j.Slf4j;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,10 +9,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.neo4j.ogm.session.Session;
 import ratpack.exec.ExecResult;
-import ratpack.exec.Promise;
 import ratpack.test.exec.ExecHarness;
-
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
