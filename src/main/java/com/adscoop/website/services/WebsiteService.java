@@ -1,11 +1,13 @@
 package com.adscoop.website.services;
 
+import com.adscoop.website.entites.Region;
 import com.adscoop.website.entites.WebSite;
 
 import com.adscoop.website.handlers.Const;
 import com.google.inject.Inject;
 import lombok.Generated;
 import lombok.Setter;
+import org.neo4j.ogm.cypher.ComparisonOperator;
 import org.neo4j.ogm.cypher.Filter;
 import org.neo4j.ogm.cypher.Filters;
 import org.neo4j.ogm.session.Session;
@@ -15,6 +17,7 @@ import ratpack.exec.Promise;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by thokle on 25/02/2017.
@@ -58,10 +61,6 @@ public class WebsiteService {
     }
 
 
-    public Promise<Iterable<WebSite>> findWebSiteByRegions(List<String> regions_name) {
-
-            return Promise.value(session.loadAll(WebSite.class,new Filter("host",regions_name)));
-    }
 
     public  Promise<Iterable<WebSite>> findByNames(List<String> names) {
         return Promise.value(session.query(WebSite.class, "MATCH (w:WebSite) WHERE w.url IN {names} RETURN w ", Collections.singletonMap("names", names)));
@@ -70,6 +69,7 @@ public class WebsiteService {
 
 
     private WebSite findSingelByUrl(String url) {
+
         Collection<WebSite> all = session.loadAll(WebSite.class, new Filter(Const.Parameter.URL, url));
         if (all.isEmpty()) {
             return WebSite.builder().build();
@@ -78,6 +78,16 @@ public class WebsiteService {
         }
     }
 
+    public Promise<Iterable<WebSite>> findWebSiteByRegion(Region region){
+
+        Map<String, String> stringStringMap =  Collections.EMPTY_MAP;
+        stringStringMap.put("city",region.getCity());
+        stringStringMap.put("country",region.getCountry());
+        stringStringMap.put("region",region.getRegion());
+        return Promise.value(session.query(WebSite.class ,"match (w:WebSite)-[WEBSITE_HAS_REGIONS]->(r:Region) where r.region =~{region} or r.city =~ {name} or r.country =~ {country} return w,r",stringStringMap));
+
+
+    }
 
     private String queryBuilder(List<String> names){
 
