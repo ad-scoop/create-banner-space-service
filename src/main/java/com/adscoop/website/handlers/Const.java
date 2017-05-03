@@ -4,7 +4,7 @@ public class Const {
 
 	public static class Parameter {
 		
-		public static final String URL = "url";
+		public static final String ID = "id";
 		
 		private Parameter() { }
 	}

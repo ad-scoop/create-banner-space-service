@@ -25,8 +25,6 @@ import ratpack.test.handling.RequestFixture;
 @RunWith(MockitoJUnitRunner.class)
 public class UpdateWebSisteHandlerTest {
 
-	private static final String URL = "www.gundmann.dk";
-
 	@Mock
 	private Session session;
 
@@ -44,7 +42,7 @@ public class UpdateWebSisteHandlerTest {
 				fixture -> fixture
 					.header(Const.Headers.TOKEN, "foo")
 					.body(toJson(WebSite.builder().build()), "application/json")
-					.pathBinding(Collections.singletonMap(Const.Parameter.URL, URL)));
+					.pathBinding(Collections.singletonMap(Const.Parameter.ID, "234234")));
 
 		// then
 		assertEquals("Website was not found", Status.OK, result.getStatus());

@@ -25,9 +25,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class WebSite extends AbstractEntity {
 
-
-	private String host;
-	
 	private int port;
 	private String path;
 	private String url;
@@ -50,12 +47,8 @@ public class WebSite extends AbstractEntity {
 
 	@Relationship(type = "WEBSITE_HAS_REGIONS")
 	@Builder.Default
-
 	private List<Region> regions =  newArrayList();
 	
-
-
-
 	@Labels
 	@Builder.Default
 	public List<String> labels = newArrayList();
@@ -67,6 +60,5 @@ public class WebSite extends AbstractEntity {
 	public boolean isNotEmpty() {
 		return StringUtils.isNotEmpty(url);
 	}
-
 
 }
