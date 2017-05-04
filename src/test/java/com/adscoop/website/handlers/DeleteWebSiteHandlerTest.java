@@ -2,6 +2,7 @@ package com.adscoop.website.handlers;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
@@ -13,12 +14,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.neo4j.ogm.cypher.Filter;
 import org.neo4j.ogm.session.Session;
 
 import com.adscoop.website.entites.WebSite;
 import com.adscoop.website.services.WebsiteService;
-import com.google.common.collect.Lists;
 
 import ratpack.http.Status;
 import ratpack.test.handling.HandlingResult;
@@ -27,7 +26,7 @@ import ratpack.test.handling.RequestFixture;
 @RunWith(MockitoJUnitRunner.class)
 public class DeleteWebSiteHandlerTest {
 
-	private static final String URL = "www.gundmann.dk";
+	private static final String ID = "3333";
 
 	@Mock
 	private Session session;
@@ -42,16 +41,15 @@ public class DeleteWebSiteHandlerTest {
 	@Test
 	public void verifyThatAWebSiteIsDeleted() throws Exception {
 		// given
-		doReturn(Lists.newArrayList(WebSite.builder()
-				.url(URL)
-				.build()))
-			.when(session).loadAll(eq(WebSite.class), any(Filter.class));
+		doReturn(WebSite.builder()
+				.build())
+			.when(session).load(eq(WebSite.class), anyLong());
 		
 		// when
 		HandlingResult result = RequestFixture.handle(handler,
 				fixture -> fixture
 					.header(Const.Headers.TOKEN, "foo")
-					.pathBinding(Collections.singletonMap(Const.Parameter.URL, URL)));
+					.pathBinding(Collections.singletonMap(Const.Parameter.ID, ID)));
 
 		// then
 		assertEquals("Website was not deleted", Status.OK, result.getStatus());

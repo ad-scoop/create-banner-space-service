@@ -21,13 +21,13 @@ public class GetWebsiteHandler extends AbstractTokenHandler {
 
 	@Override
 	protected void handleWithToken(Context ctx, String token) {
-		String url = ctx.getPathTokens().get(Const.Parameter.URL);
-		if (StringUtils.isEmpty(url)) {
+		String id = ctx.getPathTokens().get(Const.Parameter.ID);
+		if (StringUtils.isEmpty(id)) {
 			ctx.getResponse().status(Status.of(412));
 			ctx.render("Website missing");
 		} else {
-			websiteService.findByUrlName(url).then(w -> {
-				if (w.isEmpty()) {
+			websiteService.findById(Long.parseLong(id)).then(w -> {
+				if (w == null) {
 					ctx.getResponse().status(Status.of(404));
 					ctx.render("Website not found");
 				} else {

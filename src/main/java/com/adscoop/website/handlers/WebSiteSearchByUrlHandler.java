@@ -30,7 +30,7 @@ private StringUtils stringUtils;
 
 
                 ctx.parse(fromJson(SearchParams.class)).then( searchParams -> {
-                    websiteService.findByHostName(searchParams.getName()).then( webSites ->  ctx.render(json(webSites)));
+                    websiteService.findByHostName(searchParams.getName()).then( webSites -> ctx.render(json(webSites)));
                 });
 
 

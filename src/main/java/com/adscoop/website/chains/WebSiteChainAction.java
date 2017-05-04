@@ -12,8 +12,8 @@ public class WebSiteChainAction implements Action<Chain> {
                 .post("search", WebSiteSearchByUrlHandler.class)
     		.post("update", UpdateWebSisteHandler.class)
     		.get(GetWebSitesHandler.class)
-        	.get("/:" + Const.Parameter.URL,GetWebsiteHandler.class)
-        	.delete("remove/:" + Const.Parameter.URL, DeleteWebSiteHandler.class);
+        	.get("/:" + Const.Parameter.ID,GetWebsiteHandler.class)
+        	.delete("remove/:" + Const.Parameter.ID, DeleteWebSiteHandler.class);
     }
     
 }
