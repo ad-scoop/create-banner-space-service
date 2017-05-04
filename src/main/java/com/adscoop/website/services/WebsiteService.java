@@ -1,15 +1,13 @@
 package com.adscoop.website.services;
 
-import com.adscoop.website.entites.Region;
+import com.adscoop.website.entites.Area;
 import com.adscoop.website.entites.WebSite;
 
 import com.adscoop.website.handlers.Const;
 import com.google.inject.Inject;
-import lombok.Generated;
 import lombok.Setter;
 import org.neo4j.ogm.cypher.ComparisonOperator;
 import org.neo4j.ogm.cypher.Filter;
-import org.neo4j.ogm.cypher.Filters;
 import org.neo4j.ogm.session.Session;
 import ratpack.exec.Promise;
 
@@ -78,13 +76,20 @@ public class WebsiteService {
         }
     }
 
-    public Promise<Iterable<WebSite>> findWebSiteByRegion(Region region){
+    public Promise<Iterable<WebSite>> findWebSiteByRegion(Area region){
 
         Map<String, String> stringStringMap =  Collections.EMPTY_MAP;
-        stringStringMap.put("city",region.getCity());
+        stringStringMap.put("city",region.getZip());
         stringStringMap.put("country",region.getCountry());
         stringStringMap.put("region",region.getRegion());
         return Promise.value(session.query(WebSite.class ,"match (w:WebSite)-[WEBSITE_HAS_REGIONS]->(r:Region) where r.region =~{region} or r.city =~ {name} or r.country =~ {country} return w,r",stringStringMap));
+
+
+    }
+    public  Promise<Iterable<WebSite>> findByHostName(String host){
+        Filter filter = new Filter("url",host);
+        filter.setComparisonOperator(ComparisonOperator.CONTAINING);
+        return Promise.value(session.loadAll(WebSite.class,filter));
 
 
     }

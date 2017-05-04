@@ -48,10 +48,10 @@ public class WebSite extends AbstractEntity {
 	@Builder.Default
 	private List<BannerSpace> bannerSpaces = newArrayList();
 
-	@Relationship(type = "WEBSITE_HAS_REGIONS")
+	@Relationship(type = "WEBSITE_HAS_AREA")
 	@Builder.Default
 
-	private List<Region> regions =  newArrayList();
+	private List<Area> regions =  newArrayList();
 	
 
 

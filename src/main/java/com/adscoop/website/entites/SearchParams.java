@@ -18,7 +18,7 @@ public class SearchParams {
 
     @Getter
     @Setter
-    List<String> names = newArrayList();
+    String name;
 
 
 
