@@ -96,18 +96,24 @@ public class WebsiteService {
 
 
     public  Promise<Iterable<WebSite>> findByUrls(List<String> s){
-       Filter filter = new Filter("url",s);
-       filter.setComparisonOperator(ComparisonOperator.IN);
-       filter.setComparisonOperator(ComparisonOperator.CONTAINING);
 
-       return  Promise.value(session.loadAll(WebSite.class, filter));
+        String param = queryBuilder("w","url",s,ComparisonOperator.CONTAINING);
+        return  Promise.value(session.query(WebSite.class,"match (w:WebSite) where {param} return w",Collections.singletonMap("param",param)));
+
 
     }
 
-    private String queryBuilder(List<String> names){
+    public String queryBuilder(String prefix, String property ,List<String> names, ComparisonOperator comparisonOperator){
+    final StringBuilder stringBuilder =new StringBuilder();
+        names.stream().forEach( s -> {
+            String query  = prefix+"."+property+"  "+comparisonOperator +"  \""+ s  +"\"  OR " ;
+            stringBuilder.append(query);
+        });
 
-
-         return query;
+         return stringBuilder.toString().substring(0,stringBuilder.length()-3);
     }
+
+
+
 
 }
