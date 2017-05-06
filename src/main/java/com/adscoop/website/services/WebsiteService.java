@@ -4,9 +4,9 @@ package com.adscoop.website.services;
 import com.adscoop.website.entites.Area;
 import com.adscoop.website.entites.WebSite;
 
+import com.adscoop.website.operators.ComparisonOperators;
 import com.google.inject.Inject;
 import lombok.Setter;
-import org.neo4j.ogm.cypher.ComparisonOperator;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -85,32 +85,23 @@ public class WebsiteService {
 
 
 
-    public  Promise<Iterable<WebSite>> findByHostName(String host){
-        Filter filter = new Filter("url",host);
-        filter.setComparisonOperator(ComparisonOperator.CONTAINING);
-
-        return Promise.value(session.loadAll(WebSite.class,filter));
-
-
-    }
-
 
     public  Promise<Iterable<WebSite>> findByUrls(List<String> s){
 
-        String param = queryBuilder("w","url",s,ComparisonOperator.CONTAINING);
-        return  Promise.value(session.query(WebSite.class,"match (w:WebSite) where {param} return w",Collections.singletonMap("param",param)));
+        String param = queryBuilder("w","url",s, ComparisonOperators.CONTAINS);
+        return  Promise.value(session.query(WebSite.class,"match (w:WebSite) where " +  param + " return w",Collections.emptyMap()));
 
 
     }
 
-    public String queryBuilder(String prefix, String property ,List<String> names, ComparisonOperator comparisonOperator){
+    public String queryBuilder(String prefix, String property ,List<String> names, ComparisonOperators comparisonOperator){
     final StringBuilder stringBuilder =new StringBuilder();
         names.stream().forEach( s -> {
-            String query  = prefix+"."+property+"  "+comparisonOperator +"  \""+ s  +"\"  OR " ;
+            String query  = prefix+"."+property+"  "+comparisonOperator +"  '"+ s  +"' OR " ;
             stringBuilder.append(query);
         });
 
-         return stringBuilder.toString().substring(0,stringBuilder.length()-3);
+         return stringBuilder.toString().substring(0,stringBuilder.length()-4);
     }
 
 

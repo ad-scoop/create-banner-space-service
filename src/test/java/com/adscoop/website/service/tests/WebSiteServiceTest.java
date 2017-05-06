@@ -1,13 +1,14 @@
 package com.adscoop.website.service.tests;
 
 import com.adscoop.website.entites.WebSite;
+import com.adscoop.website.operators.ComparisonOperators;
 import com.adscoop.website.services.WebsiteService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.neo4j.ogm.cypher.ComparisonOperator;
+
 import org.neo4j.ogm.session.Session;
 
 import java.util.ArrayList;
@@ -45,10 +46,10 @@ private Session session;
         search.add("world");
         search.add("fart");
         //expected result;
-        String exp = "w.url  CONTAINING  \"hello\"  OR w.url  CONTAINING  \"world\"  OR w.url  CONTAINING  \"fart\""  ;
+        String exp  = " w.url  CONTAINS  'hello' OR w.url  CONTAINS  'world' OR w.url  CONTAINS  'fart' ";
 
 
-        String res = websiteService.queryBuilder("w","url", search, ComparisonOperator.CONTAINING);
+        String res = websiteService.queryBuilder("w","url", search, ComparisonOperators.CONTAINS);
 
         assertEquals(exp.trim(),res.trim());
 
