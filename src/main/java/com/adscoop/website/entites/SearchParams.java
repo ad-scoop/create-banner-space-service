@@ -19,7 +19,8 @@ public class SearchParams {
     String name;
 
     @Getter
-            @Setter
+    @Setter
+    @Builder.Default
     List<String> names = newArrayList();
 
 
