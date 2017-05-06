@@ -8,10 +8,7 @@ import com.adscoop.website.operators.ComparisonOperators;
 import com.google.inject.Inject;
 import lombok.Setter;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 import org.neo4j.ogm.cypher.Filter;
@@ -95,14 +92,20 @@ public class WebsiteService {
     }
 
     public String queryBuilder(String prefix, String property ,List<String> names, ComparisonOperators comparisonOperator){
-    final StringBuilder stringBuilder =new StringBuilder();
-        names.stream().forEach( s -> {
-            String query  = prefix+"."+property+"  "+comparisonOperator +"  '"+ s  +"' OR " ;
-            stringBuilder.append(query);
-        });
+		final StringBuilder stringBuilder = new StringBuilder();
 
-         return stringBuilder.toString().substring(0,stringBuilder.length()-4);
+
+			names.stream().forEach(s -> {
+				if(!s.equalsIgnoreCase("DROP")   ) {
+					String query = prefix + "." + property + "  " + comparisonOperator + "  '" + s + "' OR ";
+					stringBuilder.append(query);
+
+				}
+			});
+			return stringBuilder.toString().substring(0,stringBuilder.length()-4);
+
     }
+
 
 
 
