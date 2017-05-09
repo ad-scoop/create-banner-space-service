@@ -81,7 +81,7 @@ public class StartWebsiteServcieTest {
 			assertThat("Http requst status was no ok", service.getHttpClient()
 					.requestSpec(request -> request.body(body -> body.type("application/json").text(json)).getHeaders()
 							.add(Const.Headers.TOKEN, USER_TOKEN))
-					.post("websites/update").getStatus(), equalTo(Status.OK));
+					.put("websites/update").getStatus(), equalTo(Status.OK));
 		}
 	}
 
@@ -108,11 +108,11 @@ public class StartWebsiteServcieTest {
 						.build()))
 				.url("www.any.dk")
 				.accepted(true)
-				.area(Area.builder()
+				.areas(newArrayList(Area.builder()
 						.country("dk")
 						.region("region")
-						.zip("2222")
-						.build())
+						.city("Vanløse")
+						.build()))
 				.demografi(Demografi.builder()
 						.maxAge(123)
 						.minAge(2)

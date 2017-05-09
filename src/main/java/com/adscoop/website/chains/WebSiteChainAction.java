@@ -9,11 +9,11 @@ public class WebSiteChainAction implements Action<Chain> {
     @Override
     public void execute(Chain chain) throws Exception {
         chain.post("create",CreateWebSiteHandler.class)
-                .post("search", WebSiteSearchByUrlHandler.class)
-    		.post("update", UpdateWebSisteHandler.class)
-    		.get(GetWebSitesHandler.class)
-        	.get("/:" + Const.Parameter.ID,GetWebsiteHandler.class)
-        	.delete("remove/:" + Const.Parameter.ID, DeleteWebSiteHandler.class);
+             .post("search", WebSiteSearchByUrlHandler.class)
+    		 .put("update", UpdateWebSisteHandler.class)
+    		 .get(GetWebSitesHandler.class)
+        	 .get("/:" + Const.Parameter.ID,GetWebsiteHandler.class)
+        	 .delete("remove/:" + Const.Parameter.ID, DeleteWebSiteHandler.class);
     }
     
 }

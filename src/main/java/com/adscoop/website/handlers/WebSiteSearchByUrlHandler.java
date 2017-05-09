@@ -21,7 +21,7 @@ public class WebSiteSearchByUrlHandler extends AbstractTokenHandler {
 	@Override
 	protected void handleWithToken(Context ctx, String token) {
 		ctx.parse(fromJson(SearchParams.class)).then(searchParams -> {
-			websiteService.findByHostName(searchParams.getName()).then(webSites -> ctx.render(json(webSites)));
+			websiteService.findByNames(searchParams.getNames()).then(webSites -> ctx.render(json(webSites)));
 		});
 	}
 
