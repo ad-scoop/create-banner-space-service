@@ -15,7 +15,7 @@ CORSHandler implements Handler {
 
 
 	public static final String ACCESS_CONTROL_ALLOW_METHODS = "Access-Control-Allow-Methods";
-	public static final String ACCESS_CONTROL_ALLOW_METHODS_VALUE = "GET, POST, DELETE, OPTIONS";
+	public static final String ACCESS_CONTROL_ALLOW_METHODS_VALUE = "GET, PUT, POST, DELETE, OPTIONS";
 
 	@Override
 	public void handle(Context ctx) throws Exception {
