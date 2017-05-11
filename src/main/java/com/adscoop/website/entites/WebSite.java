@@ -2,8 +2,8 @@ package com.adscoop.website.entites;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-
 import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.neo4j.ogm.annotation.Labels;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -35,6 +35,7 @@ public class WebSite extends AbstractEntity {
 	@Relationship(type = "SEX", direction = Relationship.OUTGOING)
 	private Demografi demografi;
 
+
 	@Relationship(type = "PLACE", direction = Relationship.OUTGOING)
 	private Area area;
 
@@ -46,9 +47,6 @@ public class WebSite extends AbstractEntity {
 	private List<BannerSpace> bannerSpaces = newArrayList();
 
 
-	@Labels
-	@Builder.Default
-	public List<String> labels = newArrayList();
 	
 	public boolean isEmpty() {
 		return StringUtils.isEmpty(url);
