@@ -2,6 +2,7 @@ package com.adscoop.website.entites;
 
 import static com.google.common.collect.Lists.newArrayList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -37,7 +38,7 @@ public class WebSite extends AbstractEntity {
 
 
 	@Relationship(type = "PLACE", direction = Relationship.OUTGOING)
-	private Area area;
+	private List<Area> areas;
 
 	@Relationship(type = "COOPERATION", direction = Relationship.INCOMING)
 	private Organisation organisation;
@@ -46,6 +47,11 @@ public class WebSite extends AbstractEntity {
 	@Builder.Default
 	private List<BannerSpace> bannerSpaces = newArrayList();
 
+
+	@Labels
+	@Getter
+	@Setter
+	private List<String> labels = newArrayList();
 
 	
 	public boolean isEmpty() {
