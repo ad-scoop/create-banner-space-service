@@ -9,8 +9,6 @@ public class WebSiteChainAction implements Action<Chain> {
     @Override
     public void execute(Chain chain) throws Exception {
         chain.post("create",CreateWebSiteHandler.class)
-
-                .get("search/:region?&zip?&country?&", WebSiteSearchHandler.class)
     		.post("update", UpdateWebSisteHandler.class)
     		.get(GetWebSitesHandler.class)
         	.get("/:" + Const.Parameter.ID,GetWebsiteHandler.class)

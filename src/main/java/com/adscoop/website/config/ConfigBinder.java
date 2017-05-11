@@ -1,6 +1,7 @@
 package com.adscoop.website.config;
 
 
+import com.adscoop.website.chains.SearchChain;
 import com.adscoop.website.chains.WebSiteChainAction;
 import com.adscoop.website.handlers.*;
 import com.adscoop.website.services.SearchService;
@@ -19,9 +20,9 @@ public class ConfigBinder extends AbstractModule {
         bind(GetWebSitesHandler.class).asEagerSingleton();
         bind(DeleteWebSiteHandler.class).asEagerSingleton();
         bind(UpdateWebSisteHandler.class).asEagerSingleton();
-
+bind(WebSiteSearchHandler.class).asEagerSingleton();
         bind(WebsiteService.class).asEagerSingleton();
-
+bind(SearchChain.class).asEagerSingleton();
         bind(SearchService.class).asEagerSingleton();
     }
 
