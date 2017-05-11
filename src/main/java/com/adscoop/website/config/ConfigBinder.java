@@ -21,7 +21,7 @@ public class ConfigBinder extends AbstractModule {
         bind(UpdateWebSisteHandler.class).asEagerSingleton();
         bind(WebSiteSearchByUrlHandler.class).asEagerSingleton();
         bind(WebsiteService.class).asEagerSingleton();
-        bind(WebSiteSearchByArea.class).asEagerSingleton();
+        bind(WebSiteSearchHandler.class).asEagerSingleton();
         bind(SearchService.class).asEagerSingleton();
     }
 

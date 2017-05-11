@@ -11,14 +11,14 @@ import javax.inject.Inject;
 /**
  * Created by thokle on 09/05/2017.
  */
-public class WebSiteSearchByArea extends  AbstractTokenHandler{
+public class WebSiteSearchHandler extends  AbstractTokenHandler{
 
 
     private SearchService searchService;
 
 
     @Inject
-    public WebSiteSearchByArea(SearchService searchService) {
+    public WebSiteSearchHandler(SearchService searchService) {
         this.searchService = searchService;
     }
 
