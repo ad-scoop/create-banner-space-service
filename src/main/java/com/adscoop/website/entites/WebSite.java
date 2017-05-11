@@ -32,10 +32,10 @@ public class WebSite extends AbstractEntity {
 	@Setter
 	private String token;
 
-	@Relationship(type = "SEX", direction = Relationship.INCOMING)
+	@Relationship(type = "SEX", direction = Relationship.OUTGOING)
 	private Demografi demografi;
 
-	@Relationship(type = "PLACE", direction = Relationship.INCOMING)
+	@Relationship(type = "PLACE", direction = Relationship.OUTGOING)
 	private Area area;
 
 	@Relationship(type = "COOPERATION", direction = Relationship.INCOMING)
@@ -45,9 +45,6 @@ public class WebSite extends AbstractEntity {
 	@Builder.Default
 	private List<BannerSpace> bannerSpaces = newArrayList();
 
-	@Relationship(type = "WEBSITE_HAS_AREA")
-	@Builder.Default
-	private List<Area> regions =  newArrayList();
 
 	@Labels
 	@Builder.Default

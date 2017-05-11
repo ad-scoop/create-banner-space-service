@@ -3,6 +3,7 @@ package com.adscoop.website.config;
 
 import com.adscoop.website.chains.WebSiteChainAction;
 import com.adscoop.website.handlers.*;
+import com.adscoop.website.services.SearchService;
 import com.adscoop.website.services.WebsiteService;
 import com.google.inject.AbstractModule;
 
@@ -20,6 +21,8 @@ public class ConfigBinder extends AbstractModule {
         bind(UpdateWebSisteHandler.class).asEagerSingleton();
         bind(WebSiteSearchByUrlHandler.class).asEagerSingleton();
         bind(WebsiteService.class).asEagerSingleton();
+        bind(WebSiteSearchByArea.class).asEagerSingleton();
+        bind(SearchService.class).asEagerSingleton();
     }
 
 }

@@ -1,8 +1,6 @@
 package com.adscoop.website.entites;
 
-import static com.google.common.collect.Lists.newArrayList;
 
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Builder;
@@ -15,14 +13,34 @@ public class SearchParams {
 
     @Getter
     @Setter
-
-    String name;
-
+    private String zip;
     @Getter
     @Setter
-    @Builder.Default
-    List<String> names = newArrayList();
-
+    private String country;
+    @Getter
+    @Setter
+    private String region;
+    @Getter
+    @Setter
+    private String type;
+    @Getter
+    @Setter
+    private String category;
+    @Getter
+    @Setter
+    private String visitors;
+    @Getter
+    @Setter
+    private String gender;
+    @Getter
+    @Setter
+    private int mixAge;
+    @Getter
+    @Setter
+    private int maxAge;
+    @Getter
+    @Setter
+    private boolean physicalShop;
 
 
 
