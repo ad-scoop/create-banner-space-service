@@ -1,5 +1,6 @@
 package com.adscoop.website;
 
+import com.adscoop.website.chains.SearchChain;
 import com.adscoop.website.chains.WebSiteChainAction;
 import com.adscoop.website.config.ConfigBinder;
 import com.adscoop.website.handlers.CORSHandler;
@@ -26,7 +27,7 @@ public class StartWebsiteServcie {
                 .registry(Guice.registry(bindingsSpec -> bindingsSpec.module(ConfigBinder.class).module(ServiceCommonConfigModule.class)))
                 .handlers(chain -> chain
                         .all(CORSHandler.class)
-                        .prefix("websites", WebSiteChainAction.class)));
+                        .prefix("websites", WebSiteChainAction.class).prefix("search", SearchChain.class)));
     }
 
 
