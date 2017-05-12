@@ -2,7 +2,6 @@ package com.adscoop.website.entites;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -15,14 +14,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @NodeEntity
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class WebSite extends AbstractEntity {
 
@@ -33,26 +30,32 @@ public class WebSite extends AbstractEntity {
 	@Setter
 	private String token;
 
-	@Relationship(type = "SEX", direction = Relationship.OUTGOING)
-	private Demografi demografi;
+	@Relationship(type = "SEX")
+	@Builder.Default
+	private Demografi demografi = new Demografi();
 
-
-	@Relationship(type = "PLACE", direction = Relationship.OUTGOING)
-	private List<Area> areas;
+	@Relationship(type = "PLACE")
+	@Builder.Default
+	private List<Area> areas = newArrayList();
 
 	@Relationship(type = "COOPERATION", direction = Relationship.INCOMING)
-	private Organisation organisation;
+	@Builder.Default
+	private Organisation organisation = new Organisation();
 
 	@Relationship(type = "WEBSITE_HAS_BANNERSPACE")
 	@Builder.Default
 	private List<BannerSpace> bannerSpaces = newArrayList();
 
-
 	@Labels
-	@Getter
-	@Setter
+	@Builder.Default
 	private List<String> labels = newArrayList();
-
+	
+	public WebSite() {
+		this.demografi = new Demografi();
+		this.areas = newArrayList();
+		this.organisation = new Organisation();
+		this.bannerSpaces = newArrayList();
+	}
 	
 	public boolean isEmpty() {
 		return StringUtils.isEmpty(url);
