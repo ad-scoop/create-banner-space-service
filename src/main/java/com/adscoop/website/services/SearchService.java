@@ -30,21 +30,35 @@ public class SearchService {
 
     public Promise<Iterable<WebSite>> searchByArea(SearchParams area){
 
-        Map<String,String> map = new HashMap();
-        map.put("country", Optional.of(area.getCountry()).orElse(""));
-        map.put("zip",area.getZip());
-        map.put("region",area.getRegion());
+        Map<String, Object> map = getStringObjectMap(area);
 
         return Promise.async( downstream -> {
+
+
             Iterable<WebSite> webSites = session.query(WebSite.class,"MATCH (w:WebSite)-[:PLACE]->(a:Area) WHERE a.region CONTAINS {region}  OR a.zip CONTAINS {zip} OR a.country = {country} " +
                     "OPTIONAL MATCH (w)-[:DEMOGRAFIC]->(d:Demografi) WHERE d.gender = {gender} AND d.minAge = {minAge} AND d.maxAge = {maxAge} " +
                     " OPTIONAL MATCH (w:WebSite)-[:COOPERATION]->(c:Organisation) WHERE c.type = {type} OR c.category = {category} OR c.visitors = {visitors}  OR c.physicalShop = {physicalShop} RETURN w,c,d ",map);
             downstream.success(webSites);
 
-            downstream.complete();
+
         });
 
 
+    }
+
+    private Map<String, Object> getStringObjectMap(SearchParams area) {
+        Map<String,Object> map = new HashMap();
+        map.put("country", area.getCountry());
+        map.put("zip",area.getZip());
+        map.put("region",area.getRegion());
+        map.put("category",area.getCategory());
+        map.put("gender",area.getGender());
+        map.put("minAge",area.getMixAge());
+        map.put("maxAge",area.getMaxAge());
+        map.put("type",area.getType());
+        map.put("visitors",area.getVisitors());
+        map.put("physicalShop",area.isPhysicalShop());
+        return map;
     }
 
 }
