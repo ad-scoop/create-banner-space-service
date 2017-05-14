@@ -1,15 +1,11 @@
 package com.adscoop.website.handlers;
 
-import com.adscoop.website.entites.Area;
+
 import com.adscoop.website.entites.SearchParams;
-import com.adscoop.website.entites.WebSite;
 import com.adscoop.website.services.SearchService;
-import org.apache.commons.lang3.StringUtils;
 import ratpack.handling.Context;
 import ratpack.rx.RxRatpack;
-
 import javax.inject.Inject;
-
 import static ratpack.jackson.Jackson.json;
 
 /**
@@ -28,8 +24,6 @@ public class WebSiteSearchHandler extends  AbstractTokenHandler{
 
     @Override
     protected void handleWithToken(Context ctx, String token) {
-
-
        String zip =  ctx.getPathTokens().getOrDefault("zip","2000");
        String country= ctx.getPathTokens().getOrDefault("country","dk");
        String region = ctx.getPathTokens().getOrDefault("region","copenhagen");
@@ -52,10 +46,6 @@ public class WebSiteSearchHandler extends  AbstractTokenHandler{
                        mixAge(mixAge).
                        maxAge(maxAge).
                        physicalShop(physicalShop).build())).forEach( webSites -> ctx.render(json(webSites))  );
-
-
-
-
 
     }
 }

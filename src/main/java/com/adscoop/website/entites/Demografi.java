@@ -4,14 +4,10 @@ import static com.google.common.collect.Lists.newArrayList;
 
 import java.util.List;
 
+import lombok.*;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @NodeEntity
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -23,7 +19,11 @@ public class Demografi extends AbstractEntity {
 
 	@Builder.Default
     private List<String> genders  = newArrayList();
+	@Setter
+	@Getter
 	private int minAge;
+	@Setter
+	@Getter
 	private int maxAge;
 
 }
