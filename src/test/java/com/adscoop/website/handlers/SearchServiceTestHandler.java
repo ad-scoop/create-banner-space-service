@@ -60,7 +60,7 @@ public class SearchServiceTestHandler {
 
             assertThat("Http requst status was no ok",
                     service.getHttpClient().requestSpec(r -> r.getHeaders().add(Const.Headers.TOKEN, USER_TOKEN))
-                            .get("search/:zip?/:country?/:region?/:category?/:gender?/:minAge?/:maxAge?/:type?/:visitors?/:physicalShop" ).getStatus(),
+                            .get("search/:zip?/:country?/:region?/:category?/:gender?/:minAge?/:maxAge?/:type?/:visitors?/:physicalShop?" ).getStatus(),
                     equalTo(Status.OK));
 
         }
