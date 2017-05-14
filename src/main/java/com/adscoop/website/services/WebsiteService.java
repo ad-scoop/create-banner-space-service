@@ -1,6 +1,5 @@
 package com.adscoop.website.services;
 
-
 import com.adscoop.website.entites.Area;
 import com.adscoop.website.entites.WebSite;
 
@@ -9,7 +8,6 @@ import com.google.inject.Inject;
 import lombok.Setter;
 
 import java.util.*;
-
 
 import org.neo4j.ogm.cypher.Filter;
 import org.neo4j.ogm.session.Session;
@@ -66,35 +64,34 @@ public class WebsiteService {
 	public Promise<WebSite> findById(long id) {
 		return Promise.value(this.session.load(WebSite.class, id));
 	}
-	
-    public  Promise<Iterable<WebSite>> findByUrls(List<String> s){
 
-        String param = queryBuilder("w","url",s, ComparisonOperators.CONTAINS);
-        return  Promise.value(session.query(WebSite.class,"match (w:WebSite) where " +  param + " return w",Collections.emptyMap()));
-    }
+	public Promise<Iterable<WebSite>> findByUrls(List<String> s) {
 
-    public String queryBuilder(String prefix, String property ,List<String> names, ComparisonOperators comparisonOperator){
+		String param = queryBuilder("w", "url", s, ComparisonOperators.CONTAINS);
+		return Promise.value(
+				session.query(WebSite.class, "match (w:WebSite) where " + param + " return w", Collections.emptyMap()));
+	}
+
+	public String queryBuilder(String prefix, String property, List<String> names,
+			ComparisonOperators comparisonOperator) {
 		final StringBuilder stringBuilder = new StringBuilder();
 
-
-			names.stream().forEach(s -> {
-				if(!s.equalsIgnoreCase("DROP")   ) {
-					String query = prefix + "." + property + "  " + comparisonOperator + "  '" + s + "' OR ";
-					stringBuilder.append(query);
-
-				}
-			});
-			return stringBuilder.toString().substring(0,stringBuilder.length()-4);
-
-    }
+		names.stream().forEach(s -> {
+			if (!s.equalsIgnoreCase("DROP")) {
+				String query = prefix + "." + property + "  " + comparisonOperator + "  '" + s + "' OR ";
+				stringBuilder.append(query);
+			}
+		});
+		return stringBuilder.toString().substring(0, stringBuilder.length() - 4);
+	}
 
 	private WebSite findSingelByUrl(String url) {
 		Collection<WebSite> all = session.loadAll(WebSite.class, new Filter("url", url));
-    	if (all.isEmpty()) {
-    		return WebSite.builder().build();
-    	} else {
-    		return all.iterator().next();
-    	}
+		if (all.isEmpty()) {
+			return WebSite.builder().build();
+		} else {
+			return all.iterator().next();
+		}
 	}
 
 }

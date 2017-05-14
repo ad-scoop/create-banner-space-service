@@ -15,7 +15,7 @@ import ratpack.server.RatpackServer;
 public class StartWebsiteServcie {
 
     public static void main(String... args) throws Exception {
-        RxRatpack.initialize();
+     RxRatpack.initialize();
         RatpackServer.start(ratpackServerSpec -> ratpackServerSpec
                 .serverConfig(sfb -> sfb.baseDir(BaseDir.find())
                         .props("ratpack.properties")

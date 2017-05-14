@@ -4,7 +4,9 @@ import com.adscoop.website.StartWebsiteServcie;
 import com.adscoop.website.entites.SearchParams;
 import com.adscoop.website.entites.WebSite;
 import com.adscoop.website.services.SearchService;
+import com.adscoop.website.utils.RxRule;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -31,6 +33,8 @@ public class SearchServiceTestHandler {
 
     private static final String USER_TOKEN = "user_token";
 
+    @Rule
+    public RxRule rxRule = new RxRule();
 
     @Mock
     private SearchService searchService;
@@ -44,51 +48,18 @@ public class SearchServiceTestHandler {
     }
 
     @Test
-    public void testAllParametersInUrl() throws Exception {
-        when(searchService.searchByArea(any(SearchParams.class))).thenReturn( Promise.value(webSites()));
-
-        RequestFixture.handle(webSiteSearchHandler, requestFixture -> {
-                requestFixture.method("get").pathBinding(getStringObjectMap());
-
-        });
-    }
-
-
-    @Test
     public void testPrefixUforSearch(){
         try (MainClassApplicationUnderTest service = new MainClassApplicationUnderTest(StartWebsiteServcie.class)) {
 
-            assertThat("Http requst status was no ok",
+            assertThat("Http request status was  ok",
                     service.getHttpClient().requestSpec(r -> r.getHeaders().add(Const.Headers.TOKEN, USER_TOKEN))
                             .get("search/:zip?/:country?/:region?/:category?/:gender?/:minAge?/:maxAge?/:type?/:visitors?/:physicalShop?" ).getStatus(),
                     equalTo(Status.OK));
 
         }
-
     }
 
 
-    private Map<String, String> getStringObjectMap() {
-        Map<String,String> map = new HashMap();
-        map.put("country","dk");
-        map.put("zip", "2000");
-        map.put("region","cph");
-        map.put("category","IT");
-        map.put("gender", "male");
-        map.put("minAge","20");
-        map.put("maxAge","40");
-        map.put("type","tno");
-        map.put("visitors","2000");
-        map.put("physicalShop","true");
-        return map;
-    }
-
-
-    private Iterable<WebSite> webSites(){
-
-          return null;
-
-    }
 
 
     }
