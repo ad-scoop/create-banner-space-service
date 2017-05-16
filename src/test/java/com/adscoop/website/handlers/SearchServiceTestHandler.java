@@ -11,18 +11,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import ratpack.exec.Promise;
 import ratpack.http.Status;
 import ratpack.test.MainClassApplicationUnderTest;
-import ratpack.test.handling.RequestFixture;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by thokle on 11/05/2017.
@@ -53,11 +47,14 @@ public class SearchServiceTestHandler {
 
             assertThat("Http request status was  ok",
                     service.getHttpClient().requestSpec(r -> r.getHeaders().add(Const.Headers.TOKEN, USER_TOKEN))
-                            .get("search/:zip?/:country?/:region?/:category?/:gender?/:minAge?/:maxAge?/:type?/:visitors?/:physicalShop?" ).getStatus(),
+                            .get("search/:zip?/:country?/:region?/:category?/:gender?/:minAge?/:maxAge?/:type?/:visitors?/:physicalShop?").getStatus(),
                     equalTo(Status.OK));
 
         }
     }
+
+
+
 
 
 

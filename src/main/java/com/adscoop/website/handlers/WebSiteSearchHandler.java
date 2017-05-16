@@ -24,9 +24,9 @@ public class WebSiteSearchHandler extends  AbstractTokenHandler{
 
     @Override
     protected void handleWithToken(Context ctx, String token) {
-       String zip =  ctx.getPathTokens().getOrDefault("zip","2000");
-       String country= ctx.getPathTokens().getOrDefault("country","dk");
-       String region = ctx.getPathTokens().getOrDefault("region","copenhagen");
+       String zip =  ctx.getPathTokens().getOrDefault("zip","*");
+       String country= ctx.getPathTokens().getOrDefault("country","*");
+       String region = ctx.getPathTokens().getOrDefault("region","*");
        String type = ctx.getPathTokens().getOrDefault("type", "* ");
        String category = ctx.getPathTokens().getOrDefault("category", " *");
        String visitors = ctx.getPathTokens().getOrDefault("vistors", " *");
@@ -36,7 +36,7 @@ public class WebSiteSearchHandler extends  AbstractTokenHandler{
        boolean physicalShop = Boolean.valueOf(ctx.getPathTokens().getOrDefault("physicalShop","false"));
 
        RxRatpack.observe(searchService.
-               searchByArea(SearchParams.builder().
+               search(SearchParams.builder().
                        category(category).
                        zip(zip).country(country).
                        region(region).

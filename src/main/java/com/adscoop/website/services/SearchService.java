@@ -28,7 +28,7 @@ public class SearchService {
 
 
 
-    public Promise<Iterable<WebSite>> searchByArea(SearchParams area){
+    public Promise<Iterable<WebSite>> search(SearchParams area){
 
         Map<String, Object> map = getStringObjectMap(area);
 

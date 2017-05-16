@@ -1,10 +1,7 @@
 package com.adscoop.website.service.tests;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.adscoop.website.operators.ComparisonOperators;
+import com.adscoop.website.services.WebsiteService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,8 +9,10 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.neo4j.ogm.session.Session;
 
-import com.adscoop.website.operators.ComparisonOperators;
-import com.adscoop.website.services.WebsiteService;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 /**
  * Created by thokle on 06/05/2017.
  */
