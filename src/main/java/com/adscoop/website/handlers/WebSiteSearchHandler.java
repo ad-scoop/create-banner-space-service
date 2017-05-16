@@ -33,8 +33,8 @@ public class WebSiteSearchHandler extends  AbstractTokenHandler{
                        type(ctx.getPathTokens().getOrDefault("type", "* ")).
                        visitors(ctx.getPathTokens().getOrDefault("vistors", " *")).
                        gender(ctx.getPathTokens().getOrDefault("gender", "*")).
-                       mixAge(Integer.valueOf(ctx.getPathTokens().getOrDefault("minAge", ""))).
-                       maxAge(Integer.valueOf(ctx.getPathTokens().getOrDefault("maxAge", ""))).
+                       mixAge(Integer.valueOf(ctx.getPathTokens().getOrDefault("minAge", "0"))).
+                       maxAge(Integer.valueOf(ctx.getPathTokens().getOrDefault("maxAge", "0"))).
                        physicalShop(Boolean.valueOf(ctx.getPathTokens().getOrDefault("physicalShop",""))).
                        build()))
        			.forEach( webSites -> ctx.render(json(webSites))  );
