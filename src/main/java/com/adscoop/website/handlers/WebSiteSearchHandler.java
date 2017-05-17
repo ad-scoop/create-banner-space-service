@@ -5,13 +5,16 @@ import com.adscoop.website.entites.SearchParams;
 import com.adscoop.website.services.SearchService;
 import ratpack.handling.Context;
 import ratpack.rx.RxRatpack;
+import ratpack.util.MultiValueMap;
+
 import javax.inject.Inject;
+
 import static ratpack.jackson.Jackson.json;
 
 /**
  * Created by thokle on 09/05/2017.
  */
-public class WebSiteSearchHandler extends  AbstractTokenHandler{
+public class WebSiteSearchHandler extends AbstractTokenHandler {
 
 
     private SearchService searchService;
@@ -24,28 +27,47 @@ public class WebSiteSearchHandler extends  AbstractTokenHandler{
 
     @Override
     protected void handleWithToken(Context ctx, String token) {
-       String zip =  ctx.getPathTokens().getOrDefault("zip","*");
-       String country= ctx.getPathTokens().getOrDefault("country","*");
-       String region = ctx.getPathTokens().getOrDefault("region","*");
-       String type = ctx.getPathTokens().getOrDefault("type", "* ");
-       String category = ctx.getPathTokens().getOrDefault("category", " *");
-       String visitors = ctx.getPathTokens().getOrDefault("vistors", " *");
-       String gender = ctx.getPathTokens().getOrDefault("gender", "*");
-       int mixAge = Integer.valueOf(ctx.getPathTokens().getOrDefault("minAge", "0"));
-       int maxAge = Integer.valueOf(ctx.getPathTokens().getOrDefault("maxAge", String.valueOf(100)));
-       boolean physicalShop = Boolean.valueOf(ctx.getPathTokens().getOrDefault("physicalShop","false"));
+        MultiValueMap<String, String> map = ctx.getRequest().getQueryParams();
+        RxRatpack.observe(searchService.
+                search(params(map)))
+                .forEach(webSites -> ctx.render(json(webSites)));
+    }
 
-       RxRatpack.observe(searchService.
-               search(SearchParams.builder().
-                       category(category).
-                       zip(zip).country(country).
-                       region(region).
-                       type(type).
-                       visitors(visitors).
-                       gender(gender).
-                       mixAge(mixAge).
-                       maxAge(maxAge).
-                       physicalShop(physicalShop).build())).forEach( webSites -> ctx.render(json(webSites))  );
+    private SearchParams params(MultiValueMap<String, String> map) {
+        SearchParams.SearchParamsBuilder searchParams = SearchParams.builder();
 
+        map.forEach((s, s2) -> {
+            switch (s) {
+                case "zip":
+                    searchParams.zip(s2);
+                    break;
+                case "country":
+                    searchParams.country(s2);
+                    break;
+                case "region":
+                    searchParams.region(s2);
+                    break;
+                case "visitors":
+                    searchParams.visitors(s2);
+                    break;
+                case "category":
+                    searchParams.category(s2);
+                    break;
+                case "type":
+                    searchParams.type(s2);
+                    break;
+                case "gender":
+                    searchParams.gender(s2);
+                    break;
+                case "minAge":
+                    searchParams.mixAge(Integer.valueOf(s2));
+                    break;
+                case "maxAge":
+                    searchParams.maxAge(Integer.valueOf(s2));
+                case "":
+                    searchParams.physicalShop(Boolean.valueOf(s2));
+            }
+        });
+        return searchParams.build();
     }
 }

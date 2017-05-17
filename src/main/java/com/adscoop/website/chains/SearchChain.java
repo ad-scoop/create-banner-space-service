@@ -9,11 +9,12 @@ import ratpack.handling.Chain;
  */
 public class SearchChain implements Action<Chain> {
 
-
+    /**
+     * "/*&country?&region?&type?&category?&visitors?&gender?&minAge?&maxAge?&physicalShop? **/
 
 
     @Override
     public void execute(Chain chain) throws Exception {
-        chain.get(":zip?/:country?/:region?/:category?/:gender?/:minAge?/:maxAge?/:type?/:visitors?/:physicalShop?", WebSiteSearchHandler.class);
+        chain.get("", WebSiteSearchHandler.class);
     }
 }

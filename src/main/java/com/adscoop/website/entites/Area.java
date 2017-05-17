@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Area extends AbstractEntity {
 
+//	private String zip;
     private String city;
     private String country;
     private String region;
