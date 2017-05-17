@@ -39,7 +39,7 @@ public class SearchServiceTestHandler {
         try (MainClassApplicationUnderTest service = new MainClassApplicationUnderTest(StartWebsiteServcie.class)) {
             assertThat("Http request status was  ok",
                     service.getHttpClient().requestSpec(r -> r.getHeaders().add(Const.Headers.TOKEN, USER_TOKEN))
-                            .get("search/:zip?/:country?/:region?/:category?/:gender?/:minAge?/:maxAge?/:type?/:visitors?/:physicalShop?").getStatus(),
+                            .get("search").getStatus(),
                     equalTo(Status.OK));
         }
     }
