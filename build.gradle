@@ -15,7 +15,7 @@ buildscript {
 	    mavenCentral()
 	    mavenLocal()
 	    maven {
-	        url "http://www.gundmann.dk/artifactory/ext-release-local"
+	        url "https://www.gundmann.dk/artifactory/ext-release-local"
 	    }
     }
     dependencies{
