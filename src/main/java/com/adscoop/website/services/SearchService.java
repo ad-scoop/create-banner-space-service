@@ -26,7 +26,7 @@ public class SearchService {
 
         return Promise.async( downstream -> {
             Iterable<WebSite> webSites = session.query(WebSite.class,"MATCH (w:WebSite)-[:PLACE]->(a:Area) WHERE a.region CONTAINS {region}  OR a.zip CONTAINS {zip} OR a.country = {country} " +
-                    "OPTIONAL MATCH (w)-[:DEMOGRAFIC]->(d:Demografi) WHERE d.gender = {gender} AND d.minAge = {minAge} AND d.maxAge = {maxAge} " +
+                    "OPTIONAL MATCH (w)-[:DEMOGRAFIC]->(d:Demografi) WHERE d.gender = {gender} OR d.minAge = {minAge} OR d.maxAge = {maxAge} " +
                     " OPTIONAL MATCH (w:WebSite)-[:COOPERATION]->(c:Organisation) WHERE c.type = {type} OR c.category = {category} OR c.visitors = {visitors}  OR c.physicalShop = {physicalShop} RETURN w,c,d ",map);
             downstream.success(webSites);
         });
