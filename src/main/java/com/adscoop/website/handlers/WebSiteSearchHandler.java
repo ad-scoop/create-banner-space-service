@@ -25,9 +25,13 @@ public class WebSiteSearchHandler extends AbstractTokenHandler {
 
 	@Override
 	protected void handleWithToken(Context ctx, String token) {
+
 		MultiValueMap<String, String> map = ctx.getRequest().getQueryParams();
+		if(map.size() == 0) {
+				RxRatpack.observe(searchService.getAllWebSites()).forEach(webSites ->  ctx.render(json(webSites)));
+		}else {
 		RxRatpack.observe(searchService.search(params(map))).forEach(webSites -> ctx.render(json(webSites)));
-	}
+	}}
 
 	private SearchParams params(MultiValueMap<String, String> map) {
 		SearchParams.SearchParamsBuilder searchParams = SearchParams.builder();
