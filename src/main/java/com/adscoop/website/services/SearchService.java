@@ -3,8 +3,6 @@ package com.adscoop.website.services;
 import java.util.HashMap;
 import java.util.Map;
 import javax.inject.Inject;
-
-import org.apache.commons.collections4.MapUtils;
 import org.neo4j.ogm.session.Session;
 import com.adscoop.website.entites.SearchParams;
 import com.adscoop.website.entites.WebSite;

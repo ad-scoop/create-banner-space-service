@@ -37,9 +37,10 @@ public class SearchServiceTestHandler {
     @Test
     public void testPrefixUforSearch(){
         try (MainClassApplicationUnderTest service = new MainClassApplicationUnderTest(StartWebsiteServcie.class)) {
-            assertThat("Http request status was  ok",
-                    service.getHttpClient().requestSpec(r -> r.getHeaders().add(Const.Headers.TOKEN, USER_TOKEN))
-                            .get("search").getStatus(),
+            assertThat("Http request status was ok",
+                    service.getHttpClient().requestSpec(r -> r.getHeaders()
+                    		.add(Const.Headers.TOKEN, USER_TOKEN))
+                            .get("/websites/search").getStatus(),
                     equalTo(Status.OK));
         }
     }
