@@ -3,6 +3,8 @@ package com.adscoop.website.services;
 import java.util.HashMap;
 import java.util.Map;
 import javax.inject.Inject;
+
+import org.apache.commons.collections4.MapUtils;
 import org.neo4j.ogm.session.Session;
 import com.adscoop.website.entites.SearchParams;
 import com.adscoop.website.entites.WebSite;
@@ -24,14 +26,22 @@ public class SearchService {
 
         Map<String, Object> map = getStringObjectMap(area);
 
+            return Promise.async(downstream -> {
+                Iterable<WebSite> webSites = session.query(WebSite.class, "MATCH (w:WebSite)-[:PLACE]->(a:Area) WHERE a.region CONTAINS {region}  OR a.zip CONTAINS {zip} OR a.country = {country} " +
+                        "OPTIONAL MATCH (w)-[:DEMOGRAFIC]->(d:Demografi) WHERE d.gender = {gender} AND d.minAge = {minAge} AND d.maxAge = {maxAge} " +
+                        " OPTIONAL MATCH (w:WebSite)-[:COOPERATION]->(c:Organisation) WHERE c.type = {type} OR c.category = {category} OR c.visitors = {visitors}  OR c.physicalShop = {physicalShop} RETURN w,c,d ", map);
+                downstream.success(webSites);
+            });
+        }
+
+
+    public Promise<Iterable<WebSite>> getAllWebSites() {
         return Promise.async( downstream -> {
-            Iterable<WebSite> webSites = session.query(WebSite.class,"MATCH (w:WebSite)-[:PLACE]->(a:Area) WHERE a.region CONTAINS {region}  OR a.zip CONTAINS {zip} OR a.country = {country} " +
-                    "OPTIONAL MATCH (w)-[:DEMOGRAFIC]->(d:Demografi) WHERE d.gender = {gender} AND d.minAge = {minAge} AND d.maxAge = {maxAge} " +
-                    " OPTIONAL MATCH (w:WebSite)-[:COOPERATION]->(c:Organisation) WHERE c.type = {type} OR c.category = {category} OR c.visitors = {visitors}  OR c.physicalShop = {physicalShop} RETURN w,c,d ",map);
+            Iterable<WebSite> webSites = session.query(WebSite.class, "Match (w:WebSite) return w" , MapUtils.EMPTY_SORTED_MAP);
             downstream.success(webSites);
         });
-    }
 
+    }
     private Map<String, Object> getStringObjectMap(SearchParams area) {
         Map<String,Object> map = new HashMap();
         map.put("country", area.getCountry());
@@ -44,6 +54,8 @@ public class SearchService {
         map.put("type",area.getType());
         map.put("visitors",area.getVisitors());
         map.put("physicalShop",area.isPhysicalShop());
+
+
         return map;
     }
 

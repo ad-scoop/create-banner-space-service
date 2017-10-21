@@ -5,6 +5,7 @@ import com.adscoop.website.entites.SearchParams;
 import com.adscoop.website.services.SearchService;
 import ratpack.handling.Context;
 import ratpack.rx.RxRatpack;
+import ratpack.server.RatpackServer;
 import ratpack.util.MultiValueMap;
 
 import javax.inject.Inject;
@@ -28,9 +29,14 @@ public class WebSiteSearchHandler extends AbstractTokenHandler {
     @Override
     protected void handleWithToken(Context ctx, String token) {
         MultiValueMap<String, String> map = ctx.getRequest().getQueryParams();
-        RxRatpack.observe(searchService.
-                search(params(map)))
-                .forEach(webSites -> ctx.render(json(webSites)));
+        map.size();
+        if (map.size() == 0) {
+            RxRatpack.observe(searchService.getAllWebSites()).forEach(webSites -> ctx.render(json(webSites)));
+        } else if (map.size() > 0) {
+            RxRatpack.observe(searchService.
+                    search(params(map)))
+                    .forEach(webSites -> ctx.render(json(webSites)));
+        }
     }
 
     private SearchParams params(MultiValueMap<String, String> map) {
