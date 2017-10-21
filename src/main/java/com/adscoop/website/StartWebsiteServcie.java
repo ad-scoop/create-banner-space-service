@@ -26,7 +26,7 @@ public class StartWebsiteServcie {
                 .registry(Guice.registry(bindingsSpec -> bindingsSpec.module(ConfigBinder.class).module(ServiceCommonConfigModule.class)))
                 .handlers(chain -> chain
                         .all(CORSHandler.class)
-                        .prefix("websites", WebSiteChainAction.class));
+                        .prefix("websites", WebSiteChainAction.class)));
 
     }
 
