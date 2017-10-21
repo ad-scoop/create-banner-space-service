@@ -1,11 +1,16 @@
 package com.adscoop.website.services;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.inject.Inject;
+
 import org.neo4j.ogm.session.Session;
+
 import com.adscoop.website.entites.SearchParams;
 import com.adscoop.website.entites.WebSite;
+
 import ratpack.exec.Promise;
 
 /**
@@ -35,13 +40,13 @@ public class SearchService {
 
     public Promise<Iterable<WebSite>> getAllWebSites() {
         return Promise.async( downstream -> {
-            Iterable<WebSite> webSites = session.query(WebSite.class, "Match (w:WebSite) return w" , MapUtils.EMPTY_SORTED_MAP);
+            Iterable<WebSite> webSites = session.query(WebSite.class, "Match (w:WebSite) return w" , Collections.emptyMap());
             downstream.success(webSites);
         });
 
     }
     private Map<String, Object> getStringObjectMap(SearchParams area) {
-        Map<String,Object> map = new HashMap();
+        Map<String,Object> map = new HashMap<>();
         map.put("country", area.getCountry());
         map.put("zip",area.getZip());
         map.put("region",area.getRegion());

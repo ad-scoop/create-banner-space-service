@@ -1,6 +1,5 @@
 package com.adscoop.website.config;
 
-import com.adscoop.website.chains.SearchChain;
 import com.adscoop.website.chains.WebSiteChainAction;
 import com.adscoop.website.handlers.CORSHandler;
 import com.adscoop.website.handlers.CreateWebSiteHandler;
@@ -22,7 +21,6 @@ public class ConfigBinder extends AbstractModule {
 
 		bind(CORSHandler.class).asEagerSingleton();
 		bind(WebSiteChainAction.class).asEagerSingleton();
-		bind(SearchChain.class).asEagerSingleton();
 		bind(GetWebsiteHandler.class).asEagerSingleton();
 		bind(GetWebSitesHandler.class).asEagerSingleton();
 		bind(DeleteWebSiteHandler.class).asEagerSingleton();
