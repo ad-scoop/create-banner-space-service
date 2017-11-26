@@ -36,7 +36,12 @@ public class WebsiteService {
 	}
 
 	public Promise<Iterable<WebSite>> findByToken(String token) {
-		return Promise.value(session.loadAll(WebSite.class, new Filter("token", token)));
+
+		return Promise.async(downstream -> {
+		   Iterable<WebSite>  webSites = 	session.query(WebSite.class, "MATCH (w:Website) ",Collections.singletonMap("token", token));
+			downstream.success(webSites);
+		});
+
 	}
 
 	public void delete(long id) {
@@ -86,12 +91,8 @@ public class WebsiteService {
 	}
 
 	private WebSite findSingelByUrl(String url) {
-		Collection<WebSite> all = session.loadAll(WebSite.class, new Filter("url", url));
-		if (all.isEmpty()) {
-			return WebSite.builder().build();
-		} else {
-			return all.iterator().next();
-		}
+		return session.queryForObject(WebSite.class, "match (w: website) {url:{url}} return w", Collections.singletonMap("url",url));
+
 	}
 
 }
