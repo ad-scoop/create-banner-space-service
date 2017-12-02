@@ -38,7 +38,7 @@ public class WebsiteService {
 	public Promise<Iterable<WebSite>> findByToken(String token) {
 
 		return Promise.async(downstream -> {
-		   Iterable<WebSite>  webSites = 	session.query(WebSite.class, "MATCH (w:Website) ",Collections.singletonMap("token", token));
+		   Iterable<WebSite>  webSites = 	session.query(WebSite.class, "MATCH (w:Website) where w.token={token} return w ",Collections.singletonMap("token", token));
 			downstream.success(webSites);
 		});
 
@@ -91,7 +91,7 @@ public class WebsiteService {
 	}
 
 	private WebSite findSingelByUrl(String url) {
-		return session.queryForObject(WebSite.class, "match (w: website) {url:{url}} return w", Collections.singletonMap("url",url));
+		return session.queryForObject(WebSite.class, "match (w:WebSite) where w.url = {url}  return w", Collections.singletonMap("url",url));
 
 	}
 
