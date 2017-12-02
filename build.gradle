@@ -14,9 +14,7 @@ buildscript {
 	    jcenter()
 	    mavenCentral()
 	    mavenLocal()
-	    maven {
-	        url "https://www.gundmann.dk/artifactory/ext-release-local"
-	    }
+
     }
     dependencies{
         classpath "io.ratpack:ratpack-gradle:1.4.1"
