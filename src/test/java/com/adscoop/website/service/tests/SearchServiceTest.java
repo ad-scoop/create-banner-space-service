@@ -3,6 +3,7 @@ package com.adscoop.website.service.tests;
 import com.adscoop.website.entites.SearchParams;
 import com.adscoop.website.entites.WebSite;
 import com.adscoop.website.services.SearchService;
+
 import org.apache.commons.collections4.iterators.IteratorIterable;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,6 +29,7 @@ import static org.mockito.Mockito.when;
 public class SearchServiceTest {
 
     @Mock
+    private
     Session session;
 
 
