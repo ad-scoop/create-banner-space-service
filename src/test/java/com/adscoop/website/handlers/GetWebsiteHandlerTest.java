@@ -1,8 +1,7 @@
 package com.adscoop.website.handlers;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.doReturn;
 
 import java.util.Collections;
@@ -41,7 +40,7 @@ public class GetWebsiteHandlerTest {
 		// given
 		doReturn(WebSite.builder()
 				.build())
-			.when(session).load(eq(WebSite.class), anyLong());
+			.when(session).queryForObject(eq(WebSite.class), anyString(), anyMap());
 		
 		// when
 		HandlingResult result = RequestFixture.handle(handler,
